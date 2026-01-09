@@ -1,0 +1,136 @@
+/* ====================
+   HOMEPAGE STYLES
+   ==================== */
+
+/* Intro paragraph */
+.intro {
+    font-size: 1.25rem;
+    color: #b0b0b0;
+    margin-bottom: 3rem;
+    text-align: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Project cards */
+.project-card {
+    background: rgba(30, 30, 30, 0.3);
+    border: 1px solid #333333;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    background: rgba(40, 40, 40, 0.4);
+    border-color: rgba(96, 165, 250, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.project-card h2 {
+    margin-top: 0;
+    padding-top: 0;
+    color: #ffffff;
+    border-bottom: none;
+}
+
+.project-card h2 a {
+    color: #ffffff;
+    border-bottom: none;
+    text-decoration: none;
+}
+
+.project-card h2 a:hover {
+    color: #60a5fa;
+}
+
+.project-features h3 {
+    font-size: 1.25rem;
+    color: #60a5fa;
+    margin: 1.5rem 0 1rem;
+    padding-top: 0;
+}
+
+.project-features ul {
+    margin: 1rem 0 1.5rem 1.5rem;
+    list-style: none;
+}
+
+.project-features li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #d4d4d4;
+}
+
+.project-features li::before {
+    content: "▸";
+    color: #60a5fa;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.project-details {
+    background: rgba(30, 30, 30, 0.5);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-left: 4px solid #60a5fa;
+}
+
+.project-details p {
+    margin-bottom: 0.75rem;
+    color: #b0b0b0;
+}
+
+.project-details p:last-child {
+    margin-bottom: 0;
+}
+
+.project-details strong {
+    color: #e0e0e0;
+}
+
+/* Project link button */
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(139, 92, 246, 0.1));
+    color: #93c5fd;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    transition: all 0.2s ease;
+    margin-top: 1rem;
+}
+
+.project-link:hover {
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.2), rgba(139, 92, 246, 0.2));
+    color: #ffffff;
+    border-color: rgba(96, 165, 250, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(96, 165, 250, 0.1);
+}
+
+/* Responsive adjustments for homepage */
+@media (max-width: 768px) {
+    .intro {
+        font-size: 1.125rem;
+        padding: 0 1rem;
+    }
+    
+    .project-card {
+        padding: 1.5rem;
+    }
+    
+    .project-details {
+        padding: 1rem;
+    }
+}
