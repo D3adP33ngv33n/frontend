@@ -1,0 +1,203 @@
+// career-detail.component.scss
+.career-detail {
+    min-height: 100vh;
+    background-color: var(--dark-bg);
+    padding: 2rem 1rem;
+    
+    .back-btn {
+      background: transparent;
+      border: none;
+      color: var(--primary-color);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 0.5rem 0;
+      margin-bottom: 2rem;
+      transition: var(--transition);
+      
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+    
+    .job-detail {
+      max-width: 800px;
+      margin: 0 auto;
+      
+      .job-header {
+        margin-bottom: 3rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border-color);
+        
+        .job-code {
+          color: var(--primary-color);
+          font-size: 1.2rem;
+          margin-bottom: 0.5rem;
+        }
+        
+        h1 {
+          font-size: 2.5rem;
+          margin-bottom: 1.5rem;
+          color: var(--text-primary);
+        }
+        
+        .job-meta {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1.5rem;
+          
+          .meta-item {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            
+            &::before {
+              content: '◈';
+              color: var(--primary-color);
+              margin-right: 0.5rem;
+            }
+          }
+        }
+      }
+      
+      .job-content {
+        margin-bottom: 4rem;
+        
+        .content-section {
+          margin-bottom: 2.5rem;
+          
+          h3 {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1rem;
+            
+            &::before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 4px;
+              height: 60%;
+              background-color: var(--primary-color);
+            }
+          }
+          
+          .section-list {
+            list-style: none;
+            padding-left: 1rem;
+            
+            li {
+              color: var(--text-secondary);
+              margin-bottom: 0.8rem;
+              position: relative;
+              padding-left: 1.5rem;
+              
+              &::before {
+                content: '—';
+                position: absolute;
+                left: 0;
+                color: var(--primary-color);
+              }
+            }
+          }
+        }
+      }
+      
+      .application-form {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        padding: 2.5rem;
+        
+        h2 {
+          font-size: 1.8rem;
+          margin-bottom: 1rem;
+          color: var(--text-primary);
+        }
+        
+        .form-note {
+          color: var(--text-muted);
+          font-size: 0.9rem;
+          margin-bottom: 2rem;
+        }
+        
+        form {
+          .form-group {
+            margin-bottom: 1.5rem;
+            
+            .form-label {
+              display: block;
+              color: var(--text-secondary);
+              margin-bottom: 0.5rem;
+              font-size: 0.95rem;
+            }
+            
+            .form-input {
+              width: 100%;
+              padding: 0.8rem 1rem;
+              background-color: rgba(0, 0, 0, 0.3);
+              border: 1px solid var(--border-color);
+              border-radius: var(--border-radius);
+              color: var(--text-primary);
+              font-family: 'Inter', sans-serif;
+              font-size: 1rem;
+              transition: var(--transition);
+              
+              &:focus {
+                outline: none;
+                border-color: var(--primary-color);
+                box-shadow: 0 0 0 2px rgba(0, 255, 204, 0.1);
+              }
+              
+              &::placeholder {
+                color: var(--text-muted);
+              }
+            }
+            
+            .form-hint {
+              color: var(--text-muted);
+              font-size: 0.85rem;
+              margin-top: 0.5rem;
+              margin-bottom: 0;
+            }
+          }
+          
+          button[type="submit"] {
+            width: 100%;
+            padding: 1rem;
+            margin-top: 1rem;
+            
+            &:disabled {
+              opacity: 0.5;
+              cursor: not-allowed;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .career-detail {
+      padding: 1rem;
+      
+      .job-detail {
+        .job-header {
+          h1 {
+            font-size: 2rem;
+          }
+          
+          .job-meta {
+            flex-direction: column;
+            gap: 0.8rem;
+          }
+        }
+        
+        .application-form {
+          padding: 1.5rem;
+        }
+      }
+    }
+  }

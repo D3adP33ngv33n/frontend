@@ -1,0 +1,50 @@
+<section class="about" id="about">
+  <div class="container">
+    <div class="section-header">
+      <h2>About Us</h2>
+      <p class="section-subtitle">We exist where security meets discretion</p>
+    </div>
+    
+    <div class="about-content">
+      <div class="about-text">
+        <p class="mono">
+          Our team is composed of specialists who choose anonymity by design. This is not secrecy for its own sake, but a principle: identities are irrelevant; capability is everything.
+        </p>
+        <p>
+           We deliver private cybersecurity solutions, integrating AI and cryptographic systems, designed for environments where precision, resilience, and confidentiality are non-negotiable.
+        </p>
+        <p>
+           No publicity. No exposure.
+        </p>
+        <p>
+           Only results.
+        </p>
+        <div class="principles">
+          <h3>Principles</h3>
+          <ul class="principles-list">
+            @for (principle of principles; track principle) {
+              <li class="principle-item mono">
+                <span class="principle-marker">◉</span>
+                {{principle}}
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+      
+      <div class="about-visual">
+        <div class="visual-container">
+          <div class="data-stream">
+            @for (line of dataStream; track line) {
+              <div class="stream-line">
+                @for (bit of line; track bit) {
+                  <div class="stream-bit">{{bit}}</div>
+                }
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

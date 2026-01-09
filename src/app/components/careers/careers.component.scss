@@ -1,0 +1,206 @@
+// careers.component.scss
+.careers {
+  background-color: var(--darker-bg);
+  border-top: 1px solid var(--border-color);
+  
+  .openings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+    
+    .opening-card {
+      background-color: rgba(10, 14, 23, 0.7);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        opacity: 0;
+        transition: var(--transition);
+      }
+      
+      &:hover {
+        transform: translateY(-8px);
+        border-color: var(--primary-color);
+        box-shadow: 0 10px 30px rgba(0, 255, 204, 0.1);
+        
+        &::before {
+          opacity: 1;
+        }
+        
+        .opening-code {
+          color: var(--primary-color);
+          transform: scale(1.05);
+        }
+      }
+      
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        
+        .opening-code {
+          font-size: 1.3rem;
+          font-weight: 600;
+          color: var(--text-secondary);
+          transition: var(--transition);
+        }
+        
+        .opening-type {
+          font-size: 0.85rem;
+          color: var(--text-muted);
+          background: rgba(0, 255, 204, 0.1);
+          padding: 0.3rem 0.8rem;
+          border-radius: 20px;
+          border: 1px solid rgba(0, 255, 204, 0.2);
+        }
+      }
+      
+      .card-body {
+        flex: 1;
+        margin-bottom: 2rem;
+        
+        .opening-title {
+          font-size: 1.5rem;
+          color: var(--text-primary);
+          margin-bottom: 1.5rem;
+          line-height: 1.3;
+          font-weight: 500;
+        }
+        
+        .opening-meta {
+          display: flex;
+          flex-direction: column;
+          gap: 0.8rem;
+          margin-bottom: 1.5rem;
+          
+          .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            
+            .meta-icon {
+              font-size: 1rem;
+              opacity: 0.7;
+            }
+            
+            .meta-text {
+              color: var(--text-secondary);
+              font-size: 0.95rem;
+            }
+          }
+        }
+        
+        .opening-hint {
+          color: var(--text-muted);
+          font-size: 0.85rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          padding-top: 1rem;
+          margin: 0;
+        }
+      }
+      
+      .card-footer {
+        .btn {
+          width: 100%;
+          padding: 0.9rem;
+          font-size: 0.95rem;
+          font-weight: 500;
+          letter-spacing: 0.5px;
+          border-radius: 8px;
+          transition: var(--transition);
+          
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 204, 0.2);
+          }
+        }
+      }
+    }
+  }
+  
+  .careers-note {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    
+    p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: 0;
+      line-height: 1.6;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 992px) {
+  .careers {
+    .openings-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .careers {
+    .openings-grid {
+      grid-template-columns: 1fr;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      
+      .opening-card {
+        padding: 1.5rem;
+        
+        .opening-title {
+          font-size: 1.3rem;
+        }
+      }
+    }
+    
+    .careers-note {
+      padding: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .careers {
+    .openings-grid {
+      .opening-card {
+        .card-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.8rem;
+          
+          .opening-type {
+            align-self: flex-start;
+          }
+        }
+      }
+    }
+  }
+}
