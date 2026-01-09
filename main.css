@@ -1,0 +1,563 @@
+/* ====================
+   RESET & BASE STYLES
+   ==================== */
+   *,
+   *::before,
+   *::after {
+       box-sizing: border-box;
+       margin: 0;
+       padding: 0;
+   }
+   
+   html {
+       -webkit-text-size-adjust: 100%;
+       -webkit-tap-highlight-color: transparent;
+       scroll-behavior: smooth;
+       height: 100%;
+   }
+   
+   body {
+       background-color: #121212;
+       color: #f5f5f5;
+       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+       line-height: 1.8;
+       min-height: 100vh;
+       -webkit-font-smoothing: antialiased;
+       -moz-osx-font-smoothing: grayscale;
+       text-rendering: optimizeLegibility;
+   }
+   
+   /* ====================
+      LAYOUT & CONTAINER
+      ==================== */
+   .container {
+       max-width: 800px;
+       margin: 0 auto;
+       padding: 0 1.5rem;
+   }
+   
+   /* ====================
+      HEADER STYLES
+      ==================== */
+   header {
+       background-color: #121212;
+       border-bottom: 1px solid #333333;
+       padding: .75rem 0;
+       position: sticky;
+       top: 0;
+       z-index: 1000;
+       backdrop-filter: blur(10px);
+       background-color: rgba(18, 18, 18, 0.95);
+   }
+   
+   header .container {
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+       flex-wrap: wrap;
+       gap: 1.5rem;
+   }
+   
+   #a-title {
+       text-decoration: none;
+       color: inherit;
+       transition: opacity 0.2s ease;
+   }
+   
+   #a-title:hover {
+       opacity: 0.8;
+   }
+   
+   #a-title h1 {
+       font-family: 'Space Grotesk', 'Inter', sans-serif;
+       font-size: 1.75rem;
+       font-weight: 700;
+       color: #ffffff;
+       letter-spacing: -0.025em;
+       margin: 0;
+   }
+   
+   h2 {
+       color: #b0b0b0;
+       font-size: 1rem;
+       font-weight: 400;
+       margin: 0;
+   }
+   
+   /* ====================
+      SOCIAL LINKS
+      ==================== */
+   .social-links {
+       display: flex;
+       gap: 1.25rem;
+       margin-left: auto;
+   }
+   
+   .social-links a {
+       color: #b0b0b0;
+       font-size: 1.25rem;
+       transition: all 0.2s ease;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       width: 40px;
+       height: 40px;
+       border-radius: 50%;
+       background-color: rgba(255, 255, 255, 0.05);
+   }
+   
+   .social-links a:hover {
+       color: #60a5fa;
+       background-color: rgba(96, 165, 250, 0.1);
+       transform: translateY(-2px);
+   }
+   
+   /* ====================
+      DOWNLOADS SECTION
+      ==================== */
+   #downloads {
+       margin-top: 0.5rem;
+       width: 100%;
+   }
+   
+   .btn-github {
+       display: inline-flex;
+       align-items: center;
+       gap: 0.5rem;
+       background-color: rgba(255, 255, 255, 0.1);
+       color: #f5f5f5;
+       text-decoration: none;
+       padding: 0.75rem 1.5rem;
+       border-radius: 8px;
+       font-weight: 500;
+       transition: all 0.2s ease;
+       border: 1px solid rgba(255, 255, 255, 0.1);
+   }
+   
+   .btn-github:hover {
+       background-color: rgba(96, 165, 250, 0.2);
+       color: #93c5fd;
+       border-color: rgba(96, 165, 250, 0.3);
+       transform: translateY(-1px);
+   }
+   
+   .btn-github .icon {
+       font-family: 'Font Awesome 6 Brands';
+       content: "\f09b";
+   }
+   
+   /* ====================
+      MAIN CONTENT
+      ==================== */
+   #main_content {
+       padding: 3rem 0 4rem;
+   }
+   
+   /* ====================
+      TYPOGRAPHY
+      ==================== */
+   
+   /* Headings */
+   h1 {
+       color: #ffffff;
+       font-family: 'Space Grotesk', 'Inter', sans-serif;
+       font-size: 2.5rem;
+       font-weight: 700;
+       line-height: 1.2;
+       margin-bottom: 1.5rem;
+       letter-spacing: -0.025em;
+   }
+   
+   h2 {
+       color: #e0e0e0;
+       font-family: 'Space Grotesk', 'Inter', sans-serif;
+       font-size: 1.875rem;
+       font-weight: 600;
+       line-height: 1.3;
+       margin: 2.5rem 0 1rem;
+       padding-top: 0.5rem;
+   }
+   
+   h3 {
+       color: #d4d4d4;
+       font-family: 'Inter', sans-serif;
+       font-size: 1.5rem;
+       font-weight: 600;
+       line-height: 1.4;
+       margin: 2rem 0 1rem;
+   }
+   
+   /* Paragraphs */
+   p {
+       margin-bottom: 1.5rem;
+       font-size: 1.125rem;
+       color: #f5f5f5;
+   }
+   
+   /* Links */
+   a {
+       color: #60a5fa;
+       text-decoration: none;
+       transition: all 0.2s ease;
+       border-bottom: 1px solid transparent;
+       padding-bottom: 1px;
+   }
+   
+   a:hover {
+       color: #93c5fd;
+       border-bottom-color: currentColor;
+   }
+   
+   /* Lists */
+   ul, ol {
+       margin: 1.5rem 0 1.5rem 2rem;
+       color: #f5f5f5;
+   }
+   
+   ul ul, ol ol, ul ol, ol ul {
+       margin: 0.5rem 0 0.5rem 1.5rem;
+   }
+   
+   li {
+       margin-bottom: 0.75rem;
+       line-height: 1.7;
+   }
+   
+   li::marker {
+       color: #60a5fa;
+   }
+   
+   /* Horizontal Rule */
+   hr {
+       border: none;
+       height: 1px;
+       background: linear-gradient(90deg, 
+           transparent 0%, 
+           rgba(96, 165, 250, 0.3) 50%, 
+           transparent 100%);
+       margin: 3rem 0;
+   }
+   
+   /* Table of Contents */
+   #main_content > ul:first-of-type {
+       background: rgba(30, 30, 30, 0.7);
+       border: 1px solid #333333;
+       border-radius: 12px;
+       padding: 1.5rem 2rem;
+       margin: 2rem 0 3rem;
+       list-style: none;
+   }
+   
+   #main_content > ul:first-of-type li {
+       margin-bottom: 0.75rem;
+       position: relative;
+       padding-left: 1.25rem;
+   }
+   
+   #main_content > ul:first-of-type li::before {
+       content: "→";
+       color: #60a5fa;
+       position: absolute;
+       left: 0;
+       font-weight: bold;
+   }
+   
+   #main_content > ul:first-of-type ul {
+       margin: 0.5rem 0 0.5rem 1.5rem;
+       list-style: none;
+   }
+   
+   #main_content > ul:first-of-type ul li::before {
+       content: "•";
+       color: #93c5fd;
+   }
+   
+   /* ====================
+      CODE & PRE BLOCKS
+      ==================== */
+
+    code[class*="language-"] {
+        background: transparent !important;
+        padding: 0 !important;
+        border: none !important;
+        font-family: inherit !important;
+        font-size: inherit !important;
+        color: #d4d4d4 !important;
+    }
+    
+   pre[class*="language-"] {
+    background: #1e1e1e !important;
+    border: 1px solid #333333 !important;
+    border-radius: 12px !important;
+    padding: 1.5rem !important;
+    margin: 2rem 0 !important;
+    overflow-x: auto !important;
+    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace !important;
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+}
+   
+
+
+
+/* Customize Prism colors for #121212 background */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: #6a9955 !important; /* Green for comments */
+}
+
+.token.punctuation {
+    color: #d4d4d4 !important;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: #b5cea8 !important; /* Light green */
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #ce9178 !important; /* Orange */
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: #d4d4d4 !important;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #569cd6 !important; /* Blue */
+}
+
+.token.function,
+.token.class-name {
+    color: #dcdcaa !important; /* Yellow */
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: #d16969 !important; /* Red */
+}
+   
+   pre code {
+       background-color: transparent;
+       color: #d4d4d4;
+       padding: 0;
+       border: none;
+       font-size: inherit;
+       font-family: inherit;
+   }
+
+   div.highlight {
+    position: relative;
+   }
+   
+   /* Code block language tag */
+   .language-csharp::before {
+       content: 'C#';
+       position: absolute;
+       top: 0;
+       right: 0;
+       color: #93c5fd;
+       /* font-size: 1rem; */
+       font-weight: 500;
+       background: rgba(96, 165, 250, 0.1);
+       padding: 0.25rem 0.75rem;
+       border-top-right-radius: 12px;
+       border-bottom-left-radius: 4px;
+   }
+   
+   /* ====================
+      BLOCKQUOTES
+      ==================== */
+   blockquote {
+       border-left: 4px solid #60a5fa;
+       padding: 1.5rem 1.5rem 1.5rem 2rem;
+       margin: 2rem 0;
+       color: #b0b0b0;
+       font-style: italic;
+       background: linear-gradient(90deg, rgba(96, 165, 250, 0.05) 0%, transparent 100%);
+       border-radius: 0 12px 12px 0;
+       position: relative;
+   }
+   
+   blockquote::before {
+       content: '"';
+       position: absolute;
+       top: -0.5rem;
+       left: 0.5rem;
+       font-size: 3rem;
+       color: rgba(96, 165, 250, 0.2);
+       font-family: serif;
+   }
+   
+   /* ====================
+      FOOTER & CREDITS
+      ==================== */
+   body > script:last-of-type {
+       display: none;
+   }
+   
+   /* ====================
+      RESPONSIVE DESIGN
+      ==================== */
+   @media (max-width: 768px) {
+       .container {
+           padding: 0 1rem;
+       }
+       
+       header .container {
+           flex-direction: column;
+           align-items: flex-start;
+           gap: 1rem;
+       }
+       
+       .social-links {
+           margin-left: 0;
+           margin-top: 0.5rem;
+       }
+       
+       h1 {
+           font-size: 2rem;
+       }
+       
+       h2 {
+           font-size: 1.5rem;
+       }
+       
+       h3 {
+           font-size: 1.25rem;
+       }
+       
+       #main_content {
+           padding: 2rem 0 3rem;
+       }
+       
+       pre {
+           padding: 1rem;
+           font-size: 0.9rem;
+       }
+   }
+   
+   @media (max-width: 480px) {
+       h1 {
+           font-size: 1.75rem;
+       }
+       
+       .social-links a {
+           width: 36px;
+           height: 36px;
+           font-size: 1.1rem;
+       }
+       
+       .btn-github {
+           padding: 0.625rem 1.25rem;
+           font-size: 0.9rem;
+       }
+   }
+   
+   /* ====================
+      ANIMATIONS & EFFECTS
+      ==================== */
+   #a-title h1 {
+       position: relative;
+       display: inline-block;
+   }
+   
+   #a-title h1::after {
+       content: '';
+       position: absolute;
+       bottom: -4px;
+       left: 0;
+       width: 0;
+       height: 2px;
+       background: linear-gradient(90deg, #60a5fa, #8b5cf6);
+       transition: width 0.3s ease;
+   }
+   
+   #a-title:hover h1::after {
+       width: 100%;
+   }
+   
+   /* Smooth scroll for anchor links */
+   html {
+       scroll-padding-top: 100px;
+   }
+   
+   /* Selection color */
+   ::selection {
+       background-color: rgba(96, 165, 250, 0.3);
+       color: #ffffff;
+   }
+   
+   ::-moz-selection {
+       background-color: rgba(96, 165, 250, 0.3);
+       color: #ffffff;
+   }
+   
+   /* ====================
+      ACCESSIBILITY
+      ==================== */
+   @media (prefers-reduced-motion: reduce) {
+       *,
+       *::before,
+       *::after {
+           animation-duration: 0.01ms !important;
+           animation-iteration-count: 1 !important;
+           transition-duration: 0.01ms !important;
+           scroll-behavior: auto !important;
+       }
+   }
+   
+   /* Focus styles for accessibility */
+   :focus {
+       outline: 2px solid #60a5fa;
+       outline-offset: 2px;
+   }
+   
+   :focus:not(:focus-visible) {
+       outline: none;
+   }
+   
+   /* ====================
+      PRINT STYLES
+      ==================== */
+   @media print {
+       body {
+           background-color: white;
+           color: black;
+       }
+       
+       a {
+           color: #0066cc;
+           text-decoration: underline;
+       }
+       
+       pre, code {
+           background-color: #f5f5f5;
+           color: #333;
+           border: 1px solid #ddd;
+       }
+       
+       .social-links,
+       #downloads {
+           display: none;
+       }
+   }
