@@ -3,59 +3,11 @@
     border-top: 1px solid var(--border-color);
     
     .contact-content {
-      display: grid;
+      // display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
       max-width: 1000px;
       margin: 0 auto;
-      
-      .contact-info {
-        h3 {
-          font-size: 1.3rem;
-          margin-bottom: 1rem;
-          color: var(--text-primary);
-        }
-        
-        p {
-          margin-bottom: 2rem;
-        }
-        
-        .protocols {
-          background-color: rgba(0, 0, 0, 0.2);
-          border: 1px solid var(--border-color);
-          border-radius: var(--border-radius);
-          padding: 1.5rem;
-          margin-bottom: 2rem;
-          
-          .protocol {
-            margin-bottom: 1rem;
-            
-            &:last-child {
-              margin-bottom: 0;
-            }
-            
-            .protocol-label {
-              color: var(--text-secondary);
-              margin-right: 0.5rem;
-            }
-            
-            .protocol-value {
-              color: var(--primary-color);
-            }
-          }
-        }
-        
-        .disclaimer {
-          border-left: 2px solid var(--text-muted);
-          padding-left: 1rem;
-          
-          p {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin: 0;
-          }
-        }
-      }
       
       .contact-form {
         form {
