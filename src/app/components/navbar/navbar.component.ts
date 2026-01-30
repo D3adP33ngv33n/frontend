@@ -15,6 +15,12 @@ export class NavbarComponent {
   onWindowScroll() {
     this.isScrolled = window.pageYOffset > 20;
   }
+
+  viewBlog(): void {
+    console.log(9999);
+    
+    this.router.navigate(['/blog']);
+  }
   
   // Handle navigation within home page
   navigateToFragment(fragment: string): void {

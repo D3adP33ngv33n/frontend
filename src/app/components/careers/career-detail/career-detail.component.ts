@@ -1,5 +1,5 @@
 import { Component, OnInit, inject, input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface JobDetail {

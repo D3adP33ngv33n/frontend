@@ -10,7 +10,7 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   private router = inject(Router);
-  
+
   ngOnInit() {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
