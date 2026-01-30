@@ -1,4 +1,4 @@
-### [**[NoRWX] Proof-of-Concept**](blog/NoRWX/)  
+### [**[NoRWX] Proof-of-Concept**](blog/NoRWX/)
 **Problem:** When writing shellcode in C, only the .text section is available after compilation, so global constants and string literals cannot be used because they are placed in .rdata or .data.
 
 **Solution:** Minimize usage of construction that will cause generation of the data in .rdata or .data, with moving string literals to stack. To create stack‑based strings, represent the string as a character array stored in a local variable. This solution also obfuscates strings:
