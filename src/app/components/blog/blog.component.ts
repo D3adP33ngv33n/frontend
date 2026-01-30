@@ -1,7 +1,7 @@
 import Prism from '../../../../src/main';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MarkdownModule, MarkdownService } from 'ngx-markdown';
 
 @Component({
@@ -15,7 +15,10 @@ export class BlogComponent {
 
 	public post: string = '';
 
-	constructor(private route: ActivatedRoute) {
+	constructor(
+		private router: Router,
+		private route: ActivatedRoute,
+	) {
 		this.route.paramMap.subscribe(params => {
 			this.post = params.get('post') || '';
 		});
@@ -25,5 +28,23 @@ export class BlogComponent {
 		Prism.highlightAll(true, () => {
 			console.log('highlighted!');
 		});
+	}
+
+	onMarkdownClick(event: MouseEvent) {
+		const target = event.target as HTMLElement;
+		const anchor = target.closest('a') as HTMLAnchorElement | null;
+		if (!anchor) return;
+		const href = anchor.getAttribute('href');
+		if (!href) return;
+		if (
+		  anchor.target === '_blank' ||
+		  href.startsWith('http') ||
+		  href.startsWith('mailto:')
+		) {
+		  return;
+		}
+	
+		event.preventDefault();
+		this.router.navigate([href]);
 	}
 }
