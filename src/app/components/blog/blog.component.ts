@@ -22,8 +22,6 @@ export class BlogComponent {
 	}
 
 	ngAfterViewChecked() {
-		console.log('444444');
-		
 		Prism.highlightAll(true, () => {
 			console.log('highlighted!');
 		});
