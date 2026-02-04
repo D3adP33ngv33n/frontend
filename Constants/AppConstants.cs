@@ -9,8 +9,7 @@ public static class AppConstants
     public static class Social
     {
         public const string LinkedInUrl = "https://www.linkedin.com/company/nostdlib";
-        public const string GitHubUrl = "https://github.com/nostdlib";
-        public const string GitHubProfileUrl = "https://github.com/mrzaxaryan";
+        public const string GitHubUrl = "https://github.com/mrzaxaryan";
     }
 
     public static class Meta
