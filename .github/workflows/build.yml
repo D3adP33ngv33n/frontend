@@ -35,6 +35,11 @@ jobs:
       - name: Publish
         run: dotnet publish Nostdlib.csproj --no-build --configuration Release -o release
 
+      - name: Rewrite base href for GitHub Pages
+        run: |
+          sed -i 's|<base href="/" />|<base href="/frontend/" />|g' release/wwwroot/index.html
+          sed -i 's|<base href="/" />|<base href="/frontend/" />|g' release/wwwroot/404.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
