@@ -3,6 +3,7 @@
 @implements IDisposable
 
 <nav class="navbar @(IsScrolled ? "scrolled" : "") @(IsMobileMenuOpen ? "mobile-open" : "")">
+    <div class="mobile-overlay" @onclick="CloseMobileMenu"></div>
     <div class="container">
         <div class="navbar-brand">
             <a href="@Routes.Home" class="logo mono">
@@ -52,14 +53,23 @@
         L.OnLanguageChanged += OnLanguageChanged;
     }
 
-    private void ToggleMobileMenu()
+    private async Task ToggleMobileMenu()
     {
         IsMobileMenuOpen = !IsMobileMenuOpen;
+        await SetBodyScrollLock(IsMobileMenuOpen);
     }
 
-    private void CloseMobileMenu()
+    private async Task CloseMobileMenu()
     {
         IsMobileMenuOpen = false;
+        await SetBodyScrollLock(false);
+    }
+
+    private async Task SetBodyScrollLock(bool locked)
+    {
+        await JS.InvokeVoidAsync("eval", locked
+            ? "document.body.style.overflow = 'hidden'"
+            : "document.body.style.overflow = ''");
     }
 
     private void OnLanguageChanged()
