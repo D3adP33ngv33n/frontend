@@ -1,0 +1,34 @@
+@page "/Error"
+
+<PageTitle>Error</PageTitle>
+
+<section class="error-page">
+    <div class="container">
+        <div class="error-content">
+            <span class="error-symbol">⚠</span>
+            <h1>Error</h1>
+            <p>An unexpected error occurred.</p>
+            <a href="/" class="btn btn-primary">Return Home</a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .error-page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .error-content {
+        text-align: center;
+    }
+
+    .error-symbol {
+        font-size: 4rem;
+        color: var(--primary-color);
+        display: block;
+        margin-bottom: 1rem;
+    }
+</style>

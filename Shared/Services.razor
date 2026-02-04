@@ -1,0 +1,32 @@
+<section class="services" id="services">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>Services</h2>
+            <p class="section-subtitle">Specialized solutions for discreet protection</p>
+        </div>
+
+        <div class="services-grid">
+            @foreach (var service in ServicesList)
+            {
+                <div class="service-card">
+                    <div class="service-icon">
+                        @service.Icon
+                    </div>
+                    <h3>@service.Title</h3>
+                    <p>@service.Description</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@code {
+    private record ServiceItem(string Title, string Description, string Icon);
+
+    private List<ServiceItem> ServicesList = new()
+    {
+        new("Silent Protection", "Continuous monitoring without detection. We watch without being seen.", "👁️"),
+        new("Data Obfuscation", "Making your sensitive information unreadable to unauthorized entities.", "🌀"),
+        new("Threat Neutralization", "Eliminating digital threats before they become aware of our presence.", "⚡")
+    };
+}

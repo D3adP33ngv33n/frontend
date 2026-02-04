@@ -1,0 +1,65 @@
+@inject NavigationManager Navigation
+
+<section class="careers" id="careers">
+    <div class="container">
+        <div class="section-header">
+            <h2>Careers</h2>
+            <p class="section-subtitle">Available positions for cleared individuals</p>
+        </div>
+
+        <div class="openings-grid">
+            @foreach (var opening in CurrentOpenings)
+            {
+                <div class="opening-card">
+                    <div class="card-header">
+                        <div class="opening-code mono">@opening.Code</div>
+                        <div class="opening-type">@opening.Type</div>
+                    </div>
+
+                    <div class="card-body">
+                        <h3 class="opening-title">@opening.Title</h3>
+
+                        <div class="opening-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">📊</span>
+                                <span class="meta-text">@opening.Level</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">📍</span>
+                                <span class="meta-text mono">@opening.Location</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <button class="btn btn-primary" @onclick="() => ViewDetails(opening.Id)">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="careers-note">
+            <p class="mono">
+                All positions require thorough vetting. Approved candidates will be contacted.
+            </p>
+        </div>
+    </div>
+</section>
+
+@code {
+    private record JobPosition(int Id, string Code, string Title, string Level, string Location, string Type);
+
+    private List<JobPosition> CurrentOpenings = new()
+    {
+        new(1, "CS-01", "Security Analyst", "Senior", "Remote", "Full-time"),
+        new(2, "CS-02", "Penetration Tester", "Mid", "Any Office", "Full-time"),
+        new(3, "CS-03", "Cryptographic Researcher", "Senior", "Remote", "Contract")
+    };
+
+    private void ViewDetails(int jobId)
+    {
+        Navigation.NavigateTo($"/careers/{jobId}");
+    }
+}
