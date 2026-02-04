@@ -7,10 +7,26 @@
 
     <div class="slider-container">
         <div class="slider-viewport">
-            <div class="slider-track" style="transform: translateX(calc(-@currentIndex * (var(--card-width) + var(--card-gap))));">
+            <div class="slider-track @(disableTransition ? "no-transition" : "")"
+                 style="transform: translateX(calc(-@trackIndex * (var(--card-width) + var(--card-gap))));">
+                @* Clone all items at the beginning *@
+                @foreach (var item in Items)
+                {
+                    <div class="slider-clone">
+                        @ItemTemplate(item)
+                    </div>
+                }
+                @* Actual items *@
                 @foreach (var item in Items)
                 {
                     @ItemTemplate(item)
+                }
+                @* Clone all items at the end *@
+                @foreach (var item in Items)
+                {
+                    <div class="slider-clone">
+                        @ItemTemplate(item)
+                    </div>
                 }
             </div>
         </div>
@@ -37,20 +53,49 @@
     public RenderFragment<TItem> ItemTemplate { get; set; } = default!;
 
     private int currentIndex = 0;
+    private int trackIndex => currentIndex + Items.Count; // +Items.Count to account for the clones at the beginning
+    private bool disableTransition = false;
 
-    private void NextSlide()
+    protected override void OnInitialized()
     {
-        if (Items.Count > 0)
+        currentIndex = 0;
+    }
+
+    private async Task NextSlide()
+    {
+        if (Items.Count == 0) return;
+
+        currentIndex++;
+
+        if (currentIndex >= Items.Count)
         {
-            currentIndex = (currentIndex + 1) % Items.Count;
+            // We're now on the clone of the first item, wait for animation then jump
+            await Task.Delay(400); // Match CSS transition duration
+            disableTransition = true;
+            currentIndex = 0;
+            StateHasChanged();
+            await Task.Delay(50); // Small delay for DOM update
+            disableTransition = false;
+            StateHasChanged();
         }
     }
 
-    private void PrevSlide()
+    private async Task PrevSlide()
     {
-        if (Items.Count > 0)
+        if (Items.Count == 0) return;
+
+        currentIndex--;
+
+        if (currentIndex < 0)
         {
-            currentIndex = (currentIndex - 1 + Items.Count) % Items.Count;
+            // We're now on the clone of the last item, wait for animation then jump
+            await Task.Delay(400); // Match CSS transition duration
+            disableTransition = true;
+            currentIndex = Items.Count - 1;
+            StateHasChanged();
+            await Task.Delay(50); // Small delay for DOM update
+            disableTransition = false;
+            StateHasChanged();
         }
     }
 

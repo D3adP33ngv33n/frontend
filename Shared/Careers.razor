@@ -1,4 +1,3 @@
-@inject NavigationManager Navigation
 @inject IDataService DataService
 
 <section class="careers" id="careers">
@@ -29,12 +28,29 @@
                                 <span class="meta-text mono">@opening.Location</span>
                             </div>
                         </div>
+
+                        <div class="opening-description">
+                            <p>@opening.Description</p>
+                        </div>
+
+                        @if (opening.Requirements is not null)
+                        {
+                            <div class="opening-requirements">
+                                <h4>Requirements</h4>
+                                <ul>
+                                    @foreach (var req in opening.Requirements)
+                                    {
+                                        <li>@req</li>
+                                    }
+                                </ul>
+                            </div>
+                        }
                     </div>
 
                     <div class="card-footer">
-                        <button class="btn btn-primary" @onclick="() => ViewDetails(opening.Id)">
-                            View Details
-                        </button>
+                        <a href="@AppConstants.Social.LinkedInUrl" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                            Apply via LinkedIn
+                        </a>
                     </div>
                 </div>
             </ItemTemplate>
@@ -54,10 +70,5 @@
     protected override async Task OnInitializedAsync()
     {
         CurrentOpenings = await DataService.GetJobPositionsAsync();
-    }
-
-    private void ViewDetails(int jobId)
-    {
-        Navigation.NavigateTo(Routes.GetCareerDetailsUrl(jobId));
     }
 }

@@ -11,9 +11,9 @@
 }
 
 .opening-card {
-  flex: 0 0 var(--card-width, 400px);
-  max-width: var(--card-width, 400px);
-  min-height: 320px;
+  flex: 0 0 var(--card-width, 450px);
+  max-width: var(--card-width, 450px);
+  min-height: 500px;
   background-color: rgba(10, 14, 23, 0.7);
   border: 1px solid var(--border-color);
   border-radius: 12px;
@@ -115,6 +115,53 @@
   font-size: 0.95rem;
 }
 
+.opening-description {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.opening-description p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.opening-requirements {
+  margin-top: 1rem;
+}
+
+.opening-requirements h4 {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.opening-requirements ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.opening-requirements li {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  padding-left: 1rem;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.opening-requirements li::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-family: var(--font-mono);
+}
+
 .card-footer .btn {
   width: 100%;
   padding: 0.9rem;
@@ -148,14 +195,22 @@
 
 @media (max-width: 768px) {
   .opening-card {
-    flex: 0 0 320px;
-    max-width: 320px;
-    min-height: 300px;
+    flex: 0 0 350px;
+    max-width: 350px;
+    min-height: 450px;
     padding: 1.5rem;
   }
 
   .opening-title {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+  }
+
+  .opening-description p {
+    font-size: 0.85rem;
+  }
+
+  .opening-requirements li {
+    font-size: 0.8rem;
   }
 
   .careers-note {
@@ -165,9 +220,9 @@
 
 @media (max-width: 480px) {
   .opening-card {
-    flex: 0 0 280px;
-    max-width: 280px;
-    min-height: 280px;
+    flex: 0 0 300px;
+    max-width: 300px;
+    min-height: 400px;
   }
 
   .card-header {
