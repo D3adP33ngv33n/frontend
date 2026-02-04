@@ -37,7 +37,7 @@
     "status": "Ակտիվ",
     "audience": "Անվտանգության հետազոտողներ, համակարգային ծրագրավորողներ, ներկառուցված համակարգերի մշակողներ",
     "icon": "⚙️",
-    "gitHubUrl": "https://github.com/mrzaxaryan/cpp-pic",
+    "gitHubUrl": "https://github.com/mrzaxaryan/Position-Independent-Runtime",
     "description": "cpp-pic-ը համապարփակ է C++23 շրջանակ իսկապես պոզիցիա-անկախ կոդի համար, որը կարող է աշխատել բազմաթիվ հարթակներում։",
     "useCases": [
       "Շարժական անվտանգության գործիքների ստեղծում",

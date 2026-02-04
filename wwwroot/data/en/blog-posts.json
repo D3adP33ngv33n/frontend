@@ -47,7 +47,32 @@
     "audience": "Security researchers, systems programmers, embedded developers",
     "license": "MIT",
     "icon": "⚙️",
-    "gitHubUrl": "https://github.com/mrzaxaryan/cpp-pic"
+    "gitHubUrl": "https://github.com/mrzaxaryan/Position-Independent-Runtime"
+  },
+  {
+    "title": "[PIL] Position-Independent Language",
+    "purpose": "A lightweight, dynamically typed scripting language embedded within the Position-Independent Runtime.",
+    "description": "PIL (Position Independent Language) is a lightweight scripting language designed to function without C runtime dependencies or .rdata sections. It provides scripting capabilities in constrained environments like shellcode and UEFI firmware while maintaining full position-independence. All functions must be registered from C++, enabling minimal footprint optimized for embedded contexts.",
+    "features": [
+      "Dynamic typing with six value types (nil, bool, number, string, array, function)",
+      "Lexical scoping with nested block support (max 32 levels)",
+      "Control flow structures (if/else, while, for loops)",
+      "Function definitions with parameters and return values",
+      "No built-in functions; all functions registered from C++"
+    ],
+    "useCases": [
+      "Scripting for position-independent payloads",
+      "UEFI application development",
+      "Low-level system tools",
+      "Embedded systems requiring runtime independence"
+    ],
+    "technologies": "C++23, PIR (Position-Independent Runtime)",
+    "status": "Active",
+    "statusClass": "active",
+    "audience": "Security researchers, systems programmers, embedded developers",
+    "license": "MIT",
+    "icon": "📜",
+    "gitHubUrl": "https://github.com/mrzaxaryan/Position-Independent-Language"
   },
   {
     "title": "[EC] Armenian Encoding Converter",
