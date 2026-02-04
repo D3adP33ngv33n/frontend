@@ -1,9 +1,0 @@
-[submodule "content/EC"]
-	path = content/EC
-	url = https://github.com/mrzaxaryan/EC
-[submodule "content/c-pic"]
-	path = content/c-pic
-	url = https://github.com/mrzaxaryan/c-pic.git
-[submodule "content/NoRWX"]
-	path = content/NoRWX
-	url = https://github.com/mrzaxaryan/NoRWX.git
