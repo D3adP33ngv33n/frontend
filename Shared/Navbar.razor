@@ -19,10 +19,10 @@
 
         <ul class="navbar-nav @(IsMobileMenuOpen ? "open" : "")">
             <li class="nav-item">
-                <a href="@Routes.About" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.About"]</a>
+                <a href="@Routes.Services" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.Services"]</a>
             </li>
             <li class="nav-item">
-                <a href="@Routes.Services" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.Services"]</a>
+                <a href="@Routes.About" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.About"]</a>
             </li>
             <li class="nav-item">
                 <a href="@Routes.Blog" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.OpenSource"]</a>
@@ -31,10 +31,10 @@
                 <a href="@Routes.Careers" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.Careers"]</a>
             </li>
             <li class="nav-item">
-                <a href="@Routes.Privacy" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.Privacy"]</a>
+                <a href="@Routes.Contact" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.Contact"]</a>
             </li>
             <li class="nav-item">
-                <a href="@Routes.Contact" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.Contact"]</a>
+                <a href="@Routes.Privacy" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.Privacy"]</a>
             </li>
             <li class="nav-item">
                 <LanguageSelector />
