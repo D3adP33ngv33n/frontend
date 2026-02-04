@@ -16,7 +16,6 @@ concurrency:
 
 env:
   DOTNET_VERSION: '9.0.x'
-  BASE_PATH: '/${{ github.event.repository.name }}/'
 
 jobs:
   build:
@@ -45,13 +44,6 @@ jobs:
 
       - name: Publish
         run: dotnet publish Nostdlib.csproj --no-build --configuration Release -o release
-
-      - name: Rewrite base href for GitHub Pages
-        working-directory: release/wwwroot
-        run: |
-          sed -i 's|<base href="/" />|<base href="${{ env.BASE_PATH }}" />|g' index.html
-          sed -i 's|<base href="/" />|<base href="${{ env.BASE_PATH }}" />|g' 404.html
-          echo "Base path set to: ${{ env.BASE_PATH }}"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
