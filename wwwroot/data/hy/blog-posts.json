@@ -50,6 +50,31 @@
     "statusClass": "active"
   },
   {
+    "title": "[PIL] Position-Independent Language",
+    "purpose": "Lightweight scripting language embedded in Position-Independent Runtime.",
+    "features": [
+      "Dynamic typing (nil, bool, number, string, array, function)",
+      "Lexical scoping (max 32 levels)",
+      "Control flow (if/else, while, for)",
+      "Function definitions with parameters",
+      "No built-in functions; all registered from C++"
+    ],
+    "technologies": "C++23, PIR (Position-Independent Runtime)",
+    "status": "Active",
+    "audience": "Security researchers, systems programmers, embedded developers",
+    "icon": "📜",
+    "gitHubUrl": "https://github.com/mrzaxaryan/Position-Independent-Language",
+    "description": "PIL is a lightweight scripting language for position-independent code without C runtime or .rdata dependencies. Works in shellcode and UEFI environments.",
+    "useCases": [
+      "Scripting for position-independent payloads",
+      "UEFI application development",
+      "Low-level system tools",
+      "Embedded systems requiring runtime independence"
+    ],
+    "license": "MIT",
+    "statusClass": "active"
+  },
+  {
     "title": "[EC] Հայերեն կոդավորման փոխարկիչ",
     "purpose": "Փութիլիթի՝ հայերեն տեքստը տարբեր կոդավորման ձևաչափերի միջև փոխարկելու համար, ներառյալ ANSI, Unicode և ArmSCII։",
     "features": [

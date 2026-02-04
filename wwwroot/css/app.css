@@ -8,3 +8,4 @@
 /* Component styles */
 @import 'components/_buttons.css';
 @import 'components/_loading.css';
+@import 'components/_update-notification.css';

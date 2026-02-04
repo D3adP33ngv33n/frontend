@@ -165,21 +165,6 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Tablet breakpoint - reduce spacing */
-@media (max-width: 1024px) {
-  .nav-item {
-    margin-left: 1rem;
-  }
-
-  .nav-link {
-    font-size: 0.8rem;
-  }
-
-  .navbar-brand .logo-text {
-    font-size: 1rem;
-  }
-}
-
 /* Mobile overlay backdrop */
 .mobile-overlay {
   display: none;
@@ -199,7 +184,7 @@
   opacity: 1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .mobile-menu-toggle {
     display: flex;
   }
@@ -217,7 +202,7 @@
     position: fixed;
     top: 0;
     right: -100%;
-    width: 280px;
+    width: 320px;
     max-width: 80vw;
     height: 100vh;
     flex-direction: column;
@@ -251,14 +236,6 @@
     margin-top: 1rem;
     padding-top: 1rem;
     border-top: 1px solid rgba(0, 255, 204, 0.2);
-  }
-
-  .navbar-brand .logo-text {
-    font-size: 0.95rem;
-  }
-
-  .navbar-brand .logo-symbol {
-    font-size: 1.4rem;
   }
 }
 

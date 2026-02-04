@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="css/app.css" />
     <link rel="stylesheet" href="Nostdlib.styles.css" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#00ffcc" />
 </head>
 
 <body>
@@ -27,6 +29,65 @@
 
     <script src="js/site.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        // Service Worker Registration with Update Detection
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', async () => {
+                try {
+                    const registration = await navigator.serviceWorker.register('/service-worker.js');
+
+                    // Check for updates periodically
+                    setInterval(() => registration.update(), 60 * 60 * 1000); // Every hour
+
+                    // Handle updates
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                // New version available
+                                showUpdateNotification(registration);
+                            }
+                        });
+                    });
+                } catch (error) {
+                    console.error('Service Worker registration failed:', error);
+                }
+            });
+
+            // Reload when new service worker takes over
+            let refreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (!refreshing) {
+                    refreshing = true;
+                    window.location.reload();
+                }
+            });
+        }
+
+        function showUpdateNotification(registration) {
+            // Create update notification element
+            const notification = document.createElement('div');
+            notification.id = 'update-notification';
+            notification.innerHTML = `
+                <div class="update-content">
+                    <span>A new version is available!</span>
+                    <button onclick="applyUpdate()">Update Now</button>
+                    <button onclick="dismissUpdate()">Later</button>
+                </div>
+            `;
+            document.body.appendChild(notification);
+
+            window.applyUpdate = () => {
+                if (registration.waiting) {
+                    registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+                }
+            };
+
+            window.dismissUpdate = () => {
+                notification.remove();
+            };
+        }
+    </script>
 </body>
 
 </html>
