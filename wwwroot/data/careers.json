@@ -4,7 +4,7 @@
     "code": "CS-01",
     "title": "Security Analyst",
     "level": "Senior",
-    "location": "Remote",
+    "location": "Armenia Yerevan",
     "type": "Full-time",
     "description": "We are seeking a Security Analyst to monitor, analyze, and respond to security incidents. You will work with advanced tools and methodologies to protect our clients' critical infrastructure.",
     "requirements": [
@@ -19,8 +19,8 @@
     "id": 2,
     "code": "CS-02",
     "title": "Penetration Tester",
-    "level": "Mid",
-    "location": "Any Office",
+    "level": "Senior",
+    "location": "Armenia Yerevan",
     "type": "Full-time",
     "description": "We are seeking a Penetration Tester to identify vulnerabilities in client systems and applications. You will conduct authorized security assessments and provide detailed remediation guidance.",
     "requirements": [
@@ -36,8 +36,8 @@
     "code": "CS-03",
     "title": "Cryptographic Researcher",
     "level": "Senior",
-    "location": "Remote",
-    "type": "Contract",
+    "location": "Armenia Yerevan",
+    "type": "Full-time",
     "description": "We are seeking a Cryptographic Researcher to advance our understanding of modern cryptographic systems. You will analyze implementations, identify weaknesses, and develop novel approaches to secure communications.",
     "requirements": [
       "PhD or equivalent experience in cryptography or mathematics",

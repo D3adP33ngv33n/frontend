@@ -2,8 +2,9 @@
 :root {
   /* Colors */
   --primary-color: #00ffcc;
-  --primary-glow: rgba(0, 255, 204, 0.1);
+  --primary-glow: rgba(0, 255, 204, 0.15);
   --secondary-color: #6600ff;
+  --accent-gradient: linear-gradient(135deg, #00ffcc 0%, #6600ff 100%);
 
   /* Backgrounds */
   --dark-bg: #050510;
@@ -14,12 +15,25 @@
   --border-color: #1a1a2e;
 
   /* Text */
-  --text-primary: #e0e0ff;
-  --text-secondary: #8888aa;
-  --text-muted: #555577;
+  --text-primary: #e8e8ff;
+  --text-secondary: #9999bb;
+  --text-muted: #666688;
+
+  /* Typography */
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.05em;
+  --letter-spacing-wider: 0.1em;
 
   /* Layout */
   --border-radius: 4px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   --header-height: 70px;
 }
