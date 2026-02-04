@@ -13,9 +13,10 @@ _site/
 !*.slnLaunch.user
 *.userosscache
 *.sln.docstates
-.vscode/
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
 !.vscode/extensions.json
-!.vscode/settings.json
 *.userprefs
 
 # Build results

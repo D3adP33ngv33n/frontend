@@ -33,7 +33,7 @@ jobs:
         run: dotnet build --no-restore --configuration Release
 
       - name: Publish
-        run: dotnet publish --no-build --configuration Release -o release
+        run: dotnet publish Nostdlib.csproj --no-build --configuration Release -o release
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
