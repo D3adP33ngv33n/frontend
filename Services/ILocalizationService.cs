@@ -4,8 +4,9 @@ public interface ILocalizationService
 {
     string CurrentLanguage { get; }
     string this[string key] { get; }
-    void SetLanguage(string languageCode);
-    IEnumerable<LanguageInfo> GetSupportedLanguages();
+    Task SetLanguageAsync(string languageCode);
+    Task InitializeAsync();
+    IReadOnlyList<LanguageInfo> GetSupportedLanguages();
     event Action? OnLanguageChanged;
 }
 

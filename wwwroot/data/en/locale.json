@@ -1,0 +1,54 @@
+{
+  "Nav.About": "About",
+  "Nav.Services": "Services",
+  "Nav.OpenSource": "Open Source",
+  "Nav.Careers": "Careers",
+  "Nav.Privacy": "Privacy",
+  "Nav.Contact": "Contact",
+
+  "Hero.Title": "SECURITY WITHOUT COMPROMISE",
+  "Hero.Subtitle": "Elite cybersecurity consulting for organizations that demand discretion. Proven expertise. Measurable outcomes. Absolute confidentiality.",
+  "Hero.CTA.Primary": "Start a Conversation",
+  "Hero.CTA.Secondary": "Explore Our Work",
+
+  "About.Title": "About Us",
+  "About.Principle1": "Layered defense as architectural foundation",
+  "About.Principle2": "Absolute client confidentiality",
+  "About.Principle3": "Intelligence-driven security operations",
+  "About.Principle4": "Continuous validation through adversarial testing",
+  "About.Principle5": "First-principles approach to complex problems",
+
+  "Services.Title": "Services",
+  "Services.Subtitle": "Specialized capabilities for complex security challenges",
+
+  "Careers.Title": "Careers",
+  "Careers.Subtitle": "Build your career at the edge of security research",
+  "Careers.Requirements": "Requirements",
+  "Careers.Apply": "Apply via LinkedIn",
+  "Careers.Note": "Our selection process is rigorous by design. Qualified candidates receive direct outreach for initial conversations.",
+
+  "Blog.Title": "OPEN SOURCE",
+  "Blog.Subtitle": "Open source tools and technical research from our team",
+  "Blog.KeyFeatures": "Key Features",
+  "Blog.Audience": "Audience:",
+  "Blog.ReadMore": "Read More",
+  "Blog.GitHub": "GitHub",
+
+  "Privacy.Title": "Privacy Policy",
+  "Privacy.Commitment1": "Zero client disclosure without explicit consent",
+  "Privacy.Commitment2": "No third-party analytics or tracking",
+  "Privacy.Commitment3": "Encrypted communications as standard",
+  "Privacy.Commitment4": "Data retention limited to operational necessity",
+  "Privacy.Commitment5": "Right to deletion honored without exception",
+
+  "Contact.Title": "Initiate Contact",
+  "Contact.Subtitle": "Ready to discuss your security posture? Reach out through a secure channel below.",
+  "Contact.Note": "All initial communications are treated as confidential",
+
+  "Footer.Rights": "All rights reserved.",
+  "Footer.Tagline": "Security Beyond Perimeters",
+
+  "Common.Loading": "Loading...",
+  "Common.Error": "An error occurred",
+  "NotFound.Message": "Sorry, there's nothing at this address."
+}

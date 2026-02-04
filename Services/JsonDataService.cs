@@ -3,16 +3,13 @@ using Nostdlib.Models;
 
 namespace Nostdlib.Services;
 
-public class JsonDataService : IDataService
+public class JsonDataService : IDataService, IDisposable
 {
     private readonly HttpClient _httpClient;
     private readonly ILocalizationService _localizationService;
-
-    private List<ServiceItem>? _servicesCache;
-    private List<JobPosition>? _jobPositionsCache;
-    private List<BlogPost>? _blogPostsCache;
-    private List<SocialLink>? _socialLinksCache;
+    private readonly Dictionary<string, object> _cache = new();
     private string _cachedLanguage = "";
+    private bool _disposed;
 
     public JsonDataService(HttpClient httpClient, ILocalizationService localizationService)
     {
@@ -28,72 +25,54 @@ public class JsonDataService : IDataService
 
     public void ClearCache()
     {
-        _servicesCache = null;
-        _jobPositionsCache = null;
-        _blogPostsCache = null;
-        _socialLinksCache = null;
+        _cache.Clear();
         _cachedLanguage = "";
     }
 
     private string GetDataPath(string filename)
     {
         var lang = _localizationService.CurrentLanguage;
-
-        // Check if we have localized data for this language
-        if (lang != "en")
-        {
-            return $"data/{lang}/{filename}";
-        }
-
-        return $"data/{filename}";
+        return $"data/{lang}/{filename}";
     }
 
-    private bool IsCacheValid()
-    {
-        return _cachedLanguage == _localizationService.CurrentLanguage;
-    }
+    private bool IsCacheValid() => _cachedLanguage == _localizationService.CurrentLanguage;
 
-    public async Task<List<ServiceItem>> GetServicesAsync()
+    private async Task<List<T>> LoadDataAsync<T>(string filename, string cacheKey)
     {
-        if (_servicesCache != null && IsCacheValid())
-            return _servicesCache;
+        if (_cache.TryGetValue(cacheKey, out var cached) && cached is List<T> cachedList && IsCacheValid())
+            return cachedList;
+
+        List<T>? result = null;
 
         try
         {
-            _servicesCache = await _httpClient.GetFromJsonAsync<List<ServiceItem>>(GetDataPath("services.json"))
-                ?? new List<ServiceItem>();
+            result = await _httpClient.GetFromJsonAsync<List<T>>(GetDataPath(filename));
         }
         catch
         {
             // Fallback to English if localized file doesn't exist
-            _servicesCache = await _httpClient.GetFromJsonAsync<List<ServiceItem>>("data/services.json")
-                ?? new List<ServiceItem>();
+            try
+            {
+                result = await _httpClient.GetFromJsonAsync<List<T>>($"data/en/{filename}");
+            }
+            catch
+            {
+                // If both fail, return empty list
+            }
         }
 
+        result ??= new List<T>();
+        _cache[cacheKey] = result;
         _cachedLanguage = _localizationService.CurrentLanguage;
-        return _servicesCache;
+
+        return result;
     }
 
-    public async Task<List<JobPosition>> GetJobPositionsAsync()
-    {
-        if (_jobPositionsCache != null && IsCacheValid())
-            return _jobPositionsCache;
+    public Task<List<ServiceItem>> GetServicesAsync()
+        => LoadDataAsync<ServiceItem>("services.json", nameof(ServiceItem));
 
-        try
-        {
-            _jobPositionsCache = await _httpClient.GetFromJsonAsync<List<JobPosition>>(GetDataPath("careers.json"))
-                ?? new List<JobPosition>();
-        }
-        catch
-        {
-            // Fallback to English if localized file doesn't exist
-            _jobPositionsCache = await _httpClient.GetFromJsonAsync<List<JobPosition>>("data/careers.json")
-                ?? new List<JobPosition>();
-        }
-
-        _cachedLanguage = _localizationService.CurrentLanguage;
-        return _jobPositionsCache;
-    }
+    public Task<List<JobPosition>> GetJobPositionsAsync()
+        => LoadDataAsync<JobPosition>("careers.json", nameof(JobPosition));
 
     public async Task<JobPosition?> GetJobPositionByIdAsync(int id)
     {
@@ -101,45 +80,21 @@ public class JsonDataService : IDataService
         return positions.FirstOrDefault(p => p.Id == id);
     }
 
-    public async Task<List<BlogPost>> GetBlogPostsAsync()
+    public Task<List<BlogPost>> GetBlogPostsAsync()
+        => LoadDataAsync<BlogPost>("blog-posts.json", nameof(BlogPost));
+
+    public Task<List<SocialLink>> GetSocialLinksAsync()
+        => LoadDataAsync<SocialLink>("social-links.json", nameof(SocialLink));
+
+    public void Dispose()
     {
-        if (_blogPostsCache != null && IsCacheValid())
-            return _blogPostsCache;
+        if (_disposed)
+            return;
 
-        try
-        {
-            _blogPostsCache = await _httpClient.GetFromJsonAsync<List<BlogPost>>(GetDataPath("blog-posts.json"))
-                ?? new List<BlogPost>();
-        }
-        catch
-        {
-            // Fallback to English if localized file doesn't exist
-            _blogPostsCache = await _httpClient.GetFromJsonAsync<List<BlogPost>>("data/blog-posts.json")
-                ?? new List<BlogPost>();
-        }
+        _localizationService.OnLanguageChanged -= OnLanguageChanged;
+        _cache.Clear();
+        _disposed = true;
 
-        _cachedLanguage = _localizationService.CurrentLanguage;
-        return _blogPostsCache;
-    }
-
-    public async Task<List<SocialLink>> GetSocialLinksAsync()
-    {
-        if (_socialLinksCache != null && IsCacheValid())
-            return _socialLinksCache;
-
-        try
-        {
-            _socialLinksCache = await _httpClient.GetFromJsonAsync<List<SocialLink>>(GetDataPath("social-links.json"))
-                ?? new List<SocialLink>();
-        }
-        catch
-        {
-            // Fallback to English if localized file doesn't exist
-            _socialLinksCache = await _httpClient.GetFromJsonAsync<List<SocialLink>>("data/social-links.json")
-                ?? new List<SocialLink>();
-        }
-
-        _cachedLanguage = _localizationService.CurrentLanguage;
-        return _socialLinksCache;
+        GC.SuppressFinalize(this);
     }
 }

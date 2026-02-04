@@ -45,9 +45,9 @@
         IsOpen = !IsOpen;
     }
 
-    private void SelectLanguage(string languageCode)
+    private async Task SelectLanguage(string languageCode)
     {
-        Localization.SetLanguage(languageCode);
+        await Localization.SetLanguageAsync(languageCode);
         IsOpen = false;
     }
 
