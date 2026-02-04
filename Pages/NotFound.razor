@@ -1,6 +1,24 @@
 @page "/not-found"
 @layout MainLayout
 @inject ILocalizationService L
+@implements IDisposable
 
-<h3>Not Found</h3>
+<h3>@L["NotFound.Title"]</h3>
 <p>@L["NotFound.Message"]</p>
+
+@code {
+    protected override void OnInitialized()
+    {
+        L.OnLanguageChanged += OnLanguageChanged;
+    }
+
+    private void OnLanguageChanged()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        L.OnLanguageChanged -= OnLanguageChanged;
+    }
+}

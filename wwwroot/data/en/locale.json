@@ -12,6 +12,12 @@
   "Hero.CTA.Secondary": "Explore Our Work",
 
   "About.Title": "About Us",
+  "About.Subtitle": "Precision security for high-stakes environments",
+  "About.Description1": "Our team brings decades of combined experience across offensive security, cryptographic research, and incident response. We operate where capability matters more than visibility.",
+  "About.Description2": "We architect and defend systems for organizations facing sophisticated threats—integrating advanced cryptographic protocols and security frameworks built for resilience under pressure.",
+  "About.Description3": "No case studies. No testimonials.",
+  "About.Description4": "Just outcomes.",
+  "About.PrinciplesTitle": "Principles",
   "About.Principle1": "Layered defense as architectural foundation",
   "About.Principle2": "Absolute client confidentiality",
   "About.Principle3": "Intelligence-driven security operations",
@@ -20,6 +26,7 @@
 
   "Services.Title": "Services",
   "Services.Subtitle": "Specialized capabilities for complex security challenges",
+  "Services.Note": "Every engagement operates under strict NDA. We collaborate directly with stakeholders to design solutions calibrated to your specific threat model and operational requirements.",
 
   "Careers.Title": "Careers",
   "Careers.Subtitle": "Build your career at the edge of security research",
@@ -27,14 +34,18 @@
   "Careers.Apply": "Apply via LinkedIn",
   "Careers.Note": "Our selection process is rigorous by design. Qualified candidates receive direct outreach for initial conversations.",
 
-  "Blog.Title": "OPEN SOURCE",
-  "Blog.Subtitle": "Open source tools and technical research from our team",
+  "Blog.Title": "Open Source",
+  "Blog.Subtitle": "Technical research, tools, and documentation",
   "Blog.KeyFeatures": "Key Features",
   "Blog.Audience": "Audience:",
   "Blog.ReadMore": "Read More",
   "Blog.GitHub": "GitHub",
 
   "Privacy.Title": "Privacy Policy",
+  "Privacy.Subtitle": "Discretion as a core operating principle",
+  "Privacy.Description1": "We maintain absolute confidentiality across all engagements and client relationships. Discretion is not a policy—it's embedded in our operational DNA.",
+  "Privacy.Description2": "Our clients entrust us with sensitive systems and critical infrastructure. That responsibility shapes everything we do. Your engagement exists only between us.",
+  "Privacy.CommitmentsTitle": "Our Commitments",
   "Privacy.Commitment1": "Zero client disclosure without explicit consent",
   "Privacy.Commitment2": "No third-party analytics or tracking",
   "Privacy.Commitment3": "Encrypted communications as standard",
@@ -50,5 +61,11 @@
 
   "Common.Loading": "Loading...",
   "Common.Error": "An error occurred",
+
+  "Error.Title": "Error",
+  "Error.Message": "An unexpected error occurred.",
+  "Error.ReturnHome": "Return Home",
+
+  "NotFound.Title": "Not Found",
   "NotFound.Message": "Sorry, there's nothing at this address."
 }

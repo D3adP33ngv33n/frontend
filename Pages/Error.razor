@@ -1,17 +1,36 @@
 @page "/Error"
+@inject ILocalizationService L
+@implements IDisposable
 
-<PageTitle>Error</PageTitle>
+<PageTitle>@L["Error.Title"]</PageTitle>
 
 <section class="error-page">
     <div class="container">
         <div class="error-content">
             <span class="error-symbol">⚠</span>
-            <h1>Error</h1>
-            <p>An unexpected error occurred.</p>
-            <a href="/" class="btn btn-primary">Return Home</a>
+            <h1>@L["Error.Title"]</h1>
+            <p>@L["Error.Message"]</p>
+            <a href="/" class="btn btn-primary">@L["Error.ReturnHome"]</a>
         </div>
     </div>
 </section>
+
+@code {
+    protected override void OnInitialized()
+    {
+        L.OnLanguageChanged += OnLanguageChanged;
+    }
+
+    private void OnLanguageChanged()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        L.OnLanguageChanged -= OnLanguageChanged;
+    }
+}
 
 <style>
     .error-page {

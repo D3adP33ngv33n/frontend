@@ -1,15 +1,17 @@
 @page "/blog"
 @inject IDataService DataService
+@inject ILocalizationService L
+@implements IDisposable
 
-<PageTitle>Open Source - @AppConstants.CompanyName</PageTitle>
+<PageTitle>@L["Blog.Title"] - @AppConstants.CompanyName</PageTitle>
 
 <Navbar />
 
 <section class="blog">
     <div class="container">
         <div class="section-header text-center">
-            <h1>Open Source</h1>
-            <p class="section-subtitle">Technical research, tools, and documentation</p>
+            <h1>@L["Blog.Title"]</h1>
+            <p class="section-subtitle">@L["Blog.Subtitle"]</p>
         </div>
 
         <div class="blog-grid">
@@ -21,7 +23,7 @@
                     <p class="blog-purpose">@post.Purpose</p>
 
                     <div class="blog-features">
-                        <h4>Key Features</h4>
+                        <h4>@L["Blog.KeyFeatures"]</h4>
                         <ul>
                             @foreach (var feature in post.Features)
                             {
@@ -35,25 +37,25 @@
                         <span class="blog-status @post.Status.ToLower()">@post.Status</span>
                     </div>
 
-                    <p class="blog-audience"><strong>Audience:</strong> @post.Audience</p>
+                    <p class="blog-audience"><strong>@L["Blog.Audience"]</strong> @post.Audience</p>
 
                     <div class="blog-links">
                         @if (post.Url.StartsWith("/"))
                         {
                             <a href="@post.Url" class="btn btn-primary">
-                                Read More
+                                @L["Blog.ReadMore"]
                             </a>
                         }
                         else
                         {
                             <a href="@post.Url" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                                Read More
+                                @L["Blog.ReadMore"]
                             </a>
                         }
                         @if (!string.IsNullOrEmpty(post.GitHubUrl))
                         {
                             <a href="@post.GitHubUrl" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                                GitHub
+                                @L["Blog.GitHub"]
                             </a>
                         }
                     </div>
@@ -70,6 +72,18 @@
 
     protected override async Task OnInitializedAsync()
     {
+        L.OnLanguageChanged += OnLanguageChanged;
         BlogPosts = await DataService.GetBlogPostsAsync();
+    }
+
+    private async void OnLanguageChanged()
+    {
+        BlogPosts = await DataService.GetBlogPostsAsync();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        L.OnLanguageChanged -= OnLanguageChanged;
     }
 }
