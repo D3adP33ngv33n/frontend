@@ -11,6 +11,10 @@
 }
 
 .slider-viewport {
+  --visible-cards: 3;
+  --card-gap: 1rem;
+  --card-width: calc((100cqi - (var(--visible-cards) - 1) * var(--card-gap)) / var(--visible-cards));
+  container-type: inline-size;
   width: 100%;
   max-width: 100%;
   overflow: hidden;
@@ -26,9 +30,6 @@
 }
 
 .slider-track {
-  --visible-cards: 3;
-  --card-gap: 1rem;
-  --card-width: calc((100% - (var(--visible-cards) - 1) * var(--card-gap)) / var(--visible-cards));
   display: flex;
   align-items: stretch;
   gap: var(--card-gap);
@@ -123,7 +124,7 @@
     right: -60px;
   }
 
-  .slider-track {
+  .slider-viewport {
     --visible-cards: 2;
   }
 }
@@ -146,7 +147,7 @@
     font-size: 1.4rem;
   }
 
-  .slider-track {
+  .slider-viewport {
     --visible-cards: 2;
   }
 }
@@ -169,7 +170,7 @@
     font-size: 1.2rem;
   }
 
-  .slider-track {
+  .slider-viewport {
     --visible-cards: 1;
   }
 
