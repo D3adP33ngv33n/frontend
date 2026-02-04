@@ -19,7 +19,7 @@ body {
   font-family: var(--font-display);
   background-color: var(--dark-bg);
   color: var(--text-primary);
-  line-height: 1.6;
+  line-height: 1.5;
   overflow-x: hidden;
   font-feature-settings: 'kern' 1, 'liga' 1;
   background:
@@ -36,14 +36,14 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  font-size: clamp(2.2rem, 5vw, 3.5rem);
-  margin-bottom: 1.5rem;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: 1.25rem;
   background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 50%, var(--secondary-color) 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-weight: var(--font-weight-light);
+  font-weight: var(--font-weight-normal);
   animation: gradientShift 8s ease infinite;
 }
 
@@ -57,52 +57,52 @@ h1:focus {
 }
 
 h2 {
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  margin-bottom: 2rem;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  margin-bottom: 1.5rem;
   color: var(--text-primary);
   position: relative;
   display: inline-block;
-  letter-spacing: var(--letter-spacing-wide);
+  letter-spacing: var(--letter-spacing-wider);
   text-transform: uppercase;
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-medium);
 }
 
 h2::after {
   content: '';
   position: absolute;
-  bottom: -8px;
+  bottom: -6px;
   left: 0;
-  width: 60px;
-  height: 2px;
+  width: 40px;
+  height: 1px;
   background: var(--accent-gradient);
   border-radius: 1px;
 }
 
 h3 {
-  font-size: 1.3rem;
+  font-size: 1rem;
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-medium);
 }
 
 p {
   color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-  font-size: 1.05rem;
-  line-height: 1.8;
-  letter-spacing: 0.01em;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  letter-spacing: 0.015em;
 }
 
 /* Monospace text styling */
 .mono {
   font-family: var(--font-mono);
-  font-size: 0.95em;
-  letter-spacing: var(--letter-spacing-normal);
+  font-size: 0.85em;
+  letter-spacing: 0.02em;
 }
 
 /* Layout */
 section {
-  padding: 5rem 1rem;
+  padding: 4rem 1rem;
   position: relative;
 }
 
@@ -115,14 +115,22 @@ section {
 /* Responsive Typography */
 @media (max-width: 768px) {
   h1 {
-    font-size: 2.2rem;
+    font-size: 1.6rem;
   }
 
   h2 {
-    font-size: 1.8rem;
+    font-size: 1rem;
+  }
+
+  h3 {
+    font-size: 0.9rem;
+  }
+
+  p {
+    font-size: 0.85rem;
   }
 
   section {
-    padding: 3rem 1rem;
+    padding: 2.5rem 1rem;
   }
 }
