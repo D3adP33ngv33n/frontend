@@ -1,0 +1,103 @@
+@page "/privacy"
+
+<PageTitle>Privacy Policy - NOSTDLIB</PageTitle>
+
+<Navbar />
+
+<article class="legal-page">
+    <div class="container">
+        <a href="/" class="back-link">&larr; Back Home</a>
+
+        <header class="page-header">
+            <span class="page-icon">🔒</span>
+            <h1>Privacy Policy</h1>
+            <p class="page-intro">Your trust is our priority. We maintain complete confidentiality about our clients and projects.</p>
+            <p class="last-updated mono">Last updated: @LastUpdated</p>
+        </header>
+
+        <section class="page-section">
+            <h2>Introduction</h2>
+            <p>
+                NOSTDLIB ("we," "our," or "us") is committed to protecting your privacy and maintaining
+                the strictest confidentiality regarding our business relationships. This Privacy Policy
+                explains our commitment to discretion and how we safeguard all information related to
+                our clients and projects.
+            </p>
+            <p>
+                Confidentiality is not just a policy for us—it's a core principle of how we operate.
+                We understand that our clients trust us with sensitive projects, and we take that
+                responsibility seriously.
+            </p>
+        </section>
+
+        <section class="page-section">
+            <h2>Client Confidentiality</h2>
+            <p>
+                We maintain complete confidentiality regarding all aspects of our client relationships.
+                This means:
+            </p>
+            <ul class="privacy-list">
+                <li><strong>No Client Disclosure:</strong> We never reveal which companies or individuals we work with, whether past, present, or future clients.</li>
+                <li><strong>No Project Details:</strong> We do not share any information about the nature, scope, or specifics of work performed for our clients.</li>
+                <li><strong>No Public References:</strong> We do not use client names, logos, or project descriptions in our marketing materials without explicit written consent.</li>
+                <li><strong>No Third-Party Sharing:</strong> Information about our business relationships is never shared with third parties under any circumstances.</li>
+            </ul>
+        </section>
+
+        <section class="page-section">
+            <h2>Why We Keep Things Private</h2>
+            <p>
+                Our commitment to confidentiality stems from our understanding that:
+            </p>
+            <ul class="privacy-list">
+                <li>Your business strategies and technical decisions are proprietary information</li>
+                <li>Knowledge of vendor relationships can be competitively sensitive</li>
+                <li>Project details may involve trade secrets or intellectual property</li>
+                <li>Trust is the foundation of any successful professional partnership</li>
+            </ul>
+            <p>
+                When you work with NOSTDLIB, you can be confident that your engagement with us
+                remains strictly between us.
+            </p>
+        </section>
+
+        <section class="page-section">
+            <h2>Our Commitment</h2>
+            <p>
+                All team members at NOSTDLIB are bound by strict confidentiality agreements.
+                We maintain this commitment:
+            </p>
+            <ul class="privacy-list">
+                <li>During active engagements</li>
+                <li>After project completion</li>
+                <li>Indefinitely, unless you explicitly authorize disclosure</li>
+            </ul>
+            <p>
+                This policy applies to all forms of communication—verbal, written, and digital.
+                We will never confirm or deny any business relationship without your prior written consent.
+            </p>
+        </section>
+
+        <section class="page-section">
+            <h2>Changes to This Policy</h2>
+            <p>
+                We may update this privacy policy from time to time. We will notify you of any changes
+                by posting the new privacy policy on this page and updating the "Last updated" date.
+                Your continued use of our services after any changes indicates your acceptance of
+                the updated policy.
+            </p>
+        </section>
+
+        <section class="page-section page-footer">
+            <h2>Contact Us</h2>
+            <p>If you have questions about this privacy policy or our practices, please contact us.</p>
+            <a href="/#contact" class="btn btn-primary">Contact Us</a>
+        </section>
+    </div>
+</article>
+
+<Footer />
+
+@code {
+    private string LastUpdated => DateTime.Now.ToString("MMMM yyyy");
+}
