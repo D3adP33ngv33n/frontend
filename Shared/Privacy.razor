@@ -1,0 +1,48 @@
+<section class="privacy" id="privacy">
+    <div class="container">
+        <div class="section-header">
+            <h2>Privacy Policy</h2>
+            <p class="section-subtitle">Your trust is our foundation</p>
+        </div>
+
+        <div class="privacy-content">
+            <div class="privacy-text">
+                <p class="mono">
+                    We maintain complete confidentiality regarding all client relationships and projects.
+                    Confidentiality is not just a policy—it's a core principle of how we operate.
+                </p>
+                <p>
+                    We understand that our clients trust us with sensitive projects, and we take that
+                    responsibility seriously. Your engagement with us remains strictly between us.
+                </p>
+            </div>
+
+            <div class="privacy-commitments">
+                <h3>Our Commitments</h3>
+                <ul class="commitments-list">
+                    @foreach (var commitment in Commitments)
+                    {
+                        <li class="commitment-item mono">
+                            <span class="commitment-marker">◉</span>
+                            @commitment
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <div class="privacy-cta">
+                <a href="/privacy" class="btn btn-secondary">Read Full Policy</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    private List<string> Commitments = new()
+    {
+        "No client disclosure without consent",
+        "No project details shared externally",
+        "No third-party sharing under any circumstances",
+        "Indefinite confidentiality commitment"
+    };
+}
