@@ -1,0 +1,160 @@
+@page "/blog/cpp-pic"
+
+<PageTitle>Position-Independent Runtime - NOSTDLIB</PageTitle>
+
+<Navbar />
+
+<article class="blog-post">
+    <div class="container">
+        <a href="/blog" class="back-link">&larr; Back to Blog</a>
+
+        <header class="post-header">
+            <span class="post-icon">⚙️</span>
+            <h1>[cpp-pic] Position-Independent Runtime</h1>
+            <div class="post-meta">
+                <span class="post-tech mono">C++23, Windows PEB/NTAPI, Linux syscalls, UEFI</span>
+                <span class="post-status active">Active</span>
+            </div>
+            <p class="post-intro">A sophisticated C++23 framework enabling shellcode and position-independent code generation across multiple platforms and architectures, proving that modern C++ can produce binaries executable from arbitrary memory locations.</p>
+        </header>
+
+        <section class="post-section">
+            <h2>Overview</h2>
+            <p>
+                Traditional shellcode development requires assembly language to maintain strict execution constraints.
+                Position-Independent Runtime (PIR) bridges this gap by leveraging C++23 compile-time features to generate
+                position-independent executables while preserving the expressiveness of high-level programming.
+            </p>
+            <p>
+                It demonstrates that modern C++23 can be used without compromising the strict execution guarantees required for shellcode.
+            </p>
+        </section>
+
+        <section class="post-section">
+            <h2>Platform & Architecture Support</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>Windows</h3>
+                    <p>PEB traversal, NTAPI, PE export table parsing</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Linux</h3>
+                    <p>Direct syscall interface</p>
+                </div>
+                <div class="feature-item">
+                    <h3>UEFI</h3>
+                    <p>Pre-OS execution environment</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Architectures</h3>
+                    <p>i386, x86_64, armv7a, aarch64</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="post-section">
+            <h2>Technical Innovations</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>String Embedding</h3>
+                    <p>Compile-time decomposition into character operations using C++23 fold expressions, eliminating .rdata dependencies</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Floating-Point Constants</h3>
+                    <p>IEEE-754 bit patterns injected directly as immediate operands</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Function Pointers</h3>
+                    <p>Pure relative addressing via EMBED_FUNC macro eliminates absolute address relocations</p>
+                </div>
+                <div class="feature-item">
+                    <h3>64-bit on 32-bit</h3>
+                    <p>Custom UINT64/INT64 classes with manual carry handling</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="post-section">
+            <h2>Runtime Architecture</h2>
+            <p>Three-layer abstraction model:</p>
+            <div class="structure-grid">
+                <div class="structure-item">
+                    <h4>CORE</h4>
+                    <p>Platform-independent primitives, embedded types, memory operations</p>
+                </div>
+                <div class="structure-item">
+                    <h4>PLATFORM</h4>
+                    <p>OS-specific implementations (Windows PEB/NTAPI, Linux syscalls)</p>
+                </div>
+                <div class="structure-item">
+                    <h4>RUNTIME</h4>
+                    <p>High-level features including cryptography, networking, TLS 1.3</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="post-section">
+            <h2>Cryptographic & Network Stack</h2>
+            <ul class="requirements-list">
+                <li>SHA-256/384/512, HMAC, ChaCha20-Poly1305, ECC</li>
+                <li>DNS resolution, HTTP client, WebSocket</li>
+                <li>TLS 1.3 with certificate verification</li>
+                <li>All implemented without external dependencies</li>
+            </ul>
+        </section>
+
+        <section class="post-section">
+            <h2>PIL - Position Independent Language</h2>
+            <p>A lightweight embedded scripting language featuring:</p>
+            <ul class="requirements-list">
+                <li>State-based API familiar to scripting developers</li>
+                <li>No built-in functions (complete control over environment)</li>
+                <li>Support for variables, functions, and control flow</li>
+                <li>Position-independent implementation with no .rdata dependencies</li>
+            </ul>
+        </section>
+
+        <section class="post-section">
+            <h2>Build Requirements</h2>
+            <p>Critical compiler flags ensure position-independence:</p>
+            <pre class="code-block"><code>-fno-jump-tables    # Prevents switch statement jump tables
+-fno-exceptions     # Eliminates exception tables
+-fno-rtti           # Eliminates RTTI tables
+-nostdlib           # Complete runtime independence
+-fno-builtin        # Disable compiler built-ins</code></pre>
+            <p>Post-build verification automatically confirms no separate data sections exist.</p>
+        </section>
+
+        <section class="post-section">
+            <h2>Windows Implementation</h2>
+            <p>The framework bypasses traditional Windows API resolution:</p>
+            <ul class="requirements-list">
+                <li>Traverses Process Environment Block (PEB) for module discovery</li>
+                <li>Parses PE export tables using hash-based lookup</li>
+                <li>Eliminates static import tables and GetProcAddress calls</li>
+                <li>Implements file system, console, and networking through NTAPI</li>
+            </ul>
+        </section>
+
+        <section class="post-section">
+            <h2>Use Cases</h2>
+            <ul class="requirements-list">
+                <li>Shellcode and loaderless execution environments</li>
+                <li>Security research and malware analysis</li>
+                <li>Embedded and low-level system programming</li>
+                <li>Cross-architecture C++ development</li>
+                <li>Constrained environments without standard runtime support</li>
+            </ul>
+        </section>
+
+        <section class="post-section post-footer">
+            <h2>Source Code</h2>
+            <p>The project is open source and under active development with planned additions including macOS/FreeBSD support, direct Windows syscalls, and compile-time polymorphism.</p>
+            <a href="https://github.com/mrzaxaryan/cpp-pic" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                View on GitHub
+            </a>
+        </section>
+    </div>
+</article>
+
+<Footer />

@@ -36,18 +36,26 @@
 
                     <p class="blog-audience"><strong>Audience:</strong> @post.Audience</p>
 
-                    @if (post.Url.StartsWith("/"))
-                    {
-                        <a href="@post.Url" class="btn btn-primary">
-                            Read More
-                        </a>
-                    }
-                    else
-                    {
-                        <a href="@post.Url" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                            Read More
-                        </a>
-                    }
+                    <div class="blog-links">
+                        @if (post.Url.StartsWith("/"))
+                        {
+                            <a href="@post.Url" class="btn btn-primary">
+                                Read More
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@post.Url" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                Read More
+                            </a>
+                        }
+                        @if (!string.IsNullOrEmpty(post.GitHubUrl))
+                        {
+                            <a href="@post.GitHubUrl" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                                GitHub
+                            </a>
+                        }
+                    </div>
                 </article>
             }
         </div>
@@ -65,7 +73,8 @@
         string Status,
         string Audience,
         string Url,
-        string Icon
+        string Icon,
+        string? GitHubUrl = null
     );
 
     private List<BlogPost> BlogPosts = new()
@@ -77,29 +86,31 @@
             {
                 "No executable memory required",
                 "Hardware breakpoints + VEH technique",
-                "Security-focused demonstration"
+                "Custom x86-64 instruction emulator",
+                "Windows API calls from emulated code"
             },
             "x86-64 assembly, C",
             "Experimental",
             "Security researchers, low-level programmers",
-            "https://mrzaxaryan.blog/content/NoRWX/",
-            "🔒"
+            "/blog/norwx",
+            "🔒",
+            "https://github.com/mrzaxaryan/NoRWX"
         ),
         new(
-            "[c-pic] Position-Independent Code in C",
-            "Fully position-independent code implementation in C with manual API resolution.",
+            "[cpp-pic] Position-Independent Runtime",
+            "A C++23 framework enabling shellcode and position-independent code generation across multiple platforms and architectures.",
             new List<string>
             {
-                "No imports, no standard library, position-independent code, no fixed addresses",
-                "Embed and retrieve strings without fixed addresses",
-                "Direct TEB/PEB access",
-                "Works on x86 and x64",
-                "PEB walking"
+                "Multi-platform (Windows, Linux, UEFI) and multi-architecture (i386, x86_64, armv7a, aarch64)",
+                "Compile-time string embedding without .rdata dependencies",
+                "Full cryptographic stack (SHA-256/384/512, ChaCha20-Poly1305, ECC)",
+                "TLS 1.3 with certificate verification, DNS, HTTP, WebSocket",
+                "PIL embedded scripting language"
             },
-            "C, Windows internals, Linux syscalls",
-            "Experimental",
-            "Systems programmers, low-level developers, security researchers",
-            "https://mrzaxaryan.blog/content/c-pic/",
+            "C++23, Windows PEB/NTAPI, Linux syscalls, UEFI",
+            "Active",
+            "Security researchers, systems programmers, embedded developers",
+            "/blog/cpp-pic",
             "⚙️"
         ),
         new(

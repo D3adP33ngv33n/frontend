@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch and Debug Blazor WASM",
+            "type": "blazorwasm",
+            "request": "launch",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Launch with Hot Reload",
+            "type": "blazorwasm",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "watch"
+        },
+        {
+            "name": "Attach to Browser",
+            "type": "blazorwasm",
+            "request": "attach"
+        }
+    ]
+}

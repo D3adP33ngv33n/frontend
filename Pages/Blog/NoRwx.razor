@@ -1,0 +1,175 @@
+@page "/blog/norwx"
+
+<PageTitle>NoRWX Proof-of-Concept - NOSTDLIB</PageTitle>
+
+<Navbar />
+
+<article class="blog-post">
+    <div class="container">
+        <a href="/blog" class="back-link">&larr; Back to Blog</a>
+
+        <header class="post-header">
+            <span class="post-icon">🔒</span>
+            <h1>[NoRWX] Proof-of-Concept</h1>
+            <div class="post-meta">
+                <span class="post-tech mono">x86-64 assembly, C</span>
+                <span class="post-status experimental">Experimental</span>
+            </div>
+            <p class="post-intro">A proof-of-concept demonstrating execution of position-independent x86-64 machine code from read/write-only memory without requiring executable permissions, bypassing traditional memory protection mechanisms.</p>
+        </header>
+
+        <section class="post-section">
+            <h2>Overview</h2>
+            <p>
+                NoRWX demonstrates a novel technique for running machine code without marking memory as executable.
+                Traditional code execution requires RWX (Read-Write-Execute) or at minimum RX permissions on memory pages.
+                This project proves that with hardware breakpoints and a custom instruction emulator, code can execute
+                from RW-only memory regions.
+            </p>
+            <p>
+                The technique avoids traditional memory protection changes like <code>VirtualProtect</code>, making it
+                an interesting research vector for understanding CPU execution models and security boundaries.
+            </p>
+        </section>
+
+        <section class="post-section">
+            <h2>Core Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>No Executable Memory</h3>
+                    <p>Stores and runs machine code in RW-only memory regions</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Hardware Breakpoints</h3>
+                    <p>Uses DR0/DR7 debug registers to trigger instruction handling</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Custom Emulator</h3>
+                    <p>Full x86-64 instruction emulator for arithmetic, logic, control flow, and stack operations</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Windows API Support</h3>
+                    <p>Enables Windows API calls from within emulated code</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="post-section">
+            <h2>How It Works</h2>
+            <p>The mechanism relies on four key steps:</p>
+            <div class="structure-grid">
+                <div class="structure-item">
+                    <h4>1. Code Placement</h4>
+                    <p>Position-independent machine code is placed in RW-only memory</p>
+                </div>
+                <div class="structure-item">
+                    <h4>2. Breakpoint Installation</h4>
+                    <p>Hardware breakpoint is set on the entry address using debug registers</p>
+                </div>
+                <div class="structure-item">
+                    <h4>3. VEH Registration</h4>
+                    <p>Vectored Exception Handler is registered to intercept breakpoint exceptions</p>
+                </div>
+                <div class="structure-item">
+                    <h4>4. Instruction Emulation</h4>
+                    <p>Handler reads, decodes, and emulates each instruction, then reinstalls breakpoint at next address</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="post-section">
+            <h2>Technical Components</h2>
+            <ul class="requirements-list">
+                <li><strong>Instruction Emulator</strong> - Supports arithmetic, logic, control flow, stack, and miscellaneous x86-64 operations</li>
+                <li><strong>Vectored Exception Handler</strong> - Manages hardware breakpoints and dispatches to emulator</li>
+                <li><strong>Register/Flag Management</strong> - Updates thread context registers and CPU flags after each instruction</li>
+                <li><strong>Program Loader</strong> - Loads binary code blobs and orchestrates the execution flow</li>
+            </ul>
+        </section>
+
+        <section class="post-section">
+            <h2>Emulator Capabilities</h2>
+            <p>The x86-64 emulator handles the following instruction categories:</p>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>Arithmetic</h3>
+                    <p>ADD, SUB, MUL, DIV, INC, DEC, NEG, CMP</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Logic</h3>
+                    <p>AND, OR, XOR, NOT, SHL, SHR, SAR, ROL, ROR</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Control Flow</h3>
+                    <p>JMP, Jcc (conditional jumps), CALL, RET, LOOP</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Stack & Memory</h3>
+                    <p>PUSH, POP, MOV, LEA, XCHG</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="post-section">
+            <h2>Execution Model</h2>
+            <pre class="code-block"><code>┌─────────────────────────────────────────────────────────┐
+│  RW Memory (Non-Executable)                             │
+│  ┌─────────────────────────────────────────────────┐    │
+│  │  PIC Machine Code Blob                          │    │
+│  │  [instruction bytes...]                         │    │
+│  └─────────────────────────────────────────────────┘    │
+└─────────────────────────────────────────────────────────┘
+                          │
+                          ▼
+┌─────────────────────────────────────────────────────────┐
+│  Hardware Breakpoint (DR0) triggers on entry            │
+└─────────────────────────────────────────────────────────┘
+                          │
+                          ▼
+┌─────────────────────────────────────────────────────────┐
+│  VEH intercepts EXCEPTION_SINGLE_STEP                   │
+│  ┌─────────────────────────────────────────────────┐    │
+│  │  1. Read instruction bytes from RW memory       │    │
+│  │  2. Decode and emulate instruction              │    │
+│  │  3. Update registers and flags                  │    │
+│  │  4. Set breakpoint on next instruction          │    │
+│  └─────────────────────────────────────────────────┘    │
+└─────────────────────────────────────────────────────────┘</code></pre>
+        </section>
+
+        <section class="post-section">
+            <h2>Use Cases</h2>
+            <ul class="requirements-list">
+                <li>Security research and understanding execution models</li>
+                <li>Studying hardware breakpoint mechanisms</li>
+                <li>Exploring alternative code execution techniques</li>
+                <li>Educational purposes for low-level programming</li>
+            </ul>
+        </section>
+
+        <section class="post-section limitations">
+            <h2>Important Notice</h2>
+            <ul class="limitations-list">
+                <li>This is research-only code for educational purposes</li>
+                <li>Do not use to evade detection or run untrusted code</li>
+                <li>Do not use to break laws or policies</li>
+                <li>Performance is significantly slower than native execution due to emulation overhead</li>
+            </ul>
+        </section>
+
+        <section class="post-section post-footer">
+            <h2>Source Code</h2>
+            <p>The project is open source and available for security researchers and low-level programmers interested in understanding x86-64 execution models.</p>
+            <div class="footer-links">
+                <a href="https://mrzaxaryan.blog/content/NoRWX/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    Read Full Article
+                </a>
+                <a href="https://github.com/mrzaxaryan/NoRWX" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                    View on GitHub
+                </a>
+            </div>
+        </section>
+    </div>
+</article>
+
+<Footer />
