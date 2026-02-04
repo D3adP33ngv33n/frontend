@@ -2,7 +2,7 @@
 @inject ILocalizationService L
 @implements IDisposable
 
-<nav class="navbar @(IsScrolled ? "scrolled" : "")">
+<nav class="navbar @(IsScrolled ? "scrolled" : "") @(IsMobileMenuOpen ? "mobile-open" : "")">
     <div class="container">
         <div class="navbar-brand">
             <a href="@Routes.Home" class="logo mono">
@@ -11,24 +11,30 @@
             </a>
         </div>
 
-        <ul class="navbar-nav">
+        <button class="mobile-menu-toggle" @onclick="ToggleMobileMenu" aria-label="Toggle menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+
+        <ul class="navbar-nav @(IsMobileMenuOpen ? "open" : "")">
             <li class="nav-item">
-                <a href="@Routes.About" class="nav-link">@L["Nav.About"]</a>
+                <a href="@Routes.About" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.About"]</a>
             </li>
             <li class="nav-item">
-                <a href="@Routes.Services" class="nav-link">@L["Nav.Services"]</a>
+                <a href="@Routes.Services" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.Services"]</a>
             </li>
             <li class="nav-item">
-                <a href="@Routes.Blog" class="nav-link">@L["Nav.OpenSource"]</a>
+                <a href="@Routes.Blog" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.OpenSource"]</a>
             </li>
             <li class="nav-item">
-                <a href="@Routes.Careers" class="nav-link">@L["Nav.Careers"]</a>
+                <a href="@Routes.Careers" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.Careers"]</a>
             </li>
             <li class="nav-item">
-                <a href="@Routes.Privacy" class="nav-link">@L["Nav.Privacy"]</a>
+                <a href="@Routes.Privacy" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.Privacy"]</a>
             </li>
             <li class="nav-item">
-                <a href="@Routes.Contact" class="nav-link">@L["Nav.Contact"]</a>
+                <a href="@Routes.Contact" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.Contact"]</a>
             </li>
             <li class="nav-item">
                 <LanguageSelector />
@@ -39,10 +45,21 @@
 
 @code {
     private bool IsScrolled { get; set; } = false;
+    private bool IsMobileMenuOpen { get; set; } = false;
 
     protected override void OnInitialized()
     {
         L.OnLanguageChanged += OnLanguageChanged;
+    }
+
+    private void ToggleMobileMenu()
+    {
+        IsMobileMenuOpen = !IsMobileMenuOpen;
+    }
+
+    private void CloseMobileMenu()
+    {
+        IsMobileMenuOpen = false;
     }
 
     private void OnLanguageChanged()
