@@ -1,50 +1,50 @@
 [
   {
     "id": 1,
-    "code": "CS-01",
+    "code": "SEC-01",
     "title": "Security Analyst",
     "level": "Senior",
-    "location": "Armenia Yerevan",
+    "location": "Yerevan, Armenia",
     "type": "Full-time",
-    "description": "We are seeking a Security Analyst to monitor, analyze, and respond to security incidents. You will work with advanced tools and methodologies to protect our clients' critical infrastructure.",
+    "description": "Lead security monitoring, incident analysis, and threat response operations. Work with advanced detection systems to protect critical client infrastructure against sophisticated adversaries.",
     "requirements": [
-      "5+ years of experience in cybersecurity",
-      "Strong knowledge of SIEM tools and incident response",
-      "Experience with threat hunting and analysis",
-      "Relevant certifications (CISSP, GCIA, or equivalent)",
-      "Security clearance preferred"
+      "5+ years in security operations or incident response",
+      "Deep expertise with SIEM platforms and threat hunting methodologies",
+      "Proven track record in APT analysis and attribution",
+      "CISSP, GCIA, or equivalent certification",
+      "Ability to obtain security clearance"
     ]
   },
   {
     "id": 2,
-    "code": "CS-02",
+    "code": "SEC-02",
     "title": "Penetration Tester",
     "level": "Senior",
-    "location": "Armenia Yerevan",
+    "location": "Yerevan, Armenia",
     "type": "Full-time",
-    "description": "We are seeking a Penetration Tester to identify vulnerabilities in client systems and applications. You will conduct authorized security assessments and provide detailed remediation guidance.",
+    "description": "Execute authorized security assessments across diverse environments. Identify and exploit vulnerabilities in networks, applications, and systems with detailed remediation guidance.",
     "requirements": [
-      "3+ years of penetration testing experience",
-      "Proficiency in manual and automated testing techniques",
-      "Experience with web, network, and mobile application testing",
-      "OSCP, OSCE, or equivalent certification",
-      "Strong report writing skills"
+      "3+ years conducting professional penetration tests",
+      "Expertise in manual exploitation and custom tooling",
+      "Experience across web, network, cloud, and mobile attack surfaces",
+      "OSCP, OSCE, or equivalent demonstrated capability",
+      "Clear technical communication and reporting skills"
     ]
   },
   {
     "id": 3,
-    "code": "CS-03",
+    "code": "SEC-03",
     "title": "Cryptographic Researcher",
     "level": "Senior",
-    "location": "Armenia Yerevan",
+    "location": "Yerevan, Armenia",
     "type": "Full-time",
-    "description": "We are seeking a Cryptographic Researcher to advance our understanding of modern cryptographic systems. You will analyze implementations, identify weaknesses, and develop novel approaches to secure communications.",
+    "description": "Advance our cryptographic capabilities through original research and implementation analysis. Evaluate cryptosystems, identify weaknesses, and develop novel approaches to secure communications.",
     "requirements": [
-      "PhD or equivalent experience in cryptography or mathematics",
-      "Published research in peer-reviewed venues",
-      "Experience with post-quantum cryptography",
-      "Proficiency in formal verification methods",
-      "Ability to work on sensitive projects"
+      "PhD in cryptography, mathematics, or equivalent research experience",
+      "Published work in peer-reviewed security venues",
+      "Expertise in post-quantum cryptographic schemes",
+      "Proficiency with formal verification and proof systems",
+      "Clearance eligibility for sensitive research"
     ]
   }
 ]

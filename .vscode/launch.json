@@ -11,6 +11,7 @@
             "name": "Launch with Hot Reload",
             "type": "blazorwasm",
             "request": "launch",
+            "browser": "chrome",
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "watch"
         },

@@ -2,13 +2,13 @@
   {
     "name": "LinkedIn",
     "url": "https://www.linkedin.com/company/nostdlib",
-    "description": "Connect with our team",
+    "description": "Professional updates and team news",
     "iconType": "linkedin"
   },
   {
     "name": "GitHub",
     "url": "https://github.com/nostdlib",
-    "description": "Explore our open source projects",
+    "description": "Open source security tooling",
     "iconType": "github"
   }
 ]

@@ -3,56 +3,78 @@
 <section class="blog" id="blog">
     <div class="container">
         <div class="section-header text-center">
-            <h2>Blog</h2>
-            <p class="section-subtitle">Technical research, tools, and documentation</p>
+            <h2>OPEN SOURCE</h2>
+            <p class="section-subtitle">Open source tools and technical research from our team</p>
         </div>
 
-        <div class="blog-grid">
-            @foreach (var post in BlogPosts)
+        <div class="slider-wrapper">
+            <button class="slider-btn slider-btn-prev" @onclick="PrevSlide">
+                <span class="slider-arrow">&#8249;</span>
+            </button>
+
+            <div class="slider-container">
+                <div class="slider-viewport">
+                    <div class="slider-track" style="transform: translateX(calc(-@currentIndex * (var(--card-width) + var(--card-gap))));">
+                        @foreach (var post in BlogPosts)
+                        {
+                            <article class="blog-card">
+                                <div class="blog-icon">@post.Icon</div>
+                                <h3>@post.Title</h3>
+                                <p class="blog-purpose">@post.Purpose</p>
+
+                                <div class="blog-features">
+                                    <h4>Key Features</h4>
+                                    <ul>
+                                        @foreach (var feature in post.Features)
+                                        {
+                                            <li>@feature</li>
+                                        }
+                                    </ul>
+                                </div>
+
+                                <div class="blog-meta">
+                                    <span class="blog-tech mono">@post.Technologies</span>
+                                    <span class="blog-status @post.Status.ToLower()">@post.Status</span>
+                                </div>
+
+                                <p class="blog-audience"><strong>Audience:</strong> @post.Audience</p>
+
+                                <div class="blog-links">
+                                    @if (post.Url.StartsWith("/"))
+                                    {
+                                        <a href="@post.Url" class="btn btn-primary">
+                                            Read More
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@post.Url" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                            Read More
+                                        </a>
+                                    }
+                                    @if (!string.IsNullOrEmpty(post.GitHubUrl))
+                                    {
+                                        <a href="@post.GitHubUrl" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                                            GitHub
+                                        </a>
+                                    }
+                                </div>
+                            </article>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <button class="slider-btn slider-btn-next" @onclick="NextSlide">
+                <span class="slider-arrow">&#8250;</span>
+            </button>
+        </div>
+
+        <div class="slider-dots">
+            @for (int i = 0; i < BlogPosts.Count; i++)
             {
-                <article class="blog-card">
-                    <div class="blog-icon">@post.Icon</div>
-                    <h3>@post.Title</h3>
-                    <p class="blog-purpose">@post.Purpose</p>
-
-                    <div class="blog-features">
-                        <h4>Key Features</h4>
-                        <ul>
-                            @foreach (var feature in post.Features)
-                            {
-                                <li>@feature</li>
-                            }
-                        </ul>
-                    </div>
-
-                    <div class="blog-meta">
-                        <span class="blog-tech mono">@post.Technologies</span>
-                        <span class="blog-status @post.Status.ToLower()">@post.Status</span>
-                    </div>
-
-                    <p class="blog-audience"><strong>Audience:</strong> @post.Audience</p>
-
-                    <div class="blog-links">
-                        @if (post.Url.StartsWith("/"))
-                        {
-                            <a href="@post.Url" class="btn btn-primary">
-                                Read More
-                            </a>
-                        }
-                        else
-                        {
-                            <a href="@post.Url" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                                Read More
-                            </a>
-                        }
-                        @if (!string.IsNullOrEmpty(post.GitHubUrl))
-                        {
-                            <a href="@post.GitHubUrl" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                                GitHub
-                            </a>
-                        }
-                    </div>
-                </article>
+                var index = i;
+                <button class="slider-dot @(currentIndex == index ? "active" : "")" @onclick="() => GoToSlide(index)"></button>
             }
         </div>
     </div>
@@ -60,9 +82,25 @@
 
 @code {
     private List<BlogPost> BlogPosts = new();
+    private int currentIndex = 0;
 
     protected override async Task OnInitializedAsync()
     {
         BlogPosts = await DataService.GetBlogPostsAsync();
+    }
+
+    private void NextSlide()
+    {
+        currentIndex = (currentIndex + 1) % BlogPosts.Count;
+    }
+
+    private void PrevSlide()
+    {
+        currentIndex = (currentIndex - 1 + BlogPosts.Count) % BlogPosts.Count;
+    }
+
+    private void GoToSlide(int index)
+    {
+        currentIndex = index;
     }
 }
