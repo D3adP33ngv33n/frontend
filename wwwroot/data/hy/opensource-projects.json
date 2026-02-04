@@ -50,26 +50,26 @@
     "statusClass": "active"
   },
   {
-    "title": "[PIL] Position-Independent Language",
-    "purpose": "Lightweight scripting language embedded in Position-Independent Runtime.",
+    "title": "[PIL] Պոզիցիա-անկախ լեզու",
+    "purpose": "Թեթև սկրիպտային լեզու, ներդրված Position-Independent Runtime-ում։",
     "features": [
-      "Dynamic typing (nil, bool, number, string, array, function)",
-      "Lexical scoping (max 32 levels)",
-      "Control flow (if/else, while, for)",
-      "Function definitions with parameters",
-      "No built-in functions; all registered from C++"
+      "Դինամիկ տիպավորում (nil, bool, number, string, array, function)",
+      "Լեկսիկական տեսանելիություն (առավելագույնը 32 մակարդակ)",
+      "Կառավարման հոսք (if/else, while, for)",
+      "Ֆունկցիաների սահմանում պարամետրերով",
+      "Ընդհանուր ներդրված ֆունկցիաներ չկան. բոլորը գրանցվում են C++-ից"
     ],
     "technologies": "C++23, PIR (Position-Independent Runtime)",
-    "status": "Active",
-    "audience": "Security researchers, systems programmers, embedded developers",
+    "status": "Ակտիվ",
+    "audience": "Անվտանգության հետազոտողներ, համակարգային ծրագրավորողներ, ներկառուցված համակարգերի մշակողներ",
     "icon": "📜",
     "gitHubUrl": "https://github.com/mrzaxaryan/Position-Independent-Language",
-    "description": "PIL is a lightweight scripting language for position-independent code without C runtime or .rdata dependencies. Works in shellcode and UEFI environments.",
+    "description": "PIL-ը թեթև սկրիպտային լեզու է պոզիցիա-անկախ կոդի համար՝ առանց C runtime-ի կամ .rdata կախվածությունների։ Աշխատում է shellcode և UEFI միջավայրերում։",
     "useCases": [
-      "Scripting for position-independent payloads",
-      "UEFI application development",
-      "Low-level system tools",
-      "Embedded systems requiring runtime independence"
+      "Պոզիցիա-անկախ payload-ների սկրիպտավորում",
+      "UEFI հավելվածների մշակում",
+      "Ցածր մակարդակի համակարգային գործիքներ",
+      "Ներկառուցված համակարգեր՝ runtime անկախություն պահանջող"
     ],
     "license": "MIT",
     "statusClass": "active"

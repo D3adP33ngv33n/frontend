@@ -2,145 +2,129 @@
   {
     "id": 1,
     "code": "SEC-01",
-    "title": "Delays delays delays",
-    "level": "Delays",
-    "location": "Delays, Delays",
-    "type": "Delays delays",
-    "description": "Delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays. Delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays.",
+    "title": "Տեստավորող",
+    "level": "Ավագ",
+    "location": "Երևան, Հայաստան",
+    "type": "Լիակատար զբաղվածություն",
+    "description": "Անվտանգության թափանցման թեստավորում տարբեր միջավայրերում։ Խոցելիությունների հայտնաբերում և շահագործում ցանցերում, հավելվածներում և համակարգերում՝ մանրամասն վերացման ուղեցույցներով։",
     "requirements": [
-      "3+ delays delays delays delays delays delays delays delays delays delays delays",
-      "Delays delays delays delays delays delays delays delays delays delays delays delays delays",
-      "Web, delays, delays delays delays delays delays delays delays delays delays delays delays",
-      "OSCP, OSCE delays delays delays delays delays delays delays delays delays",
-      "Delays delays delays delays delays delays delays delays delays delays delays delays"
+      "3+ տարի թափանցման թեստավորման մասնագիտական փորձ",
+      "Փորձաղիտություն ձեռքով շահագործման և սեփական գործիքների մշակման մեջ",
+      "Փորձ web, ցանցային, ամպային և բջջային հարձակման մակերեսների հետ",
+      "OSCP, OSCE կամ համարժեք հաստատված հմտություններ",
+      "Տեխնիկական հաղորդակցման և հաշվետվությունների կազմման հմտություններ"
     ]
   },
   {
     "id": 2,
     "code": "SEC-02",
-    "title": "Delays delays delays delays delays",
-    "level": "Delays",
-    "location": "Delays, Delays",
-    "type": "Delays delays",
-    "description": "Delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays. Delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays.",
+    "title": "DevSecOps ինժեներ",
+    "level": "Ավագ",
+    "location": "Երևան, Հայաստան",
+    "type": "Լիակատար զբաղվածություն",
+    "description": "Անվտանգ CI/CD կոնվեյերների նախագծում և սպասարկում ինտեգրված անվտանգության հսկողությամբ։ IaC ներդրում ուժեղացված կոնֆիգուրացիաներով և ավտոմատացված խոցելիությունների սկանավորմամբ ողջ մշակման ցիկլում։",
     "requirements": [
-      "PhD delays delays, delays delays delays delays delays delays delays delays delays delays",
-      "Delays delays delays delays delays delays delays delays delays delays delays delays",
-      "Delays-delays delays delays delays delays delays delays delays delays delays delays",
-      "Delays delays delays delays delays delays delays delays delays delays delays delays delays",
-      "Delays delays delays delays delays delays delays delays delays delays delays delays"
+      "4+ տարի DevOps փորձաղիտություն՝ ուժեղ անվտանգության շեշտով",
+      "Կոնտեյներների անվտանգության (Docker, Kubernetes) և օրկեստրացիայի ուժեղացման փորձաղիտություն",
+      "IaC գործիքների (Terraform, Ansible) և անվտանգության ավտոմատացման տիրապետություն",
+      "SAST, DAST և SCA կոնվեյերներում ներդրման փորձաղիտություն",
+      "Սկրիպտինգի ուժեղ հմտություններ (Python, Bash) և ամպային պլատֆորմների իմացություն"
     ]
   },
   {
     "id": 3,
     "code": "SEC-03",
-    "title": "DevSecOps delays",
-    "level": "Delays",
-    "location": "Delays, Delays",
-    "type": "Delays delays",
-    "description": "Delays delays CI/CD delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays. IaC delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays.",
+    "title": "Վնասակար ծրագրերի վերլուծաբան",
+    "level": "Ավագ",
+    "location": "Երևան, Հայաստան",
+    "type": "Լիակատար զբաղվածություն",
+    "description": "Վնասակար ծրագրային ապահովման հակադարձ նախագծում՝ հնարավորությունների, ատրիբուցիայի և կոմպրոմետացիայի ցուցիչների հասկանալու համար։ Հայտնաբերման ստորագրությունների մշակում և սպառնալիքների պաշտպանության համար սպառնալիքների հետախուզության արտադրանքների ստեղծման մեջ մասնակցություն։",
     "requirements": [
-      "4+ delays DevOps delays delays delays delays delays delays delays delays delays delays delays",
-      "Docker, Kubernetes delays delays delays delays delays delays delays delays delays delays",
-      "IaC delays (Terraform, Ansible) delays delays delays delays delays delays delays delays delays",
-      "SAST, DAST delays SCA delays delays delays delays delays delays delays delays delays delays",
-      "Python, Bash delays delays delays delays delays delays delays delays delays delays delays delays"
+      "4+ տարի վնասակար ծրագրերի վերլուծության կամ հակադարձ նախագծման մեջ",
+      "Փորձագետ տիրապետություն IDA Pro, Ghidra և դեբագման գործիքներում",
+      "Windows ներքին կառուցվածքի և PE ֆորմատի խոր իմացություն",
+      "Դինամիկ վերլուծության sandbox-ի և վարքային վերլուծության փորձաղիտություն",
+      "Ասեմբլերի ազատ տիրապետություն (x86/x64) և C/C++ կոդի կարդալու ունակություն"
     ]
   },
   {
     "id": 4,
     "code": "SEC-04",
-    "title": "Delays delays delays delays delays",
-    "level": "Delays",
-    "location": "Delays, Delays",
-    "type": "Delays delays",
-    "description": "Delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays. Delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays.",
+    "title": "Սպառնալիքների հետախուզության վերլուծաբան",
+    "level": "Ավագ",
+    "location": "Երևան, Հայաստան",
+    "type": "Լիակատար զբաղվածություն",
+    "description": "Չարամիտ խմբերի, արշավների և TTP-ի հետևում գործնական հետախուզության ստեղծման համար։ Ստվերգյա ֆորումների մոնիտորինգ, հարձակման ենթակառուցվածքի վերլուծություն և առաջացող սպառնալիքների վաղ նախազգուշացման ցուցիչների մշակում։",
     "requirements": [
-      "4+ delays delays delays delays delays delays delays delays delays delays delays delays delays",
-      "IDA Pro, Ghidra delays delays delays delays delays delays delays delays delays delays delays",
-      "Windows delays delays delays PE delays delays delays delays delays delays delays delays delays",
-      "Delays delays sandbox delays delays delays delays delays delays delays delays delays delays",
-      "Delays delays (x86/x64) delays C/C++ delays delays delays delays delays delays delays delays"
+      "3+ տարի սպառնալիքների հետախուզության կամ կիբերվերլուծության մեջ",
+      "OSINT տեխնիկաների և dark web հետազոտության փորձաղիտություն",
+      "MITRE ATT&CK շրջանակի և սպառնալիքների մոդելավորման տիրապետություն",
+      "Վերլուծական գրելու և բրիֆինգների ուժեղ հմտություններ",
+      "Հետախուզական վերլուծության կամ անվտանգության գործողությունների փորձաղիտություն"
     ]
   },
   {
     "id": 5,
     "code": "SEC-05",
-    "title": "Delays delays delays delays delays delays",
-    "level": "Delays",
-    "location": "Delays, Delays",
-    "type": "Delays delays",
-    "description": "Delays delays, delays delays TTP delays delays delays delays delays delays delays delays delays delays delays delays delays. Delays delays delays delays, delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays.",
+    "title": "Հավելվածների անվտանգության ինժեներ",
+    "level": "Ավագ",
+    "location": "Երևան, Հայաստան",
+    "type": "Լիակատար զբաղվածություն",
+    "description": "Web և բջջային հավելվածներում խոցելիությունների հայտնաբերում և վերացում կոդի վերանայման և անվտանգության թեստավորման միջոցով։ Կոնսուլտացիա մշակման թիմերին անվտանգ կոդավորման պրակտիկայի և անվտանգության ինտեգրման SDLC-ում։",
     "requirements": [
-      "3+ delays delays delays delays delays delays delays delays delays delays delays delays delays",
-      "OSINT delays delays dark web delays delays delays delays delays delays delays delays delays",
-      "MITRE ATT&CK delays delays delays delays delays delays delays delays delays delays delays delays",
-      "Delays delays delays delays delays delays delays delays delays delays delays delays delays",
-      "Delays delays delays delays delays delays delays delays delays delays delays delays delays delays"
+      "4+ տարի հավելվածների անվտանգության կամ անվտանգ ծրագրավորման մեջ",
+      "OWASP Top 10-ի և տարածված խոցելիությունների դասերի խոր իմացություն",
+      "Մի քանի ծրագրավորման լեզուների տիրապետություն կոդի վերանայման համար",
+      "SAST/DAST գործիքների և անվտանգ կոդի վերանայման մեթոդոլոգիաների փորձաղիտություն",
+      "Մշակողների հետ աշխատելու ուժեղ հաղորդակցման հմտություններ"
     ]
   },
   {
     "id": 6,
-    "code": "SEC-06",
-    "title": "Delays delays delays delays delays delays",
-    "level": "Delays",
-    "location": "Delays, Delays",
-    "type": "Delays delays",
-    "description": "Web delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays. Delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays SDLC delays delays delays delays delays delays delays.",
+    "code": "DEV-01",
+    "title": "Անվտանգության համակարգերի ծրագրավորող",
+    "level": "Ավագ",
+    "location": "Երևան, Հայաստան",
+    "type": "Լիակատար զբաղվածություն",
+    "description": "Ցածր մակարդակի անվտանգության գործիքների, միջուկային մոդուլների և բարձր արդյունավետությամբ պաշտպանական համակարգերի մշակում։ Իմպլանտների հայտնաբերման, հիշողության դատական հետազոտության գործիքների և անվտանգ համակարգային բաղադրիչների ստեղծում՝ օպերացիոն համակարգի խոր իմացություն պահանջող։",
     "requirements": [
-      "4+ delays delays delays delays delays delays delays delays delays delays delays delays delays delays",
-      "OWASP Top 10 delays delays delays delays delays delays delays delays delays delays delays delays",
-      "Delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays",
-      "SAST/DAST delays delays delays delays delays delays delays delays delays delays delays delays delays delays",
-      "Delays delays delays delays delays delays delays delays delays delays delays delays delays"
+      "5+ տարի համակարգային ծրագրավորման փորձաղիտություն",
+      "C, C++ և Rust լեզուների փորձագետ տիրապետություն անվտանգության կրիտիկ կոդի համար",
+      "Windows/Linux միջուկային ներքին կառուցվածքի և API-ի խոր իմացություն",
+      "Հիշողության կառավարման, համամիտական կատարման և շահագործման դեմ պաշտպանության փորձաղիտություն",
+      "C# տիրապետություն Windows գործիքների և .NET անվտանգության վերլուծության համար"
     ]
   },
   {
     "id": 7,
-    "code": "DEV-01",
-    "title": "Delays delays delays delays delays delays",
-    "level": "Delays",
-    "location": "Delays, Delays",
-    "type": "Delays delays",
-    "description": "Delays delays delays delays delays, delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays. Delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays.",
+    "code": "QA-01",
+    "title": "QA ինժեներ",
+    "level": "Ավագ",
+    "location": "Երևան, Հայաստան",
+    "type": "Լիակատար զբաղվածություն",
+    "description": "Ծրագրային ապահովման որակի ապահովում համապարփակ թեստավորման ստրատեգիաների միջոցով՝ ներառյալ ձեռքով և ավտոմատացված թեստավորման։ Թեստային պլանների մշակում, դեֆեկտների հայտնաբերում և մշակման թիմերի հետ համագործակցություն հուսալի և անվտանգ արտադրանքների ստեղծման համար։",
     "requirements": [
-      "5+ delays delays delays delays delays delays delays delays delays delays",
-      "C, C++ delays Rust delays delays delays delays delays delays delays delays delays delays delays delays delays",
-      "Windows/Linux delays delays delays API delays delays delays delays delays delays delays delays",
-      "Delays delays, delays delays delays delays delays delays delays delays delays delays delays",
-      "C# delays Windows delays .NET delays delays delays delays delays delays delays delays delays"
+      "4+ տարի ծրագրային ապահովման որակի ապահովման կամ թեստավորման մեջ",
+      "Թեստավորման ավտոմատացման շրջանակների (Selenium, Cypress, Playwright) փորձաղիտություն",
+      "Թեստավորման մեթոդոլոգիաների և SDLC գործընթացների խոր իմացություն",
+      "Թեստ-կեյսերի և սխալների մասին հաշվետվությունների գրելու հմտություններ",
+      "CI/CD ինտեգրման և անվտանգության թեստավորման պրակտիկաների փորձաղիտություն"
     ]
   },
   {
     "id": 8,
-    "code": "QA-01",
-    "title": "QA delays",
-    "level": "Delays",
-    "location": "Delays, Delays",
-    "type": "Delays delays",
-    "description": "Delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays. Delays delays delays, delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays.",
-    "requirements": [
-      "4+ delays delays delays delays delays delays delays delays delays delays delays delays delays",
-      "Delays delays delays (Selenium, Cypress, Playwright) delays delays delays delays delays delays",
-      "Delays delays delays SDLC delays delays delays delays delays delays delays delays delays delays",
-      "Delays delays delays delays delays delays delays delays delays delays delays delays delays",
-      "CI/CD delays delays delays delays delays delays delays delays delays delays delays delays delays delays"
-    ]
-  },
-  {
-    "id": 9,
     "code": "DEV-02",
-    "title": "Android delays",
-    "level": "Delays",
-    "location": "Delays, Delays",
-    "type": "Delays delays",
-    "description": "Delays delays delays delays Android delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays. Delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays delays.",
+    "title": "Android ծրագրավորող",
+    "level": "Ավագ",
+    "location": "Երևան, Հայաստան",
+    "type": "Լիակատար զբաղվածություն",
+    "description": "Բարձրորակ Android հավելվածների նախագծում և մշակում՝ արդյունավետության, անվտանգության և օգտատիրոջի փորձի շեշտով։ Համագործակցություն կրոս-ֆունկցիոնալ թիմերի հետ նոր հնարավորությունների սահմանման, նախագծման և թողարկման համար՝ կոդի որակի և լավագույն պրակտիկաների պահպանմամբ։",
     "requirements": [
-      "4+ delays Android delays delays delays delays delays delays delays delays delays delays delays",
-      "Kotlin delays Java delays Android delays delays delays delays delays delays delays delays delays",
-      "Android SDK, Jetpack delays delays Material Design delays delays delays delays delays delays delays",
-      "RESTful API delays delays delays delays delays delays delays delays delays delays delays delays delays",
-      "CI/CD delays delays delays delays delays delays delays delays delays delays delays delays delays"
+      "4+ տարի պրոֆեսիոնալ Android ծրագրավորման փորձաղիտություն",
+      "Kotlin և Java լեզուների փորձագետ տիրապետություն Android-ի համար",
+      "Android SDK, Jetpack բաղադրիչների և Material Design-ի խոր իմացություն",
+      "RESTful API-ի, օֆլայն պահեստավորման և ֆոնային մշակման փորձաղիտություն",
+      "CI/CD կոնվեյերների և անվտանգ կոդավորման պրակտիկաների ծանոթություն"
     ]
   }
 ]

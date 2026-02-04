@@ -137,6 +137,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  position: relative;
   z-index: 1001;
 }
 
@@ -214,6 +215,7 @@
     border-left: 1px solid rgba(0, 255, 204, 0.1);
     transition: right 0.3s ease;
     overflow-y: auto;
+    z-index: 1000;
   }
 
   .navbar .navbar-nav.open {
