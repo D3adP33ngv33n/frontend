@@ -8,60 +8,37 @@
             <p class="section-subtitle">Build your career at the edge of security research</p>
         </div>
 
-        <div class="slider-wrapper">
-            <button class="slider-btn slider-btn-prev" @onclick="PrevSlide">
-                <span class="slider-arrow">&#8249;</span>
-            </button>
+        <Slider Items="CurrentOpenings" TItem="JobPosition">
+            <ItemTemplate Context="opening">
+                <div class="opening-card">
+                    <div class="card-header">
+                        <div class="opening-code mono">@opening.Code</div>
+                        <div class="opening-type">@opening.Type</div>
+                    </div>
 
-            <div class="slider-container">
-                <div class="slider-viewport">
-                    <div class="slider-track" style="transform: translateX(calc(-@currentIndex * (var(--card-width) + var(--card-gap))));">
-                        @foreach (var opening in CurrentOpenings)
-                        {
-                            <div class="opening-card">
-                                <div class="card-header">
-                                    <div class="opening-code mono">@opening.Code</div>
-                                    <div class="opening-type">@opening.Type</div>
-                                </div>
+                    <div class="card-body">
+                        <h3 class="opening-title">@opening.Title</h3>
 
-                                <div class="card-body">
-                                    <h3 class="opening-title">@opening.Title</h3>
-
-                                    <div class="opening-meta">
-                                        <div class="meta-item">
-                                            <span class="meta-icon">📊</span>
-                                            <span class="meta-text">@opening.Level</span>
-                                        </div>
-                                        <div class="meta-item">
-                                            <span class="meta-icon">📍</span>
-                                            <span class="meta-text mono">@opening.Location</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card-footer">
-                                    <button class="btn btn-primary" @onclick="() => ViewDetails(opening.Id)">
-                                        View Details
-                                    </button>
-                                </div>
+                        <div class="opening-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">📊</span>
+                                <span class="meta-text">@opening.Level</span>
                             </div>
-                        }
+                            <div class="meta-item">
+                                <span class="meta-icon">📍</span>
+                                <span class="meta-text mono">@opening.Location</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <button class="btn btn-primary" @onclick="() => ViewDetails(opening.Id)">
+                            View Details
+                        </button>
                     </div>
                 </div>
-            </div>
-
-            <button class="slider-btn slider-btn-next" @onclick="NextSlide">
-                <span class="slider-arrow">&#8250;</span>
-            </button>
-        </div>
-
-        <div class="slider-dots">
-            @for (int i = 0; i < CurrentOpenings.Count; i++)
-            {
-                var index = i;
-                <button class="slider-dot @(currentIndex == index ? "active" : "")" @onclick="() => GoToSlide(index)"></button>
-            }
-        </div>
+            </ItemTemplate>
+        </Slider>
 
         <div class="careers-note">
             <p class="mono">
@@ -73,7 +50,6 @@
 
 @code {
     private List<JobPosition> CurrentOpenings = new();
-    private int currentIndex = 0;
 
     protected override async Task OnInitializedAsync()
     {
@@ -83,20 +59,5 @@
     private void ViewDetails(int jobId)
     {
         Navigation.NavigateTo(Routes.GetCareerDetailsUrl(jobId));
-    }
-
-    private void NextSlide()
-    {
-        currentIndex = (currentIndex + 1) % CurrentOpenings.Count;
-    }
-
-    private void PrevSlide()
-    {
-        currentIndex = (currentIndex - 1 + CurrentOpenings.Count) % CurrentOpenings.Count;
-    }
-
-    private void GoToSlide(int index)
-    {
-        currentIndex = index;
     }
 }

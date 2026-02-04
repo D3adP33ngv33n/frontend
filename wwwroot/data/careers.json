@@ -46,5 +46,85 @@
       "Proficiency with formal verification and proof systems",
       "Clearance eligibility for sensitive research"
     ]
+  },
+  {
+    "id": 4,
+    "code": "SEC-04",
+    "title": "DevSecOps Engineer",
+    "level": "Senior",
+    "location": "Yerevan, Armenia",
+    "type": "Full-time",
+    "description": "Design and maintain secure CI/CD pipelines with integrated security controls. Implement infrastructure-as-code with hardened configurations and automated vulnerability scanning across the development lifecycle.",
+    "requirements": [
+      "4+ years in DevOps with strong security focus",
+      "Expertise in container security (Docker, Kubernetes) and orchestration hardening",
+      "Proficiency with IaC tools (Terraform, Ansible) and security automation",
+      "Experience implementing SAST, DAST, and SCA in pipelines",
+      "Strong scripting skills (Python, Bash) and cloud platform knowledge"
+    ]
+  },
+  {
+    "id": 5,
+    "code": "SEC-05",
+    "title": "Malware Analyst",
+    "level": "Senior",
+    "location": "Yerevan, Armenia",
+    "type": "Full-time",
+    "description": "Reverse engineer malicious software to understand capabilities, attribution, and indicators of compromise. Develop detection signatures and contribute to threat intelligence products for client defense.",
+    "requirements": [
+      "4+ years in malware analysis or reverse engineering",
+      "Expert proficiency with IDA Pro, Ghidra, and debugging tools",
+      "Strong understanding of Windows internals and PE format",
+      "Experience with dynamic analysis sandboxes and behavioral analysis",
+      "Assembly language fluency (x86/x64) and C/C++ reading ability"
+    ]
+  },
+  {
+    "id": 6,
+    "code": "SEC-06",
+    "title": "Threat Intelligence Analyst",
+    "level": "Senior",
+    "location": "Yerevan, Armenia",
+    "type": "Full-time",
+    "description": "Track adversary groups, campaigns, and TTPs to produce actionable intelligence. Monitor underground forums, analyze attack infrastructure, and develop early warning indicators for emerging threats.",
+    "requirements": [
+      "3+ years in threat intelligence or cyber analysis",
+      "Experience with OSINT techniques and dark web research",
+      "Proficiency with MITRE ATT&CK framework and threat modeling",
+      "Strong analytical writing and briefing skills",
+      "Background in intelligence analysis or security operations"
+    ]
+  },
+  {
+    "id": 7,
+    "code": "SEC-07",
+    "title": "Application Security Engineer",
+    "level": "Senior",
+    "location": "Yerevan, Armenia",
+    "type": "Full-time",
+    "description": "Identify and remediate vulnerabilities in web and mobile applications through code review and security testing. Guide development teams on secure coding practices and integrate security into the SDLC.",
+    "requirements": [
+      "4+ years in application security or secure development",
+      "Deep knowledge of OWASP Top 10 and common vulnerability classes",
+      "Proficiency in multiple programming languages for code review",
+      "Experience with SAST/DAST tools and secure code review methodologies",
+      "Strong communication skills for developer engagement"
+    ]
+  },
+  {
+    "id": 8,
+    "code": "DEV-01",
+    "title": "Systems Security Developer",
+    "level": "Senior",
+    "location": "Yerevan, Armenia",
+    "type": "Full-time",
+    "description": "Build low-level security tools, kernel modules, and high-performance defensive systems. Develop custom implant detection, memory forensics tools, and secure system components requiring deep OS knowledge.",
+    "requirements": [
+      "5+ years systems programming experience",
+      "Expert proficiency in C, C++, and Rust for security-critical code",
+      "Strong knowledge of Windows/Linux kernel internals and APIs",
+      "Experience with memory management, concurrency, and exploit mitigations",
+      "C# proficiency for Windows tooling and .NET security analysis"
+    ]
   }
 ]

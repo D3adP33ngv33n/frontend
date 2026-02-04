@@ -1,0 +1,61 @@
+@typeparam TItem
+
+<div class="slider-wrapper">
+    <button class="slider-btn slider-btn-prev" @onclick="PrevSlide">
+        <span class="slider-arrow">&#8249;</span>
+    </button>
+
+    <div class="slider-container">
+        <div class="slider-viewport">
+            <div class="slider-track" style="transform: translateX(calc(-@currentIndex * (var(--card-width) + var(--card-gap))));">
+                @foreach (var item in Items)
+                {
+                    @ItemTemplate(item)
+                }
+            </div>
+        </div>
+    </div>
+
+    <button class="slider-btn slider-btn-next" @onclick="NextSlide">
+        <span class="slider-arrow">&#8250;</span>
+    </button>
+</div>
+
+<div class="slider-dots">
+    @for (int i = 0; i < Items.Count; i++)
+    {
+        var index = i;
+        <button class="slider-dot @(currentIndex == index ? "active" : "")" @onclick="() => GoToSlide(index)"></button>
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public IList<TItem> Items { get; set; } = new List<TItem>();
+
+    [Parameter, EditorRequired]
+    public RenderFragment<TItem> ItemTemplate { get; set; } = default!;
+
+    private int currentIndex = 0;
+
+    private void NextSlide()
+    {
+        if (Items.Count > 0)
+        {
+            currentIndex = (currentIndex + 1) % Items.Count;
+        }
+    }
+
+    private void PrevSlide()
+    {
+        if (Items.Count > 0)
+        {
+            currentIndex = (currentIndex - 1 + Items.Count) % Items.Count;
+        }
+    }
+
+    private void GoToSlide(int index)
+    {
+        currentIndex = index;
+    }
+}

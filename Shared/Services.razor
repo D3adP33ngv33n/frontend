@@ -7,40 +7,17 @@
             <p class="section-subtitle">Specialized capabilities for complex security challenges</p>
         </div>
 
-        <div class="slider-wrapper">
-            <button class="slider-btn slider-btn-prev" @onclick="PrevSlide">
-                <span class="slider-arrow">&#8249;</span>
-            </button>
-
-            <div class="slider-container">
-                <div class="slider-viewport">
-                    <div class="slider-track" style="transform: translateX(calc(-@currentIndex * (var(--card-width) + var(--card-gap))));">
-                        @foreach (var service in ServicesList)
-                        {
-                            <div class="service-card">
-                                <div class="service-icon">
-                                    @service.Icon
-                                </div>
-                                <h3>@service.Title</h3>
-                                <p>@service.Description</p>
-                            </div>
-                        }
+        <Slider Items="ServicesList" TItem="ServiceItem">
+            <ItemTemplate Context="service">
+                <div class="service-card">
+                    <div class="service-icon">
+                        @service.Icon
                     </div>
+                    <h3>@service.Title</h3>
+                    <p>@service.Description</p>
                 </div>
-            </div>
-
-            <button class="slider-btn slider-btn-next" @onclick="NextSlide">
-                <span class="slider-arrow">&#8250;</span>
-            </button>
-        </div>
-
-        <div class="slider-dots">
-            @for (int i = 0; i < ServicesList.Count; i++)
-            {
-                var index = i;
-                <button class="slider-dot @(currentIndex == index ? "active" : "")" @onclick="() => GoToSlide(index)"></button>
-            }
-        </div>
+            </ItemTemplate>
+        </Slider>
 
         <div class="services-note">
             <p class="mono">Every engagement operates under strict NDA. We collaborate directly with stakeholders to design
@@ -51,25 +28,9 @@
 
 @code {
     private List<ServiceItem> ServicesList = new();
-    private int currentIndex = 0;
 
     protected override async Task OnInitializedAsync()
     {
         ServicesList = await DataService.GetServicesAsync();
-    }
-
-    private void NextSlide()
-    {
-        currentIndex = (currentIndex + 1) % ServicesList.Count;
-    }
-
-    private void PrevSlide()
-    {
-        currentIndex = (currentIndex - 1 + ServicesList.Count) % ServicesList.Count;
-    }
-
-    private void GoToSlide(int index)
-    {
-        currentIndex = index;
     }
 }
