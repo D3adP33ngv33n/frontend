@@ -1,81 +1,20 @@
-@using System.ComponentModel.DataAnnotations
-
 <section class="contact" id="contact">
     <div class="container">
         <div class="section-header text-center">
             <h2>Contact</h2>
         </div>
         <div class="contact-content">
-            <div class="contact-form">
-                <EditForm Model="@contactModel" OnValidSubmit="@HandleSubmit" FormName="ContactForm">
-                    <DataAnnotationsValidator />
-
-                    <div class="form-group">
-                        <label for="purpose" class="form-label mono">Purpose of Contact</label>
-                        <InputSelect id="purpose" @bind-Value="contactModel.Purpose" class="form-select">
-                            <option value="" disabled selected>Select a purpose</option>
-                            <option value="service">Service Inquiry</option>
-                            <option value="carrier">Carrier Inquiry</option>
-                            <option value="other">Other</option>
-                        </InputSelect>
-                        <ValidationMessage For="@(() => contactModel.Purpose)" />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message" class="form-label mono">Secure Message</label>
-                        <InputTextArea id="message"
-                                       @bind-Value="contactModel.Message"
-                                       class="form-textarea"
-                                       placeholder="Encrypted message will be created upon submission"
-                                       rows="6" />
-                        <ValidationMessage For="@(() => contactModel.Message)" />
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-checkbox">
-                            <InputCheckbox @bind-Value="contactModel.SecureChannel" class="form-checkbox-input" />
-                            <span class="form-checkbox-label">Use secure channel</span>
-                        </label>
-                    </div>
-
-                    <button type="submit"
-                            class="btn btn-primary"
-                            disabled="@isSubmitting">
-                        @(isSubmitting ? "Sending..." : "Send Request")
-                    </button>
-                </EditForm>
+            <div class="contact-links">
+                <a href="https://www.linkedin.com/company/nostdlib" target="_blank" rel="noopener noreferrer"
+                    class="contact-link">
+                    <span class="contact-link-icon">in</span>
+                    <span class="contact-link-text">Contact Us</span>
+                </a>
+                <a href="https://github.com/nostdlib" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <span class="contact-link-icon">gh</span>
+                    <span class="contact-link-text">GitHub</span>
+                </a>
             </div>
         </div>
     </div>
 </section>
-
-@code {
-    private ContactModel contactModel = new();
-    private bool isSubmitting = false;
-
-    private async Task HandleSubmit()
-    {
-        isSubmitting = true;
-        StateHasChanged();
-
-        await Task.Delay(1000);
-
-        // In a real app, you would send the data to your server here
-
-        contactModel = new ContactModel();
-        isSubmitting = false;
-        StateHasChanged();
-    }
-
-    private class ContactModel
-    {
-        [Required(ErrorMessage = "Please select a purpose")]
-        public string Purpose { get; set; } = "";
-
-        [Required(ErrorMessage = "Message is required")]
-        [MinLength(10, ErrorMessage = "Message must be at least 10 characters")]
-        public string Message { get; set; } = "";
-
-        public bool SecureChannel { get; set; } = false;
-    }
-}

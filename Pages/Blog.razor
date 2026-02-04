@@ -1,0 +1,112 @@
+@page "/blog"
+
+<PageTitle>Blog - NOSTDLIB</PageTitle>
+
+<Navbar />
+
+<section class="blog">
+    <div class="container">
+        <div class="section-header text-center">
+            <h1>Blog</h1>
+            <p class="section-subtitle">Research, tools, and technical write-ups</p>
+        </div>
+
+        <div class="blog-grid">
+            @foreach (var post in BlogPosts)
+            {
+                <article class="blog-card">
+                    <div class="blog-icon">@post.Icon</div>
+                    <h3>@post.Title</h3>
+                    <p class="blog-purpose">@post.Purpose</p>
+
+                    <div class="blog-features">
+                        <h4>Key Features</h4>
+                        <ul>
+                            @foreach (var feature in post.Features)
+                            {
+                                <li>@feature</li>
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="blog-meta">
+                        <span class="blog-tech mono">@post.Technologies</span>
+                        <span class="blog-status @post.Status.ToLower()">@post.Status</span>
+                    </div>
+
+                    <p class="blog-audience"><strong>Audience:</strong> @post.Audience</p>
+
+                    <a href="@post.Url" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                        Read More
+                    </a>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<Footer />
+
+@code {
+    private record BlogPost(
+        string Title,
+        string Purpose,
+        List<string> Features,
+        string Technologies,
+        string Status,
+        string Audience,
+        string Url,
+        string Icon
+    );
+
+    private List<BlogPost> BlogPosts = new()
+    {
+        new(
+            "[NoRWX] Proof-of-Concept",
+            "Demonstrates running position-independent (PIC) x86-64 machine code to output \"Hello World\" in RW-only memory, without marking it executable.",
+            new List<string>
+            {
+                "No executable memory required",
+                "Hardware breakpoints + VEH technique",
+                "Security-focused demonstration"
+            },
+            "x86-64 assembly, C",
+            "Experimental",
+            "Security researchers, low-level programmers",
+            "https://mrzaxaryan.blog/content/NoRWX/",
+            "🔒"
+        ),
+        new(
+            "[c-pic] Position-Independent Code in C",
+            "Fully position-independent code implementation in C with manual API resolution.",
+            new List<string>
+            {
+                "No imports, no standard library, position-independent code, no fixed addresses",
+                "Embed and retrieve strings without fixed addresses",
+                "Direct TEB/PEB access",
+                "Works on x86 and x64",
+                "PEB walking"
+            },
+            "C, Windows internals, Linux syscalls",
+            "Experimental",
+            "Systems programmers, low-level developers, security researchers",
+            "https://mrzaxaryan.blog/content/c-pic/",
+            "⚙️"
+        ),
+        new(
+            "[EC] Armenian Encoding Converter",
+            "Converts Armenian text between multiple encodings (ANSI, Unicode, ArmSCII, etc.).",
+            new List<string>
+            {
+                "Supports multiple Armenian encodings",
+                "Batch conversion",
+                "Word/Excel converters (TXT/DOC/DOCX/XLS/XLSX)"
+            },
+            "C#, .NET 9",
+            "Beta",
+            "Linguists, developers dealing with Armenian text, localization engineers",
+            "https://mrzaxaryan.blog/content/EC/",
+            "🔤"
+        )
+    };
+}
