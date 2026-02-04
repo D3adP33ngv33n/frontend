@@ -1,10 +1,10 @@
 [
   {
     "title": "[NoRWX] Proof-of-Concept",
-    "purpose": "Demonstrates running position-independent (PIC) x86-64 machine code to output \"Hello World\" in RW-only memory, without marking it executable.",
+    "purpose": "Demonstrates execution of position-independent x86-64 machine code from read/write-only memory without requiring executable permissions.",
     "features": [
       "No executable memory required",
-      "Hardware breakpoints + VEH technique",
+      "Hardware breakpoints with VEH technique",
       "Custom x86-64 instruction emulator",
       "Windows API calls from emulated code"
     ],
@@ -17,7 +17,7 @@
   },
   {
     "title": "[cpp-pic] Position-Independent Runtime",
-    "purpose": "A C++23 framework enabling shellcode and position-independent code generation across multiple platforms and architectures.",
+    "purpose": "A C++23 framework enabling position-independent code generation across multiple platforms and architectures.",
     "features": [
       "Multi-platform (Windows, Linux, UEFI) and multi-architecture (i386, x86_64, armv7a, aarch64)",
       "Compile-time string embedding without .rdata dependencies",
@@ -34,15 +34,15 @@
   },
   {
     "title": "[EC] Armenian Encoding Converter",
-    "purpose": "Converts Armenian text between multiple encodings (ANSI, Unicode, ArmSCII, etc.).",
+    "purpose": "A utility for converting Armenian text between multiple encoding formats including ANSI, Unicode, and ArmSCII.",
     "features": [
       "Supports multiple Armenian encodings",
-      "Batch conversion",
-      "Word/Excel converters (TXT/DOC/DOCX/XLS/XLSX)"
+      "Batch conversion support",
+      "Word and Excel document converters (TXT/DOC/DOCX/XLS/XLSX)"
     ],
     "technologies": "C#, .NET 9",
     "status": "Beta",
-    "audience": "Linguists, developers dealing with Armenian text, localization engineers",
+    "audience": "Linguists, developers, localization engineers",
     "url": "/blog/ec",
     "icon": "🔤",
     "gitHubUrl": "https://github.com/mrzaxaryan/EC"

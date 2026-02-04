@@ -6,13 +6,13 @@
     "level": "Senior",
     "location": "Remote",
     "type": "Full-time",
-    "description": "Join our team as a Security Analyst responsible for monitoring, analyzing, and responding to security incidents. You will work with cutting-edge tools and methodologies to protect our clients' critical infrastructure.",
+    "description": "We are seeking a Security Analyst to monitor, analyze, and respond to security incidents. You will work with advanced tools and methodologies to protect our clients' critical infrastructure.",
     "requirements": [
       "5+ years of experience in cybersecurity",
       "Strong knowledge of SIEM tools and incident response",
       "Experience with threat hunting and analysis",
       "Relevant certifications (CISSP, GCIA, or equivalent)",
-      "Active security clearance preferred"
+      "Security clearance preferred"
     ]
   },
   {
@@ -22,7 +22,7 @@
     "level": "Mid",
     "location": "Any Office",
     "type": "Full-time",
-    "description": "We are looking for a skilled Penetration Tester to identify vulnerabilities in our clients' systems and applications. You will conduct authorized security assessments and provide detailed remediation guidance.",
+    "description": "We are seeking a Penetration Tester to identify vulnerabilities in client systems and applications. You will conduct authorized security assessments and provide detailed remediation guidance.",
     "requirements": [
       "3+ years of penetration testing experience",
       "Proficiency in manual and automated testing techniques",
@@ -38,13 +38,13 @@
     "level": "Senior",
     "location": "Remote",
     "type": "Contract",
-    "description": "Seeking a Cryptographic Researcher to advance our understanding of modern cryptographic systems. You will analyze existing implementations, identify weaknesses, and develop novel approaches to secure communications.",
+    "description": "We are seeking a Cryptographic Researcher to advance our understanding of modern cryptographic systems. You will analyze implementations, identify weaknesses, and develop novel approaches to secure communications.",
     "requirements": [
       "PhD or equivalent experience in cryptography or mathematics",
       "Published research in peer-reviewed venues",
       "Experience with post-quantum cryptography",
       "Proficiency in formal verification methods",
-      "Ability to work on classified projects"
+      "Ability to work on sensitive projects"
     ]
   }
 ]

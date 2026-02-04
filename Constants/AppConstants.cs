@@ -16,6 +16,6 @@ public static class AppConstants
     public static class Meta
     {
         public const string DefaultTitle = "NOSTDLIB - Security Beyond Perimeters";
-        public const string Description = "Private cybersecurity solutions";
+        public const string Description = "Enterprise cybersecurity consulting specializing in security assessments, incident response, and secure architecture design";
     }
 }

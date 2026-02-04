@@ -2,16 +2,18 @@
     <div class="container">
         <div class="section-header">
             <h2>About Us</h2>
-            <p class="section-subtitle">We exist where security meets discretion</p>
+            <p class="section-subtitle">Where expertise meets confidentiality</p>
         </div>
 
         <div class="about-content">
             <div class="about-text">
                 <p class="mono">
-                    Our team is composed of specialists who choose anonymity by design. This is not secrecy for its own sake, but a principle: identities are irrelevant; capability is everything.
+                    Our team comprises seasoned security professionals with deep expertise across offensive and defensive domains.
+                    We prioritize capability and results over visibility.
                 </p>
                 <p>
-                    We deliver private cybersecurity solutions, integrating AI and cryptographic systems, designed for environments where precision, resilience, and confidentiality are non-negotiable.
+                    We deliver enterprise cybersecurity solutions, integrating advanced technologies and cryptographic systems,
+                    designed for environments where precision, resilience, and confidentiality are essential.
                 </p>
                 <p>
                     No publicity. No exposure.
@@ -32,34 +34,18 @@
                     </ul>
                 </div>
             </div>
-
-            <div class="about-visual">
-                <div class="visual-container">
-                    <div class="data-stream">
-                        @foreach (var line in DataStream)
-                        {
-                            <div class="stream-line">
-                                @foreach (var bit in line)
-                                {
-                                    <div class="stream-bit">@bit</div>
-                                }
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </section>
 
 @code {
     private List<string> Principles = new()
-    {
-        "We believe in security through obscurity",
-        "Our identities remain protected",
-        "We operate on a need-to-know basis",
-        "Trust is earned, not given"
-    };
+{
+"Defense in depth is our foundation",
+"Client confidentiality is paramount",
+"We operate on a need-to-know basis",
+"Trust is earned through results"
+};
 
     private List<List<string>> DataStream = new();
 
