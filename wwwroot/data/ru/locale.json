@@ -37,8 +37,9 @@
   "Blog.Title": "Open Source",
   "Blog.Subtitle": "Технические исследования, инструменты и документация",
   "Blog.KeyFeatures": "Ключевые особенности",
+  "Blog.UseCases": "Сценарии использования",
   "Blog.Audience": "Аудитория:",
-  "Blog.ReadMore": "Читать далее",
+  "Blog.License": "Лицензия:",
   "Blog.GitHub": "GitHub",
 
   "Privacy.Title": "Политика конфиденциальности",

@@ -2,22 +2,31 @@
   {
     "title": "[NoRWX] Proof-of-Concept",
     "purpose": "Demonstrates execution of position-independent x86-64 machine code from read/write-only memory without requiring executable permissions.",
+    "description": "NoRWX is a security research project that explores unconventional code execution techniques. It leverages hardware breakpoints combined with Vectored Exception Handling (VEH) to execute arbitrary machine code from memory regions that lack execute permissions. This proof-of-concept demonstrates that traditional memory protection mechanisms can be bypassed through creative use of CPU debugging features.",
     "features": [
       "No executable memory required",
       "Hardware breakpoints with VEH technique",
       "Custom x86-64 instruction emulator",
       "Windows API calls from emulated code"
     ],
+    "useCases": [
+      "Security research and vulnerability analysis",
+      "Understanding CPU debugging mechanisms",
+      "Exploring memory protection bypass techniques",
+      "Educational purposes for low-level programming"
+    ],
     "technologies": "x86-64 assembly, C",
     "status": "Experimental",
+    "statusClass": "experimental",
     "audience": "Security researchers, low-level programmers",
-    "url": "/open-source/norwx",
+    "license": "MIT",
     "icon": "🔒",
     "gitHubUrl": "https://github.com/mrzaxaryan/NoRWX"
   },
   {
     "title": "[cpp-pic] Position-Independent Runtime",
     "purpose": "A C++23 framework enabling position-independent code generation across multiple platforms and architectures.",
+    "description": "cpp-pic is a comprehensive C++23 framework designed for creating truly position-independent code that can run on multiple platforms without modification. It provides a complete runtime environment including cryptographic primitives, network protocols, and an embedded scripting language. The framework resolves all dependencies at runtime using platform-specific techniques like Windows PEB walking and Linux syscalls.",
     "features": [
       "Multi-platform (Windows, Linux, UEFI) and multi-architecture (i386, x86_64, armv7a, aarch64)",
       "Compile-time string embedding without .rdata dependencies",
@@ -25,25 +34,41 @@
       "TLS 1.3 with certificate verification, DNS, HTTP, WebSocket",
       "PIL embedded scripting language"
     ],
+    "useCases": [
+      "Building portable security tools",
+      "Embedded systems development",
+      "Creating self-contained applications",
+      "Cross-platform shellcode development",
+      "UEFI application development"
+    ],
     "technologies": "C++23, Windows PEB/NTAPI, Linux syscalls, UEFI",
     "status": "Active",
+    "statusClass": "active",
     "audience": "Security researchers, systems programmers, embedded developers",
-    "url": "/open-source/cpp-pic",
+    "license": "MIT",
     "icon": "⚙️",
     "gitHubUrl": "https://github.com/mrzaxaryan/cpp-pic"
   },
   {
     "title": "[EC] Armenian Encoding Converter",
     "purpose": "A utility for converting Armenian text between multiple encoding formats including ANSI, Unicode, and ArmSCII.",
+    "description": "EC (Encoding Converter) is a specialized tool for handling the complex landscape of Armenian text encodings. It supports conversion between legacy encodings like ArmSCII-8 and modern Unicode, making it essential for working with historical Armenian documents. The tool includes batch processing capabilities and integrates with Microsoft Office documents for seamless workflow integration.",
     "features": [
       "Supports multiple Armenian encodings",
       "Batch conversion support",
       "Word and Excel document converters (TXT/DOC/DOCX/XLS/XLSX)"
     ],
+    "useCases": [
+      "Converting legacy Armenian documents to Unicode",
+      "Batch processing of multilingual text files",
+      "Migrating old databases with Armenian content",
+      "Publishing and localization workflows"
+    ],
     "technologies": "C#, .NET 9",
     "status": "Beta",
+    "statusClass": "beta",
     "audience": "Linguists, developers, localization engineers",
-    "url": "/open-source/ec",
+    "license": "MIT",
     "icon": "🔤",
     "gitHubUrl": "https://github.com/mrzaxaryan/EC"
   }

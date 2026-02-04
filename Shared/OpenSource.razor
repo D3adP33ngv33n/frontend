@@ -12,9 +12,19 @@
         <Slider Items="BlogPosts" TItem="BlogPost">
             <ItemTemplate Context="post">
                 <article class="blog-card">
-                    <div class="blog-icon">@post.Icon</div>
-                    <h3>@post.Title</h3>
+                    <div class="blog-header">
+                        <div class="blog-icon">@post.Icon</div>
+                        <div class="blog-title-section">
+                            <h3>@post.Title</h3>
+                            <div class="blog-meta-inline">
+                                <span class="blog-status @post.StatusClass">@post.Status</span>
+                                <span class="blog-license">@L["Blog.License"] @post.License</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <p class="blog-purpose">@post.Purpose</p>
+                    <p class="blog-description">@post.Description</p>
 
                     <div class="blog-features">
                         <h4>@L["Blog.KeyFeatures"]</h4>
@@ -26,9 +36,18 @@
                         </ul>
                     </div>
 
+                    <div class="blog-use-cases">
+                        <h4>@L["Blog.UseCases"]</h4>
+                        <ul>
+                            @foreach (var useCase in post.UseCases)
+                            {
+                                <li>@useCase</li>
+                            }
+                        </ul>
+                    </div>
+
                     <div class="blog-meta">
                         <span class="blog-tech mono">@post.Technologies</span>
-                        <span class="blog-status @post.Status.ToLower()">@post.Status</span>
                     </div>
 
                     <p class="blog-audience"><strong>@L["Blog.Audience"]</strong> @post.Audience</p>

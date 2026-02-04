@@ -33,7 +33,6 @@
   "Blog.Subtitle": "Բաց կոդի գործիքներ և տեխնիկական հետազոտություններ մեր թիմից",
   "Blog.KeyFeatures": "Հիմնական հատկություններ",
   "Blog.Audience": "Թիրախավինրը՝",
-  "Blog.ReadMore": "Կարդալ ավելին",
   "Blog.GitHub": "GitHub",
   "Privacy.Title": "Գաղտնիության քաղաքականություն",
   "Privacy.Subtitle": "Գաղտնապահությունը որպես հիմնարար գործառնական սկզբունք",
@@ -56,5 +55,7 @@
   "Error.Message": "Անսպասելի սխալ տեղի ունեցավ։",
   "Error.ReturnHome": "Վերադառնալ գլխավոր էջ",
   "NotFound.Title": "Չի գտնվել",
-  "NotFound.Message": "Ներեցեք, այս հասցեում ոչինչ չկա։"
+  "NotFound.Message": "Ներեցեք, այս հասցեում ոչինչ չկա։",
+  "Blog.UseCases": "Use Cases",
+  "Blog.License": "License:"
 }
