@@ -1,3 +1,5 @@
+@inject IDataService DataService
+
 <section class="services" id="services">
     <div class="container">
         <div class="section-header text-center">
@@ -26,15 +28,10 @@
 </section>
 
 @code {
-    private record ServiceItem(string Title, string Description, string Icon);
+    private List<ServiceItem> ServicesList = new();
 
-    private List<ServiceItem> ServicesList = new()
+    protected override async Task OnInitializedAsync()
     {
-        new("Security Assessments", "Comprehensive penetration testing and vulnerability analysis for your infrastructure. Identifying weaknesses before adversaries do.", "🔍"),
-        new("Incident Response", "Rapid containment and forensic analysis when breaches occur. Discreet handling with full confidentiality.", "🛡️"),
-        new("Threat Intelligence", "Proactive monitoring of threat landscapes relevant to your organization. Early warning systems for emerging risks.", "📡"),
-        new("Secure Architecture", "Designing resilient systems from the ground up. Defense-in-depth strategies tailored to your threat model.", "🏗️"),
-        new("Red Team Operations", "Adversarial simulation to test your defenses under realistic conditions. Full-scope engagements with detailed reporting.", "⚔️"),
-        new("Data Protection", "Encryption implementation, secure communications, and data handling protocols. Keeping sensitive information confidential.", "🔐")
-    };
+        ServicesList = await DataService.GetServicesAsync();
+    }
 }

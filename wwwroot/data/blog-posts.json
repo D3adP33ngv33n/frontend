@@ -1,0 +1,50 @@
+[
+  {
+    "title": "[NoRWX] Proof-of-Concept",
+    "purpose": "Demonstrates running position-independent (PIC) x86-64 machine code to output \"Hello World\" in RW-only memory, without marking it executable.",
+    "features": [
+      "No executable memory required",
+      "Hardware breakpoints + VEH technique",
+      "Custom x86-64 instruction emulator",
+      "Windows API calls from emulated code"
+    ],
+    "technologies": "x86-64 assembly, C",
+    "status": "Experimental",
+    "audience": "Security researchers, low-level programmers",
+    "url": "/blog/norwx",
+    "icon": "🔒",
+    "gitHubUrl": "https://github.com/mrzaxaryan/NoRWX"
+  },
+  {
+    "title": "[cpp-pic] Position-Independent Runtime",
+    "purpose": "A C++23 framework enabling shellcode and position-independent code generation across multiple platforms and architectures.",
+    "features": [
+      "Multi-platform (Windows, Linux, UEFI) and multi-architecture (i386, x86_64, armv7a, aarch64)",
+      "Compile-time string embedding without .rdata dependencies",
+      "Full cryptographic stack (SHA-256/384/512, ChaCha20-Poly1305, ECC)",
+      "TLS 1.3 with certificate verification, DNS, HTTP, WebSocket",
+      "PIL embedded scripting language"
+    ],
+    "technologies": "C++23, Windows PEB/NTAPI, Linux syscalls, UEFI",
+    "status": "Active",
+    "audience": "Security researchers, systems programmers, embedded developers",
+    "url": "/blog/cpp-pic",
+    "icon": "⚙️",
+    "gitHubUrl": "https://github.com/mrzaxaryan/cpp-pic"
+  },
+  {
+    "title": "[EC] Armenian Encoding Converter",
+    "purpose": "Converts Armenian text between multiple encodings (ANSI, Unicode, ArmSCII, etc.).",
+    "features": [
+      "Supports multiple Armenian encodings",
+      "Batch conversion",
+      "Word/Excel converters (TXT/DOC/DOCX/XLS/XLSX)"
+    ],
+    "technologies": "C#, .NET 9",
+    "status": "Beta",
+    "audience": "Linguists, developers dealing with Armenian text, localization engineers",
+    "url": "/blog/ec",
+    "icon": "🔤",
+    "gitHubUrl": "https://github.com/mrzaxaryan/EC"
+  }
+]

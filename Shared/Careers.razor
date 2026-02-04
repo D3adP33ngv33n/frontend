@@ -1,4 +1,5 @@
 @inject NavigationManager Navigation
+@inject IDataService DataService
 
 <section class="careers" id="careers">
     <div class="container">
@@ -49,17 +50,15 @@
 </section>
 
 @code {
-    private record JobPosition(int Id, string Code, string Title, string Level, string Location, string Type);
+    private List<JobPosition> CurrentOpenings = new();
 
-    private List<JobPosition> CurrentOpenings = new()
+    protected override async Task OnInitializedAsync()
     {
-        new(1, "CS-01", "Security Analyst", "Senior", "Remote", "Full-time"),
-        new(2, "CS-02", "Penetration Tester", "Mid", "Any Office", "Full-time"),
-        new(3, "CS-03", "Cryptographic Researcher", "Senior", "Remote", "Contract")
-    };
+        CurrentOpenings = await DataService.GetJobPositionsAsync();
+    }
 
     private void ViewDetails(int jobId)
     {
-        Navigation.NavigateTo($"/careers/{jobId}");
+        Navigation.NavigateTo(Routes.GetCareerDetailsUrl(jobId));
     }
 }

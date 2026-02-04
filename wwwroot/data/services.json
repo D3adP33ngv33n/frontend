@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Security Assessments",
+    "description": "Comprehensive penetration testing and vulnerability analysis for your infrastructure. Identifying weaknesses before adversaries do.",
+    "icon": "🔍"
+  },
+  {
+    "title": "Incident Response",
+    "description": "Rapid containment and forensic analysis when breaches occur. Discreet handling with full confidentiality.",
+    "icon": "🛡️"
+  },
+  {
+    "title": "Threat Intelligence",
+    "description": "Proactive monitoring of threat landscapes relevant to your organization. Early warning systems for emerging risks.",
+    "icon": "📡"
+  },
+  {
+    "title": "Secure Architecture",
+    "description": "Designing resilient systems from the ground up. Defense-in-depth strategies tailored to your threat model.",
+    "icon": "🏗️"
+  },
+  {
+    "title": "Red Team Operations",
+    "description": "Adversarial simulation to test your defenses under realistic conditions. Full-scope engagements with detailed reporting.",
+    "icon": "⚔️"
+  },
+  {
+    "title": "Data Protection",
+    "description": "Encryption implementation, secure communications, and data handling protocols. Keeping sensitive information confidential.",
+    "icon": "🔐"
+  }
+]

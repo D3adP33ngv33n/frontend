@@ -1,6 +1,7 @@
 @page "/careers/{Id:int}"
+@inject IDataService DataService
 
-<PageTitle>@(Position?.Title ?? "Career") - NOSTDLIB</PageTitle>
+<PageTitle>@(Position?.Title ?? "Career") - @AppConstants.CompanyName</PageTitle>
 
 <Navbar />
 
@@ -9,7 +10,7 @@
         @if (Position is not null)
         {
             <div class="back-link">
-                <a href="/#careers">← Back to Careers</a>
+                <a href="@Routes.Careers">← Back to Careers</a>
             </div>
 
             <div class="details-card">
@@ -36,19 +37,22 @@
                     <p>@Position.Description</p>
                 </div>
 
-                <div class="position-requirements">
-                    <h2>Requirements</h2>
-                    <ul>
-                        @foreach (var req in Position.Requirements)
-                        {
-                            <li>@req</li>
-                        }
-                    </ul>
-                </div>
+                @if (Position.Requirements is not null)
+                {
+                    <div class="position-requirements">
+                        <h2>Requirements</h2>
+                        <ul>
+                            @foreach (var req in Position.Requirements)
+                            {
+                                <li>@req</li>
+                            }
+                        </ul>
+                    </div>
+                }
 
                 <div class="apply-section">
                     <p class="mono">Interested candidates should contact us through LinkedIn.</p>
-                    <a href="https://www.linkedin.com/company/nostdlib" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Apply on LinkedIn</a>
+                    <a href="@AppConstants.Social.LinkedInUrl" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Apply on LinkedIn</a>
                 </div>
             </div>
         }
@@ -57,7 +61,7 @@
             <div class="not-found">
                 <h1>Position Not Found</h1>
                 <p>The requested position could not be found.</p>
-                <a href="/#careers" class="btn btn-primary">Back to Careers</a>
+                <a href="@Routes.Careers" class="btn btn-primary">Back to Careers</a>
             </div>
         }
     </div>
@@ -71,25 +75,8 @@
 
     private JobPosition? Position { get; set; }
 
-    private record JobPosition(int Id, string Code, string Title, string Level, string Location, string Type, string Description, List<string> Requirements);
-
-    private List<JobPosition> AllPositions = new()
+    protected override async Task OnParametersSetAsync()
     {
-        new(1, "CS-01", "Security Analyst", "Senior", "Remote", "Full-time",
-            "Join our team as a Security Analyst responsible for monitoring, analyzing, and responding to security incidents. You will work with cutting-edge tools and methodologies to protect our clients' critical infrastructure.",
-            new() { "5+ years of experience in cybersecurity", "Strong knowledge of SIEM tools and incident response", "Experience with threat hunting and analysis", "Relevant certifications (CISSP, GCIA, or equivalent)", "Active security clearance preferred" }),
-
-        new(2, "CS-02", "Penetration Tester", "Mid", "Any Office", "Full-time",
-            "We are looking for a skilled Penetration Tester to identify vulnerabilities in our clients' systems and applications. You will conduct authorized security assessments and provide detailed remediation guidance.",
-            new() { "3+ years of penetration testing experience", "Proficiency in manual and automated testing techniques", "Experience with web, network, and mobile application testing", "OSCP, OSCE, or equivalent certification", "Strong report writing skills" }),
-
-        new(3, "CS-03", "Cryptographic Researcher", "Senior", "Remote", "Contract",
-            "Seeking a Cryptographic Researcher to advance our understanding of modern cryptographic systems. You will analyze existing implementations, identify weaknesses, and develop novel approaches to secure communications.",
-            new() { "PhD or equivalent experience in cryptography or mathematics", "Published research in peer-reviewed venues", "Experience with post-quantum cryptography", "Proficiency in formal verification methods", "Ability to work on classified projects" })
-    };
-
-    protected override void OnParametersSet()
-    {
-        Position = AllPositions.FirstOrDefault(p => p.Id == Id);
+        Position = await DataService.GetJobPositionByIdAsync(Id);
     }
 }

@@ -1,0 +1,21 @@
+<div class="section-header @(Centered ? "text-center" : "")">
+    @if (UseH1)
+    {
+        <h1>@Title</h1>
+    }
+    else
+    {
+        <h2>@Title</h2>
+    }
+    @if (!string.IsNullOrEmpty(Subtitle))
+    {
+        <p class="section-subtitle">@Subtitle</p>
+    }
+</div>
+
+@code {
+    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public string? Subtitle { get; set; }
+    [Parameter] public bool Centered { get; set; } = false;
+    [Parameter] public bool UseH1 { get; set; } = false;
+}
