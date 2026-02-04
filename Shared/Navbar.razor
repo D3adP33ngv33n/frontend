@@ -3,7 +3,7 @@
 <nav class="navbar @(IsScrolled ? "scrolled" : "")">
     <div class="container">
         <div class="navbar-brand">
-            <a href="/" class="logo mono">
+            <a href="@Routes.Home" class="logo mono">
                 <span class="logo-symbol">◈</span>
                 <span class="logo-text">NOSTDLIB</span>
             </a>
@@ -11,22 +11,22 @@
 
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a href="#about" class="nav-link">About</a>
+                <a href="@Routes.About" class="nav-link">About</a>
             </li>
             <li class="nav-item">
-                <a href="#services" class="nav-link">Services</a>
+                <a href="@Routes.Services" class="nav-link">Services</a>
             </li>
             <li class="nav-item">
-                <a href="#careers" class="nav-link">Careers</a>
+                <a href="@Routes.Blog" class="nav-link">Blog</a>
             </li>
             <li class="nav-item">
-                <a href="/blog" class="nav-link">Blog</a>
-            </li>
-            <li class="nav-item">
-                <a href="#contact" class="nav-link">Contact</a>
+                <a href="@Routes.Careers" class="nav-link">Careers</a>
             </li>
             <li class="nav-item">
                 <a href="@Routes.Privacy" class="nav-link">Privacy</a>
+            </li>
+            <li class="nav-item">
+                <a href="@Routes.Contact" class="nav-link">Contact</a>
             </li>
         </ul>
     </div>

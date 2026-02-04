@@ -1,117 +1,83 @@
-.legal-page {
-    padding-top: calc(var(--header-height) + 3rem);
-    padding-bottom: 4rem;
-    min-height: 100vh;
-}
-
-.back-link {
-    display: inline-block;
-    color: var(--text-muted);
-    text-decoration: none;
-    margin-bottom: 2rem;
-    font-size: 0.9rem;
-    transition: var(--transition);
-}
-
-.back-link:hover {
-    color: var(--primary-color);
-}
-
-.page-header {
-    text-align: center;
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
+.privacy {
+    background-color: var(--darker-bg);
+    border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
 }
 
-.page-icon {
-    font-size: 3rem;
-    display: block;
-    margin-bottom: 1rem;
-}
-
-.page-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-}
-
-.page-intro {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    max-width: 700px;
-    margin: 0 auto;
-    line-height: 1.7;
-}
-
-.last-updated {
-    font-size: 0.85rem;
+.section-subtitle {
     color: var(--text-muted);
-    margin-top: 1rem;
-}
-
-.page-section {
+    font-size: 1rem;
+    letter-spacing: 2px;
     margin-bottom: 3rem;
 }
 
-.page-section h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--text-primary);
-    border-left: 3px solid var(--primary-color);
-    padding-left: 1rem;
+.privacy-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
 }
 
-.page-section h3 {
+.privacy-text .mono {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
     font-size: 1.1rem;
-    color: var(--text-primary);
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
 }
 
-.page-section p {
+.privacy-text p {
     color: var(--text-secondary);
     line-height: 1.7;
-    margin-bottom: 1rem;
 }
 
-.privacy-list {
+.privacy-commitments {
+    margin-top: 2rem;
+}
+
+.privacy-commitments h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 400;
+}
+
+.commitments-list {
     list-style: none;
-    padding: 0;
 }
 
-.privacy-list li {
-    padding: 0.75rem 0;
+.commitment-item {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
     padding-left: 1.5rem;
     position: relative;
-    color: var(--text-secondary);
-    border-bottom: 1px solid var(--border-color);
+    font-size: 0.95rem;
 }
 
-.privacy-list li:last-child {
-    border-bottom: none;
-}
-
-.privacy-list li::before {
-    content: '•';
+.commitment-marker {
     position: absolute;
     left: 0;
     color: var(--primary-color);
+    font-size: 0.8rem;
 }
 
-.page-footer {
+.commitment-item:hover {
+    color: var(--text-primary);
+}
+
+.commitment-item:hover .commitment-marker {
+    animation: pulse 1s infinite;
+}
+
+.privacy-cta {
+    margin-top: 2rem;
     text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border-color);
 }
 
-.page-footer h2 {
-    border-left: none;
-    padding-left: 0;
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
 }
 
 @media (max-width: 768px) {
-    .page-header h1 {
-        font-size: 1.8rem;
+    .privacy-content {
+        gap: 2rem;
     }
 }
