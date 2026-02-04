@@ -15,14 +15,17 @@
                 <span class="post-tech mono">x86-64 assembly, C</span>
                 <span class="post-status experimental">Experimental</span>
             </div>
-            <p class="post-intro">A proof-of-concept demonstrating execution of position-independent x86-64 machine code from read/write-only memory without requiring executable permissions, bypassing traditional memory protection mechanisms.</p>
+            <p class="post-intro">A proof-of-concept demonstrating execution of position-independent x86-64 machine code
+                from read/write-only memory without requiring executable permissions, bypassing traditional memory
+                protection mechanisms.</p>
         </header>
 
         <section class="post-section">
             <h2>Overview</h2>
             <p>
                 NoRWX demonstrates a novel technique for running machine code without marking memory as executable.
-                Traditional code execution requires RWX (Read-Write-Execute) or at minimum RX permissions on memory pages.
+                Traditional code execution requires RWX (Read-Write-Execute) or at minimum RX permissions on memory
+                pages.
                 This project proves that with hardware breakpoints and a custom instruction emulator, code can execute
                 from RW-only memory regions.
             </p>
@@ -72,7 +75,8 @@
                 </div>
                 <div class="structure-item">
                     <h4>4. Instruction Emulation</h4>
-                    <p>Handler reads, decodes, and emulates each instruction, then reinstalls breakpoint at next address</p>
+                    <p>Handler reads, decodes, and emulates each instruction, then reinstalls breakpoint at next address
+                    </p>
                 </div>
             </div>
         </section>
@@ -80,9 +84,12 @@
         <section class="post-section">
             <h2>Technical Components</h2>
             <ul class="requirements-list">
-                <li><strong>Instruction Emulator</strong> - Supports arithmetic, logic, control flow, stack, and miscellaneous x86-64 operations</li>
-                <li><strong>Vectored Exception Handler</strong> - Manages hardware breakpoints and dispatches to emulator</li>
-                <li><strong>Register/Flag Management</strong> - Updates thread context registers and CPU flags after each instruction</li>
+                <li><strong>Instruction Emulator</strong> - Supports arithmetic, logic, control flow, stack, and
+                    miscellaneous x86-64 operations</li>
+                <li><strong>Vectored Exception Handler</strong> - Manages hardware breakpoints and dispatches to
+                    emulator</li>
+                <li><strong>Register/Flag Management</strong> - Updates thread context registers and CPU flags after
+                    each instruction</li>
                 <li><strong>Program Loader</strong> - Loads binary code blobs and orchestrates the execution flow</li>
             </ul>
         </section>
@@ -159,12 +166,11 @@
 
         <section class="post-section post-footer">
             <h2>Source Code</h2>
-            <p>The project is open source and available for security researchers and low-level programmers interested in understanding x86-64 execution models.</p>
+            <p>The project is open source and available for security researchers and low-level programmers interested in
+                understanding x86-64 execution models.</p>
             <div class="footer-links">
-                <a href="https://mrzaxaryan.blog/content/NoRWX/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                    Read Full Article
-                </a>
-                <a href="https://github.com/mrzaxaryan/NoRWX" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                <a href="https://github.com/mrzaxaryan/NoRWX" target="_blank" rel="noopener noreferrer"
+                    class="btn btn-secondary">
                     View on GitHub
                 </a>
             </div>
