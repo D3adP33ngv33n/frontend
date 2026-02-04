@@ -21,6 +21,7 @@
   --card-width: 400px;
   --card-gap: 1rem;
   display: flex;
+  align-items: stretch;
   gap: var(--card-gap);
   transition: transform 0.4s ease-in-out;
 }
@@ -29,8 +30,15 @@
   transition: none;
 }
 
-.slider-clone {
-  display: contents;
+.slider-item {
+  flex: 0 0 var(--card-width);
+  display: flex;
+}
+
+.slider-item > :first-child {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .slider-btn {

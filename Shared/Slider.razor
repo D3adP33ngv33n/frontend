@@ -12,19 +12,21 @@
                 @* Clone all items at the beginning *@
                 @foreach (var item in Items)
                 {
-                    <div class="slider-clone">
+                    <div class="slider-item">
                         @ItemTemplate(item)
                     </div>
                 }
                 @* Actual items *@
                 @foreach (var item in Items)
                 {
-                    @ItemTemplate(item)
+                    <div class="slider-item">
+                        @ItemTemplate(item)
+                    </div>
                 }
                 @* Clone all items at the end *@
                 @foreach (var item in Items)
                 {
-                    <div class="slider-clone">
+                    <div class="slider-item">
                         @ItemTemplate(item)
                     </div>
                 }
