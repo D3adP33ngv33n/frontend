@@ -9,4 +9,5 @@ public interface IDataService
     Task<JobPosition?> GetJobPositionByIdAsync(int id);
     Task<List<BlogPost>> GetBlogPostsAsync();
     Task<List<SocialLink>> GetSocialLinksAsync();
+    void ClearCache();
 }

@@ -1,0 +1,58 @@
+@inject ILocalizationService Localization
+@implements IDisposable
+
+<div class="language-selector">
+    <button class="language-btn" @onclick="ToggleDropdown">
+        <span class="current-lang">@GetCurrentLanguageCode()</span>
+        <span class="dropdown-arrow">@(IsOpen ? "\u25B2" : "\u25BC")</span>
+    </button>
+
+    @if (IsOpen)
+    {
+        <div class="language-dropdown">
+            @foreach (var lang in Localization.GetSupportedLanguages())
+            {
+                <button class="language-option @(lang.Code == Localization.CurrentLanguage ? "active" : "")"
+                        @onclick="() => SelectLanguage(lang.Code)">
+                    <span class="lang-code">@lang.Code.ToUpperInvariant()</span>
+                    <span class="lang-name">@lang.NativeName</span>
+                </button>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private bool IsOpen { get; set; } = false;
+
+    protected override void OnInitialized()
+    {
+        Localization.OnLanguageChanged += OnLanguageChanged;
+    }
+
+    private void OnLanguageChanged()
+    {
+        StateHasChanged();
+    }
+
+    private string GetCurrentLanguageCode()
+    {
+        return Localization.CurrentLanguage.ToUpperInvariant();
+    }
+
+    private void ToggleDropdown()
+    {
+        IsOpen = !IsOpen;
+    }
+
+    private void SelectLanguage(string languageCode)
+    {
+        Localization.SetLanguage(languageCode);
+        IsOpen = false;
+    }
+
+    public void Dispose()
+    {
+        Localization.OnLanguageChanged -= OnLanguageChanged;
+    }
+}

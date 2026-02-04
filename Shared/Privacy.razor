@@ -1,7 +1,10 @@
+@inject ILocalizationService L
+@implements IDisposable
+
 <section class="privacy" id="privacy">
     <div class="container">
         <div class="section-header">
-            <h2>Privacy Policy</h2>
+            <h2>@L["Privacy.Title"]</h2>
             <p class="section-subtitle">Discretion as a core operating principle</p>
         </div>
 
@@ -9,7 +12,7 @@
             <div class="privacy-text">
                 <p class="mono">
                     We maintain absolute confidentiality across all engagements and client relationships.
-                    Discretion is not a policy—it's embedded in our operational DNA.
+                    Discretion is not a policy--it's embedded in our operational DNA.
                 </p>
                 <p>
                     Our clients entrust us with sensitive systems and critical infrastructure.
@@ -23,7 +26,7 @@
                     @foreach (var commitment in Commitments)
                     {
                         <li class="commitment-item mono">
-                            <span class="commitment-marker">◉</span>
+                            <span class="commitment-marker"></span>
                             @commitment
                         </li>
                     }
@@ -34,11 +37,27 @@
 </section>
 
 @code {
-    private List<string> Commitments = new()
-{
-"Zero client disclosure without explicit consent",
-"Complete project confidentiality maintained indefinitely",
-"No third-party data sharing under any circumstances",
-"Permanent non-disclosure as standard practice"
-};
+    private List<string> Commitments => new()
+    {
+        L["Privacy.Commitment1"],
+        L["Privacy.Commitment2"],
+        L["Privacy.Commitment3"],
+        L["Privacy.Commitment4"],
+        L["Privacy.Commitment5"]
+    };
+
+    protected override void OnInitialized()
+    {
+        L.OnLanguageChanged += OnLanguageChanged;
+    }
+
+    private void OnLanguageChanged()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        L.OnLanguageChanged -= OnLanguageChanged;
+    }
 }

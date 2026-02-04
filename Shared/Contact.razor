@@ -1,12 +1,14 @@
 @inject IDataService DataService
+@inject ILocalizationService L
+@implements IDisposable
 
 <section class="contact" id="contact">
     <div class="container">
         <div class="contact-split">
             <div class="contact-info">
-                <h2>Initiate Contact</h2>
-                <p class="contact-description">Ready to discuss your security posture? Reach out through a secure channel below.</p>
-                <p class="contact-cta mono">All initial communications are treated as confidential</p>
+                <h2>@L["Contact.Title"]</h2>
+                <p class="contact-description">@L["Contact.Subtitle"]</p>
+                <p class="contact-cta mono">@L["Contact.Note"]</p>
             </div>
 
             <div class="contact-links">
@@ -42,6 +44,18 @@
 
     protected override async Task OnInitializedAsync()
     {
+        L.OnLanguageChanged += OnLanguageChanged;
         SocialLinks = await DataService.GetSocialLinksAsync();
+    }
+
+    private async void OnLanguageChanged()
+    {
+        SocialLinks = await DataService.GetSocialLinksAsync();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        L.OnLanguageChanged -= OnLanguageChanged;
     }
 }

@@ -1,3 +1,4 @@
+@inject ILocalizationService L
 @implements IDisposable
 
 <section class="hero">
@@ -5,16 +6,15 @@
         <div class="hero-content">
             <div class="hero-text">
                 <h1>
-                    <span class="glow">NOSTDLIB</span><br>
+                    <span class="glow">@AppConstants.CompanyName</span><br>
                     <span class="mono typing-text">@TypedText<span class="cursor">|</span></span>
                 </h1>
                 <p class="hero-subtitle">
-                    Elite cybersecurity consulting for organizations that demand discretion.
-                    Proven expertise. Measurable outcomes. Absolute confidentiality.
+                    @L["Hero.Subtitle"]
                 </p>
                 <div class="hero-actions">
-                    <a href="#contact" class="btn btn-primary">Start a Conversation</a>
-                    <a href="#about" class="btn btn-secondary">Explore Our Work</a>
+                    <a href="#contact" class="btn btn-primary">@L["Hero.CTA.Primary"]</a>
+                    <a href="#about" class="btn btn-secondary">@L["Hero.CTA.Secondary"]</a>
                 </div>
             </div>
         </div>
@@ -71,7 +71,7 @@
 </section>
 
 @code {
-    private string TypingText = "SECURITY WITHOUT COMPROMISE";
+    private string TypingText => L["Hero.Title"];
     private string TypedText = "";
     private int TypingIndex = 0;
     private int TypingSpeed = 100;
@@ -80,7 +80,17 @@
 
     protected override void OnInitialized()
     {
+        L.OnLanguageChanged += OnLanguageChanged;
         StartTyping();
+    }
+
+    private void OnLanguageChanged()
+    {
+        TypedText = "";
+        TypingIndex = 0;
+        _timer?.Dispose();
+        StartTyping();
+        InvokeAsync(StateHasChanged);
     }
 
     private void StartTyping()
@@ -118,5 +128,6 @@
     {
         _disposed = true;
         _timer?.Dispose();
+        L.OnLanguageChanged -= OnLanguageChanged;
     }
 }

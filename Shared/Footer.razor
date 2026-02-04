@@ -1,17 +1,20 @@
+@inject ILocalizationService L
+@implements IDisposable
+
 <footer class="footer">
     <div class="container">
         <div class="footer-content">
             <div class="footer-brand">
-                <span class="logo-symbol mono">◈</span>
-                <span class="logo-text mono">NOSTDLIB</span>
+                <span class="logo-symbol mono">@AppConstants.LogoSymbol</span>
+                <span class="logo-text mono">@AppConstants.CompanyName</span>
             </div>
 
             <div class="footer-legal mono">
-                <span>© @CurrentYear NOSTDLIB. All rights reserved.</span>
+                <span>&copy; @CurrentYear @AppConstants.CompanyName. @L["Footer.Rights"]</span>
             </div>
 
             <div class="footer-note">
-                <span class="mono">Security Beyond Perimeters</span>
+                <span class="mono">@L["Footer.Tagline"]</span>
             </div>
         </div>
     </div>
@@ -19,4 +22,19 @@
 
 @code {
     private int CurrentYear => DateTime.Now.Year;
+
+    protected override void OnInitialized()
+    {
+        L.OnLanguageChanged += OnLanguageChanged;
+    }
+
+    private void OnLanguageChanged()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        L.OnLanguageChanged -= OnLanguageChanged;
+    }
 }

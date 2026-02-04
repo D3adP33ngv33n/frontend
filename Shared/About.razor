@@ -1,7 +1,10 @@
+@inject ILocalizationService L
+@implements IDisposable
+
 <section class="about" id="about">
     <div class="container">
         <div class="section-header">
-            <h2>About Us</h2>
+            <h2>@L["About.Title"]</h2>
             <p class="section-subtitle">Precision security for high-stakes environments</p>
         </div>
 
@@ -39,19 +42,26 @@
 </section>
 
 @code {
-    private List<string> Principles = new()
-{
-"Layered defense as architectural foundation",
-"Absolute client confidentiality",
-"Strict operational compartmentalization",
-"Trust earned through demonstrated outcomes"
-};
+    private List<string> Principles => new()
+    {
+        L["About.Principle1"],
+        L["About.Principle2"],
+        L["About.Principle3"],
+        L["About.Principle4"],
+        L["About.Principle5"]
+    };
 
     private List<List<string>> DataStream = new();
 
     protected override void OnInitialized()
     {
+        L.OnLanguageChanged += OnLanguageChanged;
         GenerateDataStream();
+    }
+
+    private void OnLanguageChanged()
+    {
+        InvokeAsync(StateHasChanged);
     }
 
     private void GenerateDataStream()
@@ -67,5 +77,10 @@
             }
             DataStream.Add(line);
         }
+    }
+
+    public void Dispose()
+    {
+        L.OnLanguageChanged -= OnLanguageChanged;
     }
 }

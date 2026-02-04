@@ -1,0 +1,14 @@
+[
+  {
+    "name": "LinkedIn",
+    "description": "Профессиональная связь и возможности сотрудничества",
+    "url": "https://www.linkedin.com/company/nostdlib",
+    "iconType": "linkedin"
+  },
+  {
+    "name": "GitHub",
+    "description": "Наши проекты с открытым исходным кодом и технические исследования",
+    "url": "https://github.com/nostdlib",
+    "iconType": "github"
+  }
+]

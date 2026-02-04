@@ -1,10 +1,12 @@
 @inject IDataService DataService
+@inject ILocalizationService L
+@implements IDisposable
 
 <section class="careers" id="careers">
     <div class="container">
         <div class="section-header">
-            <h2>Careers</h2>
-            <p class="section-subtitle">Build your career at the edge of security research</p>
+            <h2>@L["Careers.Title"]</h2>
+            <p class="section-subtitle">@L["Careers.Subtitle"]</p>
         </div>
 
         <Slider Items="CurrentOpenings" TItem="JobPosition">
@@ -36,7 +38,7 @@
                         @if (opening.Requirements is not null)
                         {
                             <div class="opening-requirements">
-                                <h4>Requirements</h4>
+                                <h4>@L["Careers.Requirements"]</h4>
                                 <ul>
                                     @foreach (var req in opening.Requirements)
                                     {
@@ -49,7 +51,7 @@
 
                     <div class="card-footer">
                         <a href="@AppConstants.Social.LinkedInUrl" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                            Apply via LinkedIn
+                            @L["Careers.Apply"]
                         </a>
                     </div>
                 </div>
@@ -58,7 +60,7 @@
 
         <div class="careers-note">
             <p class="mono">
-                Our selection process is rigorous by design. Qualified candidates receive direct outreach for initial conversations.
+                @L["Careers.Note"]
             </p>
         </div>
     </div>
@@ -69,6 +71,18 @@
 
     protected override async Task OnInitializedAsync()
     {
+        L.OnLanguageChanged += OnLanguageChanged;
         CurrentOpenings = await DataService.GetJobPositionsAsync();
+    }
+
+    private async void OnLanguageChanged()
+    {
+        CurrentOpenings = await DataService.GetJobPositionsAsync();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        L.OnLanguageChanged -= OnLanguageChanged;
     }
 }

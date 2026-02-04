@@ -1,32 +1,37 @@
 @inject IJSRuntime JS
+@inject ILocalizationService L
+@implements IDisposable
 
 <nav class="navbar @(IsScrolled ? "scrolled" : "")">
     <div class="container">
         <div class="navbar-brand">
             <a href="@Routes.Home" class="logo mono">
-                <span class="logo-symbol">◈</span>
-                <span class="logo-text">NOSTDLIB</span>
+                <span class="logo-symbol">@AppConstants.LogoSymbol</span>
+                <span class="logo-text">@AppConstants.CompanyName</span>
             </a>
         </div>
 
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a href="@Routes.About" class="nav-link">About</a>
+                <a href="@Routes.About" class="nav-link">@L["Nav.About"]</a>
             </li>
             <li class="nav-item">
-                <a href="@Routes.Services" class="nav-link">Services</a>
+                <a href="@Routes.Services" class="nav-link">@L["Nav.Services"]</a>
             </li>
             <li class="nav-item">
-                <a href="@Routes.Blog" class="nav-link">Open Source</a>
+                <a href="@Routes.Blog" class="nav-link">@L["Nav.OpenSource"]</a>
             </li>
             <li class="nav-item">
-                <a href="@Routes.Careers" class="nav-link">Careers</a>
+                <a href="@Routes.Careers" class="nav-link">@L["Nav.Careers"]</a>
             </li>
             <li class="nav-item">
-                <a href="@Routes.Privacy" class="nav-link">Privacy</a>
+                <a href="@Routes.Privacy" class="nav-link">@L["Nav.Privacy"]</a>
             </li>
             <li class="nav-item">
-                <a href="@Routes.Contact" class="nav-link">Contact</a>
+                <a href="@Routes.Contact" class="nav-link">@L["Nav.Contact"]</a>
+            </li>
+            <li class="nav-item">
+                <LanguageSelector />
             </li>
         </ul>
     </div>
@@ -34,6 +39,16 @@
 
 @code {
     private bool IsScrolled { get; set; } = false;
+
+    protected override void OnInitialized()
+    {
+        L.OnLanguageChanged += OnLanguageChanged;
+    }
+
+    private void OnLanguageChanged()
+    {
+        StateHasChanged();
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -52,5 +67,10 @@
             IsScrolled = shouldBeScrolled;
             StateHasChanged();
         }
+    }
+
+    public void Dispose()
+    {
+        L.OnLanguageChanged -= OnLanguageChanged;
     }
 }
