@@ -80,8 +80,8 @@ public class JsonDataService : IDataService, IDisposable
         return positions.FirstOrDefault(p => p.Id == id);
     }
 
-    public Task<List<BlogPost>> GetBlogPostsAsync()
-        => LoadDataAsync<BlogPost>("blog-posts.json", nameof(BlogPost));
+    public Task<List<OpenSourceProject>> GetOpenSourceProjectsAsync()
+        => LoadDataAsync<OpenSourceProject>("opensource-projects.json", nameof(OpenSourceProject));
 
     public Task<List<SocialLink>> GetSocialLinksAsync()
         => LoadDataAsync<SocialLink>("social-links.json", nameof(SocialLink));

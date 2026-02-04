@@ -1,6 +1,6 @@
 namespace Nostdlib.Models;
 
-public record BlogPost(
+public record OpenSourceProject(
     string Title,
     string Purpose,
     string Description,

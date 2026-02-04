@@ -2,32 +2,32 @@
 @inject ILocalizationService L
 @implements IDisposable
 
-<section class="blog" id="open-source">
+<section class="opensource" id="open-source">
     <div class="container">
         <div class="section-header text-center">
-            <h2>@L["Blog.Title"]</h2>
-            <p class="section-subtitle">@L["Blog.Subtitle"]</p>
+            <h2>@L["OpenSource.Title"]</h2>
+            <p class="section-subtitle">@L["OpenSource.Subtitle"]</p>
         </div>
 
-        <Slider Items="BlogPosts" TItem="BlogPost">
+        <Slider Items="OpenSourceProjects" TItem="OpenSourceProject">
             <ItemTemplate Context="post">
-                <article class="blog-card">
-                    <div class="blog-header">
-                        <div class="blog-icon">@post.Icon</div>
-                        <div class="blog-title-section">
+                <article class="opensource-card">
+                    <div class="opensource-header">
+                        <div class="opensource-icon">@post.Icon</div>
+                        <div class="opensource-title-section">
                             <h3>@post.Title</h3>
-                            <div class="blog-meta-inline">
-                                <span class="blog-status @post.StatusClass">@post.Status</span>
-                                <span class="blog-license">@L["Blog.License"] @post.License</span>
+                            <div class="opensource-meta-inline">
+                                <span class="opensource-status @post.StatusClass">@post.Status</span>
+                                <span class="opensource-license">@L["OpenSource.License"] @post.License</span>
                             </div>
                         </div>
                     </div>
 
-                    <p class="blog-purpose">@post.Purpose</p>
-                    <p class="blog-description">@post.Description</p>
+                    <p class="opensource-purpose">@post.Purpose</p>
+                    <p class="opensource-description">@post.Description</p>
 
-                    <div class="blog-features">
-                        <h4>@L["Blog.KeyFeatures"]</h4>
+                    <div class="opensource-features">
+                        <h4>@L["OpenSource.KeyFeatures"]</h4>
                         <ul>
                             @foreach (var feature in post.Features)
                             {
@@ -36,8 +36,8 @@
                         </ul>
                     </div>
 
-                    <div class="blog-use-cases">
-                        <h4>@L["Blog.UseCases"]</h4>
+                    <div class="opensource-use-cases">
+                        <h4>@L["OpenSource.UseCases"]</h4>
                         <ul>
                             @foreach (var useCase in post.UseCases)
                             {
@@ -46,17 +46,17 @@
                         </ul>
                     </div>
 
-                    <div class="blog-meta">
-                        <span class="blog-tech mono">@post.Technologies</span>
+                    <div class="opensource-meta">
+                        <span class="opensource-tech mono">@post.Technologies</span>
                     </div>
 
-                    <p class="blog-audience"><strong>@L["Blog.Audience"]</strong> @post.Audience</p>
+                    <p class="opensource-audience"><strong>@L["OpenSource.Audience"]</strong> @post.Audience</p>
 
-                    <div class="blog-links">
+                    <div class="opensource-links">
                         @if (!string.IsNullOrEmpty(post.GitHubUrl))
                         {
                             <a href="@post.GitHubUrl" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                                @L["Blog.GitHub"]
+                                @L["OpenSource.GitHub"]
                             </a>
                         }
                     </div>
@@ -67,17 +67,17 @@
 </section>
 
 @code {
-    private List<BlogPost> BlogPosts = new();
+    private List<OpenSourceProject> OpenSourceProjects = new();
 
     protected override async Task OnInitializedAsync()
     {
         L.OnLanguageChanged += OnLanguageChanged;
-        BlogPosts = await DataService.GetBlogPostsAsync();
+        OpenSourceProjects = await DataService.GetOpenSourceProjectsAsync();
     }
 
     private async void OnLanguageChanged()
     {
-        BlogPosts = await DataService.GetBlogPostsAsync();
+        OpenSourceProjects = await DataService.GetOpenSourceProjectsAsync();
         await InvokeAsync(StateHasChanged);
     }
 

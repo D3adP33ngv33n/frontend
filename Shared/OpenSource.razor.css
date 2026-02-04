@@ -1,11 +1,11 @@
-.blog .section-subtitle {
+.opensource .section-subtitle {
   color: var(--text-muted);
   font-size: 1rem;
   letter-spacing: 2px;
   margin-bottom: 3rem;
 }
 
-.blog-card {
+.opensource-card {
   height: 100%;
   min-height: 680px;
   background-color: var(--card-bg);
@@ -17,70 +17,70 @@
   flex-direction: column;
 }
 
-.blog-card:hover {
+.opensource-card:hover {
   border-color: var(--primary-color);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.blog-card:hover .blog-icon {
+.opensource-card:hover .opensource-icon {
   transform: scale(1.1);
 }
 
-.blog-header {
+.opensource-header {
   display: flex;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
-.blog-icon {
+.opensource-icon {
   font-size: 2.5rem;
   transition: var(--transition);
   flex-shrink: 0;
 }
 
-.blog-title-section {
+.opensource-title-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.blog-card h3 {
+.opensource-card h3 {
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
   color: var(--primary-color);
 }
 
-.blog-meta-inline {
+.opensource-meta-inline {
   display: flex;
   gap: 0.75rem;
   align-items: center;
   flex-wrap: wrap;
 }
 
-.blog-license {
+.opensource-license {
   font-size: 0.75rem;
   color: var(--text-muted);
 }
 
-.blog-purpose {
+.opensource-purpose {
   color: var(--text-secondary);
   font-size: 0.95rem;
   margin-bottom: 1rem;
   line-height: 1.6;
 }
 
-.blog-description {
+.opensource-description {
   color: var(--text-muted);
   font-size: 0.9rem;
   margin-bottom: 1.5rem;
   line-height: 1.7;
 }
 
-.blog-features {
+.opensource-features {
   margin-bottom: 1.5rem;
 }
 
-.blog-features h4 {
+.opensource-features h4 {
   font-size: 0.85rem;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -88,13 +88,13 @@
   margin-bottom: 0.75rem;
 }
 
-.blog-features ul {
+.opensource-features ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.blog-features li {
+.opensource-features li {
   color: var(--text-secondary);
   font-size: 0.9rem;
   padding: 0.4rem 0;
@@ -102,7 +102,7 @@
   position: relative;
 }
 
-.blog-features li::before {
+.opensource-features li::before {
   content: '>';
   position: absolute;
   left: 0;
@@ -110,11 +110,11 @@
   font-weight: bold;
 }
 
-.blog-use-cases {
+.opensource-use-cases {
   margin-bottom: 1.5rem;
 }
 
-.blog-use-cases h4 {
+.opensource-use-cases h4 {
   font-size: 0.85rem;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -122,13 +122,13 @@
   margin-bottom: 0.75rem;
 }
 
-.blog-use-cases ul {
+.opensource-use-cases ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.blog-use-cases li {
+.opensource-use-cases li {
   color: var(--text-secondary);
   font-size: 0.9rem;
   padding: 0.4rem 0;
@@ -136,14 +136,14 @@
   position: relative;
 }
 
-.blog-use-cases li::before {
+.opensource-use-cases li::before {
   content: '•';
   position: absolute;
   left: 0;
   color: var(--primary-color);
 }
 
-.blog-meta {
+.opensource-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -154,12 +154,12 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-.blog-tech {
+.opensource-tech {
   font-size: 0.8rem;
   color: var(--text-muted);
 }
 
-.blog-status {
+.opensource-status {
   font-size: 0.75rem;
   padding: 0.25rem 0.75rem;
   border-radius: 2px;
@@ -168,72 +168,72 @@
   font-weight: 500;
 }
 
-.blog-status.experimental {
+.opensource-status.experimental {
   background-color: rgba(102, 0, 255, 0.2);
   color: #a366ff;
   border: 1px solid rgba(102, 0, 255, 0.3);
 }
 
-.blog-status.beta {
+.opensource-status.beta {
   background-color: rgba(0, 255, 204, 0.1);
   color: var(--primary-color);
   border: 1px solid rgba(0, 255, 204, 0.3);
 }
 
-.blog-status.active {
+.opensource-status.active {
   background-color: rgba(50, 205, 50, 0.1);
   color: #32cd32;
   border: 1px solid rgba(50, 205, 50, 0.3);
 }
 
-.blog-audience {
+.opensource-audience {
   font-size: 0.85rem;
   color: var(--text-muted);
   margin-bottom: 1.5rem;
 }
 
-.blog-audience strong {
+.opensource-audience strong {
   color: var(--text-secondary);
 }
 
-.blog-links {
+.opensource-links {
   display: flex;
   gap: 0.75rem;
 }
 
-.blog-card .btn {
+.opensource-card .btn {
   align-self: flex-start;
 }
 
-.blog-card .btn-secondary {
+.opensource-card .btn-secondary {
   background-color: transparent;
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
 }
 
-.blog-card .btn-secondary:hover {
+.opensource-card .btn-secondary:hover {
   border-color: var(--primary-color);
   color: var(--primary-color);
 }
 
 @media (max-width: 768px) {
-  .blog-card {
+  .opensource-card {
     min-height: 620px;
     padding: 1.5rem;
   }
 
-  .blog-header {
+  .opensource-header {
     flex-direction: column;
     gap: 0.5rem;
   }
 
-  .blog-meta {
+  .opensource-meta {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
   }
 
-  .blog-meta-inline {
+  .opensource-meta-inline {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
@@ -241,7 +241,7 @@
 }
 
 @media (max-width: 480px) {
-  .blog-card {
+  .opensource-card {
     min-height: 580px;
   }
 }

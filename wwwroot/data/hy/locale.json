@@ -29,11 +29,11 @@
   "Careers.Requirements": "Պահանջներ",
   "Careers.Apply": "Դիմել LinkedIn-ի միջոցով",
   "Careers.Note": "Մեր ընտրության գործընթացը խիստ է նախագծմամբ։ Որակավորված թեկնածուները ստանում են ուղիղ հրավերներ նախնական զրույցների համար։",
-  "Blog.Title": "ԲԱՑ ԿՈԴ",
-  "Blog.Subtitle": "Բաց կոդի գործիքներ և տեխնիկական հետազոտություններ մեր թիմից",
-  "Blog.KeyFeatures": "Հիմնական հատկություններ",
-  "Blog.Audience": "Թիրախավինրը՝",
-  "Blog.GitHub": "GitHub",
+  "OpenSource.Title": "ԲԱՑ ԿՈԴ",
+  "OpenSource.Subtitle": "Բաց կոդի գործիքներ և տեխնիկական հետազոտություններ մեր թիմից",
+  "OpenSource.KeyFeatures": "Հիմնական հատկություններ",
+  "OpenSource.Audience": "Թիրախավինրը՝",
+  "OpenSource.GitHub": "GitHub",
   "Privacy.Title": "Գաղտնիության քաղաքականություն",
   "Privacy.Subtitle": "Գաղտնապահությունը որպես հիմնարար գործառնական սկզբունք",
   "Privacy.Description1": "Մենք պահպանում ենք բացարձակ գաղտնիություն բոլոր պայմանավորությունների և հաճախորդի հարաբերությունների մեջ։ Գաղտնապահությունը քաղաքականություն չէ - այն ներդրված է մեր գործառնական DNA-ի մեջ։",
@@ -56,6 +56,6 @@
   "Error.ReturnHome": "Վերադառնալ գլխավոր էջ",
   "NotFound.Title": "Չի գտնվել",
   "NotFound.Message": "Ներեցեք, այս հասցեում ոչինչ չկա։",
-  "Blog.UseCases": "Use Cases",
-  "Blog.License": "License:"
+  "OpenSource.UseCases": "Use Cases",
+  "OpenSource.License": "License:"
 }

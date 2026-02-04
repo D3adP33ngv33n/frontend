@@ -3,7 +3,7 @@ namespace Nostdlib.Constants;
 public static class Routes
 {
     public const string Home = "/";
-    public const string Blog = "#open-source";
+    public const string OpenSource = "#open-source";
     public const string Careers = "#careers";
     public const string Privacy = "#privacy";
     public const string Services = "#services";
