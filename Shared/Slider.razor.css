@@ -146,10 +146,6 @@
   .slider-arrow {
     font-size: 1.4rem;
   }
-
-  .slider-viewport {
-    --visible-cards: 2;
-  }
 }
 
 @media (max-width: 480px) {
