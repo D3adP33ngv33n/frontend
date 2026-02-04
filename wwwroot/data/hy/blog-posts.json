@@ -11,7 +11,7 @@
     "technologies": "x86-64 ասեմբլեր, C",
     "status": "Փորձարարական",
     "audience": "Անվտանգության հետազոտողներ, ցածր մակարդակի ծրագրավորողներ",
-    "url": "/blog/norwx",
+    "url": "/open-source/norwx",
     "icon": "🔒",
     "gitHubUrl": "https://github.com/mrzaxaryan/NoRWX"
   },
@@ -28,7 +28,7 @@
     "technologies": "C++23, Windows PEB/NTAPI, Linux syscalls, UEFI",
     "status": "Ակտիվ",
     "audience": "Անվտանգության հետազոտողներ, համակարգային ծրագրավորողներ, ներկառուցված համակարգերի մշակողներ",
-    "url": "/blog/cpp-pic",
+    "url": "/open-source/cpp-pic",
     "icon": "⚙️",
     "gitHubUrl": "https://github.com/mrzaxaryan/cpp-pic"
   },
@@ -43,7 +43,7 @@
     "technologies": "C#, .NET 9",
     "status": "Բետա",
     "audience": "Լեզվաբաններ, ծրագրավորողներ, տեղայնացման ինժեներներ",
-    "url": "/blog/ec",
+    "url": "/open-source/ec",
     "icon": "🔤",
     "gitHubUrl": "https://github.com/mrzaxaryan/EC"
   }

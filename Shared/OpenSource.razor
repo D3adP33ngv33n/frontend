@@ -1,22 +1,16 @@
-@page "/blog"
 @inject IDataService DataService
 @inject ILocalizationService L
 @implements IDisposable
 
-<PageTitle>@L["Blog.Title"] - @AppConstants.CompanyName</PageTitle>
-
-<Navbar />
-
-<section class="blog">
+<section class="blog" id="open-source">
     <div class="container">
         <div class="section-header text-center">
-            <h1>@L["Blog.Title"]</h1>
+            <h2>@L["Blog.Title"]</h2>
             <p class="section-subtitle">@L["Blog.Subtitle"]</p>
         </div>
 
-        <div class="blog-grid">
-            @foreach (var post in BlogPosts)
-            {
+        <Slider Items="BlogPosts" TItem="BlogPost">
+            <ItemTemplate Context="post">
                 <article class="blog-card">
                     <div class="blog-icon">@post.Icon</div>
                     <h3>@post.Title</h3>
@@ -60,12 +54,10 @@
                         }
                     </div>
                 </article>
-            }
-        </div>
+            </ItemTemplate>
+        </Slider>
     </div>
 </section>
-
-<Footer />
 
 @code {
     private List<BlogPost> BlogPosts = new();
