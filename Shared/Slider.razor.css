@@ -26,8 +26,9 @@
 }
 
 .slider-track {
-  --card-width: 400px;
+  --visible-cards: 3;
   --card-gap: 1rem;
+  --card-width: calc((100% - (var(--visible-cards) - 1) * var(--card-gap)) / var(--visible-cards));
   display: flex;
   align-items: stretch;
   gap: var(--card-gap);
@@ -121,6 +122,10 @@
   .slider-btn-next {
     right: -60px;
   }
+
+  .slider-track {
+    --visible-cards: 2;
+  }
 }
 
 @media (max-width: 768px) {
@@ -142,7 +147,7 @@
   }
 
   .slider-track {
-    --card-width: 320px;
+    --visible-cards: 2;
   }
 }
 
@@ -165,7 +170,7 @@
   }
 
   .slider-track {
-    --card-width: 280px;
+    --visible-cards: 1;
   }
 
   .slider-dot {
