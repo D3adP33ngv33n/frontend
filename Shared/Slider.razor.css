@@ -15,6 +15,14 @@
   max-width: 100%;
   overflow: hidden;
   border-radius: 12px;
+  touch-action: pan-y pinch-zoom;
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.slider-viewport:active {
+  cursor: grabbing;
 }
 
 .slider-track {

@@ -1,6 +1,8 @@
 @typeparam TItem
+@inject IJSRuntime JS
+@implements IAsyncDisposable
 
-<div class="slider-wrapper">
+<div class="slider-wrapper" id="@sliderId">
     <button class="slider-btn slider-btn-prev" @onclick="PrevSlide">
         <span class="slider-arrow">&#8249;</span>
     </button>
@@ -57,10 +59,33 @@
     private int currentIndex = 0;
     private int trackIndex => currentIndex + Items.Count; // +Items.Count to account for the clones at the beginning
     private bool disableTransition = false;
+    private string sliderId = $"slider-{Guid.NewGuid():N}";
+    private DotNetObjectReference<Slider<TItem>>? dotNetRef;
 
     protected override void OnInitialized()
     {
         currentIndex = 0;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            dotNetRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("sliderTouch.init", sliderId, dotNetRef);
+        }
+    }
+
+    [JSInvokable]
+    public async Task OnSwipeNext() => await NextSlide();
+
+    [JSInvokable]
+    public async Task OnSwipePrev() => await PrevSlide();
+
+    public async ValueTask DisposeAsync()
+    {
+        await JS.InvokeVoidAsync("sliderTouch.dispose", sliderId);
+        dotNetRef?.Dispose();
     }
 
     private async Task NextSlide()
