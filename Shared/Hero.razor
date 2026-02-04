@@ -1,0 +1,122 @@
+@implements IDisposable
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>
+                    <span class="glow">NOSTDLIB</span><br>
+                    <span class="mono typing-text">@TypedText<span class="cursor">|</span></span>
+                </h1>
+                <p class="hero-subtitle">
+                    We operate in the shadows to secure what matters.
+                    Our methods are unconventional, our results are absolute.
+                </p>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary">Request Access</a>
+                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-bg">
+        <div class="grid-overlay"></div>
+
+        <!-- Binary Data Stream -->
+        <div class="binary-stream">
+            @for (int i = 1; i <= 12; i++)
+            {
+                <div class="binary-column-@i"></div>
+            }
+        </div>
+
+        <!-- Neural Network -->
+        <div class="neural-network">
+            @for (int i = 1; i <= 20; i++)
+            {
+                <div class="neuron-@i"></div>
+            }
+        </div>
+
+        <!-- Radar Sweep -->
+        <div class="radar-container">
+            @for (int i = 1; i <= 4; i++)
+            {
+                <div class="radar-ring"></div>
+            }
+            <div class="radar-sweep"></div>
+        </div>
+
+        <!-- Crypto Elements -->
+        <div class="crypto-elements">
+            <div class="crypto-1">0x1A2B3C4D</div>
+            <div class="crypto-2">SHA-256</div>
+            <div class="crypto-3">AES-256</div>
+            <div class="crypto-4">RSA-4096</div>
+            <div class="crypto-5">ECC-384</div>
+            <div class="crypto-6">PGP</div>
+            <div class="crypto-7">TLS 1.3</div>
+            <div class="crypto-8">ZK-SNARK</div>
+        </div>
+
+        <!-- Enhanced Floating Shapes -->
+        <div class="floating-shapes">
+            @for (int i = 1; i <= 8; i++)
+            {
+                <div class="shape-@i"></div>
+            }
+        </div>
+    </div>
+</section>
+
+@code {
+    private string TypingText = "PROTECTION BEYOND PERIMETERS";
+    private string TypedText = "";
+    private int TypingIndex = 0;
+    private int TypingSpeed = 100;
+    private System.Threading.Timer? _timer;
+    private bool _disposed = false;
+
+    protected override void OnInitialized()
+    {
+        StartTyping();
+    }
+
+    private void StartTyping()
+    {
+        _timer = new System.Threading.Timer(TypeNextChar, null, TypingSpeed, System.Threading.Timeout.Infinite);
+    }
+
+    private void TypeNextChar(object? state)
+    {
+        if (_disposed) return;
+
+        if (TypingIndex < TypingText.Length)
+        {
+            TypedText += TypingText[TypingIndex];
+            TypingIndex++;
+            InvokeAsync(StateHasChanged);
+            _timer?.Change(TypingSpeed, System.Threading.Timeout.Infinite);
+        }
+        else
+        {
+            // Reset after delay
+            _timer?.Change(3000, System.Threading.Timeout.Infinite);
+            _timer = new System.Threading.Timer(_ =>
+            {
+                if (_disposed) return;
+                TypedText = "";
+                TypingIndex = 0;
+                InvokeAsync(StateHasChanged);
+                StartTyping();
+            }, null, 3000, System.Threading.Timeout.Infinite);
+        }
+    }
+
+    public void Dispose()
+    {
+        _disposed = true;
+        _timer?.Dispose();
+    }
+}
