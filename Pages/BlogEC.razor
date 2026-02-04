@@ -1,0 +1,130 @@
+@page "/blog/ec"
+
+<PageTitle>Armenian Encoding Converter - NOSTDLIB</PageTitle>
+
+<Navbar />
+
+<article class="blog-post">
+    <div class="container">
+        <a href="/blog" class="back-link">&larr; Back to Blog</a>
+
+        <header class="post-header">
+            <span class="post-icon">🔤</span>
+            <h1>[EC] Armenian Encoding Converter</h1>
+            <div class="post-meta">
+                <span class="post-tech mono">C#, .NET 9</span>
+                <span class="post-status beta">Beta</span>
+            </div>
+            <p class="post-intro">A .NET 9 application designed to convert Armenian text between different encoding formats, featuring a core library, CLI, and GUI (in development).</p>
+        </header>
+
+        <section class="post-section">
+            <h2>Overview</h2>
+            <p>
+                The Armenian Encoding Converter (EC) addresses the challenge of working with Armenian text across different encoding systems.
+                Whether you're dealing with legacy ANSI-encoded documents or modern Unicode text, EC provides a robust solution for seamless conversion.
+            </p>
+        </section>
+
+        <section class="post-section">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>TextConverter</h3>
+                    <p>Handles text transformation via mapping files</p>
+                </div>
+                <div class="feature-item">
+                    <h3>ExcelConverter</h3>
+                    <p>Processes spreadsheets (Windows/Office required)</p>
+                </div>
+                <div class="feature-item">
+                    <h3>WordConverter</h3>
+                    <p>Manages document conversion (Windows/Office required)</p>
+                </div>
+                <div class="feature-item">
+                    <h3>EncodingMapper</h3>
+                    <p>Loads character mappings from configuration files</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="post-section">
+            <h2>System Requirements</h2>
+            <ul class="requirements-list">
+                <li>.NET 9 SDK</li>
+                <li>Windows OS (for Word/Excel conversion)</li>
+                <li>Microsoft Office (for document/spreadsheet conversion)</li>
+            </ul>
+        </section>
+
+        <section class="post-section">
+            <h2>Getting Started</h2>
+            <p>Clone the repository and build the project:</p>
+            <pre class="code-block"><code>git clone https://github.com/mrzaxaryan/EC.git
+cd EC
+dotnet build
+dotnet test</code></pre>
+        </section>
+
+        <section class="post-section">
+            <h2>CLI Usage</h2>
+            <p>The application supports two conversion directions via command-line:</p>
+            <pre class="code-block"><code>dotnet run --project EC.CLI -- --file &lt;path&gt; --type &lt;0|1&gt;</code></pre>
+            <ul class="param-list">
+                <li><code>--type 0</code> — ANSI to Unicode</li>
+                <li><code>--type 1</code> — Unicode to ANSI</li>
+            </ul>
+            <p>Supported formats: Word (.doc, .docx) and Excel (.xls, .xlsx) files.</p>
+        </section>
+
+        <section class="post-section">
+            <h2>Configuration</h2>
+            <p>Character mappings are stored in <code>armenian.map</code> located at <code>EC/Encodings/armenian.map</code>.</p>
+            <p>The mapping file uses a simple key-value format:</p>
+            <pre class="code-block"><code># Comments start with #
+A=Ա
+B=Բ
+...</code></pre>
+        </section>
+
+        <section class="post-section">
+            <h2>Project Structure</h2>
+            <div class="structure-grid">
+                <div class="structure-item">
+                    <h4>EC.Library</h4>
+                    <p>Core functionality with converters and mapping capabilities</p>
+                </div>
+                <div class="structure-item">
+                    <h4>EC.CLI</h4>
+                    <p>Command-line tool for batch or single-file conversions</p>
+                </div>
+                <div class="structure-item">
+                    <h4>EC.GUI</h4>
+                    <p>Cross-platform graphical interface (in development)</p>
+                </div>
+                <div class="structure-item">
+                    <h4>EC.Library.Tests</h4>
+                    <p>Unit test suite for core logic</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="post-section">
+            <h2>Limitations</h2>
+            <ul class="limitations-list">
+                <li>Word/Excel conversion requires Microsoft Office installed</li>
+                <li>The mapping configuration file must exist at the expected location</li>
+            </ul>
+        </section>
+
+        <section class="post-section post-footer">
+            <h2>Source Code</h2>
+            <p>The project is open source under the MIT License.</p>
+            <a href="https://github.com/mrzaxaryan/EC" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                View on GitHub
+            </a>
+        </section>
+    </div>
+</article>
+
+<Footer />
