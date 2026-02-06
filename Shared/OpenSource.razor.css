@@ -197,12 +197,22 @@
 }
 
 .opensource-links {
-  display: flex;
-  gap: 0.75rem;
+  text-align: center;
 }
 
-.opensource-card .btn {
-  align-self: flex-start;
+.opensource-links .btn {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.opensource-links .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 255, 204, 0.2);
 }
 
 .opensource-card .btn-secondary {
