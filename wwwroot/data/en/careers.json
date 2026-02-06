@@ -2,22 +2,6 @@
   {
     "id": 1,
     "code": "SEC-01",
-    "title": "Penetration Tester",
-    "level": "Senior",
-    "location": "Yerevan, Armenia",
-    "type": "Full-time",
-    "description": "Execute authorized security assessments across diverse environments. Identify and exploit vulnerabilities in networks, applications, and systems with detailed remediation guidance.",
-    "requirements": [
-      "3+ years conducting professional penetration tests",
-      "Expertise in manual exploitation and custom tooling",
-      "Experience across web, network, cloud, and mobile attack surfaces",
-      "OSCP, OSCE, or equivalent demonstrated capability",
-      "Clear technical communication and reporting skills"
-    ]
-  },
-  {
-    "id": 2,
-    "code": "SEC-02",
     "title": "Cryptographic Researcher",
     "level": "Senior",
     "location": "Yerevan, Armenia",
@@ -32,8 +16,8 @@
     ]
   },
   {
-    "id": 3,
-    "code": "SEC-03",
+    "id": 2,
+    "code": "SEC-02",
     "title": "DevSecOps Engineer",
     "level": "Senior",
     "location": "Yerevan, Armenia",
@@ -48,8 +32,8 @@
     ]
   },
   {
-    "id": 4,
-    "code": "SEC-04",
+    "id": 3,
+    "code": "SEC-03",
     "title": "Malware Analyst",
     "level": "Senior",
     "location": "Yerevan, Armenia",
@@ -64,8 +48,8 @@
     ]
   },
   {
-    "id": 5,
-    "code": "SEC-05",
+    "id": 4,
+    "code": "SEC-04",
     "title": "Threat Intelligence Analyst",
     "level": "Senior",
     "location": "Yerevan, Armenia",
@@ -80,8 +64,8 @@
     ]
   },
   {
-    "id": 6,
-    "code": "SEC-06",
+    "id": 5,
+    "code": "SEC-05",
     "title": "Application Security Engineer",
     "level": "Senior",
     "location": "Yerevan, Armenia",
@@ -93,6 +77,22 @@
       "Proficiency in multiple programming languages for code review",
       "Experience with SAST/DAST tools and secure code review methodologies",
       "Strong communication skills for developer engagement"
+    ]
+  },
+  {
+    "id": 6,
+    "code": "QA-01",
+    "title": "QA Engineer",
+    "level": "Senior",
+    "location": "Yerevan, Armenia",
+    "type": "Full-time",
+    "description": "Ensure software quality through comprehensive testing strategies including manual and automated testing. Develop test plans, identify defects, and collaborate with development teams to deliver reliable, secure products.",
+    "requirements": [
+      "4+ years in software quality assurance or testing",
+      "Experience with test automation frameworks (Selenium, Cypress, Playwright)",
+      "Strong knowledge of testing methodologies and SDLC processes",
+      "Proficiency in writing test cases and bug reports",
+      "Experience with CI/CD integration and security testing practices"
     ]
   },
   {
@@ -113,22 +113,6 @@
   },
   {
     "id": 8,
-    "code": "QA-01",
-    "title": "QA Engineer",
-    "level": "Senior",
-    "location": "Yerevan, Armenia",
-    "type": "Full-time",
-    "description": "Ensure software quality through comprehensive testing strategies including manual and automated testing. Develop test plans, identify defects, and collaborate with development teams to deliver reliable, secure products.",
-    "requirements": [
-      "4+ years in software quality assurance or testing",
-      "Experience with test automation frameworks (Selenium, Cypress, Playwright)",
-      "Strong knowledge of testing methodologies and SDLC processes",
-      "Proficiency in writing test cases and bug reports",
-      "Experience with CI/CD integration and security testing practices"
-    ]
-  },
-  {
-    "id": 9,
     "code": "DEV-02",
     "title": "Android Developer",
     "level": "Senior",
@@ -141,6 +125,22 @@
       "Strong knowledge of Android SDK, Jetpack components, and Material Design",
       "Experience with RESTful APIs, offline storage, and background processing",
       "Familiarity with CI/CD pipelines and secure coding practices"
+    ]
+  },
+  {
+    "id": 9,
+    "code": "AI-01",
+    "title": "AI & LLM Engineer",
+    "level": "Senior",
+    "location": "Yerevan, Armenia",
+    "type": "Full-time",
+    "description": "Design, develop, and deploy advanced AI systems and large language model solutions. Fine-tune and optimize LLMs for domain-specific applications, build RAG pipelines, and integrate AI capabilities into production systems with a focus on performance, reliability, and security.",
+    "requirements": [
+      "3+ years of experience in machine learning or AI engineering",
+      "Deep expertise in LLM architectures, fine-tuning, and prompt engineering",
+      "Proficiency in Python and ML frameworks (PyTorch, TensorFlow, Hugging Face)",
+      "Experience with RAG systems, vector databases, and embedding models",
+      "Strong understanding of AI security, model evaluation, and responsible AI practices"
     ]
   }
 ]
