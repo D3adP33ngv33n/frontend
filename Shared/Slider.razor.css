@@ -117,11 +117,11 @@
 
 @media (max-width: 992px) {
   .slider-btn-prev {
-    left: -60px;
+    left: 8px;
   }
 
   .slider-btn-next {
-    right: -60px;
+    right: 8px;
   }
 
   .slider-viewport {
@@ -136,11 +136,11 @@
   }
 
   .slider-btn-prev {
-    left: -50px;
+    left: 6px;
   }
 
   .slider-btn-next {
-    right: -50px;
+    right: 6px;
   }
 
   .slider-arrow {
@@ -155,11 +155,11 @@
   }
 
   .slider-btn-prev {
-    left: -45px;
+    left: 4px;
   }
 
   .slider-btn-next {
-    right: -45px;
+    right: 4px;
   }
 
   .slider-arrow {
