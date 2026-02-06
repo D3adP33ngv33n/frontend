@@ -6,11 +6,13 @@
       "Կատարման հիշողություն չի պահանջվում",
       "Ապարատային breakpoints VEH տեխնիկայով",
       "Սեփական x86-64 հրահանգների էմուլյատոր",
-      "Windows API կանչեր էմուլյացված կոդից"
+      "Windows API կանչեր էմուլյացված կոդից",
+      "Vectored Exception Handler (VEH) breakpoint management",
+      "DR0/DR7 hardware registers control"
     ],
-    "technologies": "x86-64 ասեմբլեր, C",
+    "technologies": "x86-64 ասեմբլեր, C#",
     "status": "Փորձարարական",
-    "audience": "Անվտանգության հետազոտողներ, ցածր մակարդակի ծրագրավորողներ",
+    "audience": "Անվտանգության հետազոտողներ, ցածր մակարդակի ծրագրավորողներ, reverse engineering",
     "icon": "🔒",
     "gitHubUrl": "https://github.com/mrzaxaryan/NoRWX",
     "description": "NoRWX-ը անվտանգության հետազոտության նախագիծ է, որը հետազոտում է կոդի կատարման տեխնիկաներ hardware breakpoints-ի և VEH-ի օգնությամբ։",
@@ -31,14 +33,15 @@
       "Կոմպիլյացիայի ժամանակ ստրինգների ներդրում առանց .rdata կախվածությունների",
       "Լիարժեք գաղտնագրական ստեկ (SHA-256/384/512, ChaCha20-Poly1305, ECC)",
       "TLS 1.3 սերտիֆիկատի ստուգմամբ, DNS, HTTP, WebSocket",
-      "PIL ներկառուցված սկրիպտային լեզու"
+      "PIL ներկառուցված սկրիպտային լեզու",
+      "Core, Platform, Runtime architecture"
     ],
-    "technologies": "C++23, Windows PEB/NTAPI, Linux syscalls, UEFI",
+    "technologies": "C++23, Windows PEB/NTAPI, Linux syscalls, UEFI, CMake",
     "status": "Ակտիվ",
     "audience": "Անվտանգության հետազոտողներ, համակարգային ծրագրավորողներ, ներկառուցված համակարգերի մշակողներ",
     "icon": "⚙️",
     "gitHubUrl": "https://github.com/mrzaxaryan/Position-Independent-Runtime",
-    "description": "PIR-ը համապարփակ է C++23 շրջանակ իսկապես պոզիցիա-անկախ կոդի համար, որը կարող է աշխատել բազմաթիվ հարթակներում։",
+    "description": "PIR-ը համապարփակ է C++23 շրջանակ իսկապես պոզիցիա-անկախ կոդի համար, որը կարող է աշխատել բազմաթիվ հարթակներում Core (platform-independent), Platform (OS-specific), Runtime (crypto, networking)։",
     "useCases": [
       "Շարժական անվտանգության գործիքների ստեղծում",
       "Ներկառուցված համակարգերի մշակում",
@@ -57,7 +60,10 @@
       "Լեկսիկական տեսանելիություն (առավելագույնը 32 մակարդակ)",
       "Կառավարման հոսք (if/else, while, for)",
       "Ֆունկցիաների սահմանում պարամետրերով",
-      "Ընդհանուր ներդրված ֆունկցիաներ չկան. բոլորը գրանցվում են C++-ից"
+      "20+ standard library functions (print, len, str, type, abs, min, max, floor, ceil)",
+      "File I/O (read, write, append, binary)",
+      "Network operations (sockets, DNS, HTTP, WebSocket)",
+      "Multi-platform (Windows, Linux, UEFI - i386, x86_64, armv7a, aarch64)"
     ],
     "technologies": "C++23, PIR (Position-Independent Runtime)",
     "status": "Ակտիվ",
@@ -80,7 +86,9 @@
     "features": [
       "Տարբեր հայկական կոդավորումների աջակցություն",
       "Խմբային փոխարկման աջակցություն",
-      "Word և Excel փաստաթղթերի փոխարկիչներ (TXT/DOC/DOCX/XLS/XLSX)"
+      "Word և Excel փաստաթղթերի փոխարկիչներ (TXT/DOC/DOCX/XLS/XLSX)",
+      "CLI (command-line interface)",
+      "GUI (in development)"
     ],
     "technologies": "C#, .NET 9",
     "status": "Բետա",
