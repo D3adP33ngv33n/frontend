@@ -1,23 +1,7 @@
 [
   {
     "id": 1,
-    "code": "SEC-01",
-    "title": "Cryptographic Researcher",
-    "level": "Senior",
-    "location": "Yerevan, Armenia",
-    "type": "Full-time",
-    "description": "Advance our cryptographic capabilities through original research and implementation analysis. Evaluate cryptosystems, identify weaknesses, and develop novel approaches to secure communications.",
-    "requirements": [
-      "PhD in cryptography, mathematics, or equivalent research experience",
-      "Published work in peer-reviewed security venues",
-      "Expertise in post-quantum cryptographic schemes",
-      "Proficiency with formal verification and proof systems",
-      "Clearance eligibility for sensitive research"
-    ]
-  },
-  {
-    "id": 2,
-    "code": "SEC-02",
+    "code": "DEVSEC-01",
     "title": "DevSecOps Engineer",
     "level": "Senior",
     "location": "Yerevan, Armenia",
@@ -32,8 +16,8 @@
     ]
   },
   {
-    "id": 3,
-    "code": "SEC-03",
+    "id": 2,
+    "code": "SEC-01",
     "title": "Malware Analyst",
     "level": "Senior",
     "location": "Yerevan, Armenia",
@@ -48,8 +32,8 @@
     ]
   },
   {
-    "id": 4,
-    "code": "SEC-04",
+    "id": 3,
+    "code": "SEC-02",
     "title": "Threat Intelligence Analyst",
     "level": "Senior",
     "location": "Yerevan, Armenia",
@@ -64,8 +48,8 @@
     ]
   },
   {
-    "id": 5,
-    "code": "SEC-05",
+    "id": 4,
+    "code": "SEC-03",
     "title": "Application Security Engineer",
     "level": "Senior",
     "location": "Yerevan, Armenia",
@@ -80,7 +64,7 @@
     ]
   },
   {
-    "id": 6,
+    "id": 5,
     "code": "QA-01",
     "title": "QA Engineer",
     "level": "Senior",
@@ -96,7 +80,7 @@
     ]
   },
   {
-    "id": 7,
+    "id": 6,
     "code": "DEV-01",
     "title": "Systems Security Developer",
     "level": "Senior",
@@ -112,7 +96,7 @@
     ]
   },
   {
-    "id": 8,
+    "id": 7,
     "code": "DEV-02",
     "title": "Android Developer",
     "level": "Senior",
@@ -125,6 +109,22 @@
       "Strong knowledge of Android SDK, Jetpack components, and Material Design",
       "Experience with RESTful APIs, offline storage, and background processing",
       "Familiarity with CI/CD pipelines and secure coding practices"
+    ]
+  },
+  {
+    "id": 8,
+    "code": "DEV-03",
+    "title": "macOS Developer",
+    "level": "Senior",
+    "location": "Yerevan, Armenia",
+    "type": "Full-time",
+    "description": "Design and develop high-quality macOS applications with focus on performance, security, and native user experience. Leverage Apple frameworks and modern Swift development to build robust desktop solutions that integrate seamlessly with the macOS ecosystem.",
+    "requirements": [
+      "4+ years of professional macOS development experience",
+      "Expert proficiency in Swift and Objective-C",
+      "Strong knowledge of AppKit, SwiftUI, and Cocoa frameworks",
+      "Experience with Core Data, networking, and system-level APIs",
+      "Familiarity with CI/CD pipelines, code signing, and App Store distribution"
     ]
   },
   {

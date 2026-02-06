@@ -24,9 +24,9 @@
     "gitHubUrl": "https://github.com/mrzaxaryan/NoRWX"
   },
   {
-    "title": "[cpp-pic] Position-Independent Runtime",
+    "title": "[PIR] Position-Independent Runtime",
     "purpose": "A C++23 framework enabling position-independent code generation across multiple platforms and architectures.",
-    "description": "cpp-pic is a comprehensive C++23 framework designed for creating truly position-independent code that can run on multiple platforms without modification. It provides a complete runtime environment including cryptographic primitives, network protocols, and an embedded scripting language. The framework resolves all dependencies at runtime using platform-specific techniques like Windows PEB walking and Linux syscalls.",
+    "description": "PIR is a comprehensive C++23 framework designed for creating truly position-independent code that can run on multiple platforms without modification. It provides a complete runtime environment including cryptographic primitives, network protocols, and an embedded scripting language. The framework resolves all dependencies at runtime using platform-specific techniques like Windows PEB walking and Linux syscalls.",
     "features": [
       "Multi-platform (Windows, Linux, UEFI) and multi-architecture (i386, x86_64, armv7a, aarch64)",
       "Compile-time string embedding without .rdata dependencies",
