@@ -130,6 +130,10 @@
 }
 
 @media (max-width: 768px) {
+  .slider-viewport {
+    --visible-cards: 1;
+  }
+
   .slider-btn {
     width: 40px;
     height: 40px;
@@ -164,10 +168,6 @@
 
   .slider-arrow {
     font-size: 1.2rem;
-  }
-
-  .slider-viewport {
-    --visible-cards: 1;
   }
 
   .slider-dot {
