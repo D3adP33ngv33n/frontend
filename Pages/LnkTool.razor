@@ -929,6 +929,71 @@
                                        placeholder="00000000-0000-0000-0000-000000000000" class="form-input" />
                             </div>
 
+                            <div class="console-subgroup">
+                                <span class="console-subgroup-label mono">System.Link Properties</span>
+                                <div class="form-group">
+                                    <label class="mono">Target Parsing Path</label>
+                                    <span class="form-hint">Canonical parsing path to the link target (System.Link.TargetParsingPath)</span>
+                                    <input type="text" @bind="PropTargetParsingPath" class="form-input" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="mono">Target SFGAO Flags</label>
+                                    <span class="form-hint">Shell attributes (SFGAO) of the target as a decimal value (System.Link.TargetSFGAOFlags)</span>
+                                    <input type="number" @bind="PropTargetSFGAOFlags" class="form-input" />
+                                </div>
+                            </div>
+
+                            <div class="console-subgroup">
+                                <span class="console-subgroup-label mono">System Properties</span>
+                                <div class="form-group">
+                                    <label class="mono">Item Type Text</label>
+                                    <span class="form-hint">File type description e.g. "Text Document" (System.ItemTypeText)</span>
+                                    <input type="text" @bind="PropItemTypeText" class="form-input" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="mono">MIME Type</label>
+                                    <span class="form-hint">MIME type of the target e.g. "text/plain" (System.MIMEType)</span>
+                                    <input type="text" @bind="PropMimeType" placeholder="application/octet-stream" class="form-input" />
+                                </div>
+                            </div>
+
+                            <div class="console-subgroup">
+                                <span class="console-subgroup-label mono">Named Properties</span>
+                                @for (int i = 0; i < NamedProperties.Count; i++)
+                                {
+                                    var idx = i;
+                                    <div class="form-row" style="align-items: flex-end;">
+                                        <div class="form-group" style="flex: 1;">
+                                            <label class="mono">Name</label>
+                                            <input type="text" value="@NamedProperties[idx].Name"
+                                                   @onchange="e => UpdateNamedProperty(idx, e.Value?.ToString(), null, null)"
+                                                   class="form-input" />
+                                        </div>
+                                        <div class="form-group" style="flex: 0 0 120px;">
+                                            <label class="mono">Type</label>
+                                            <select value="@NamedProperties[idx].Type"
+                                                    @onchange="e => UpdateNamedProperty(idx, null, e.Value?.ToString(), null)"
+                                                    class="form-input">
+                                                <option value="String">String</option>
+                                                <option value="UInt32">UInt32</option>
+                                                <option value="Bool">Bool</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" style="flex: 1;">
+                                            <label class="mono">Value</label>
+                                            <input type="text" value="@NamedProperties[idx].Value"
+                                                   @onchange="e => UpdateNamedProperty(idx, null, null, e.Value?.ToString())"
+                                                   class="form-input" />
+                                        </div>
+                                        <button class="btn btn-secondary" style="margin-bottom: 0.5rem; padding: 0.4rem 0.6rem;"
+                                                @onclick="() => RemoveNamedProperty(idx)">✕</button>
+                                    </div>
+                                }
+                                <button class="btn btn-secondary" style="margin-top: 0.25rem;" @onclick="AddNamedProperty">
+                                    + Add Property
+                                </button>
+                            </div>
+
                             <div class="form-checkboxes checkbox-grid">
                                 <label class="checkbox-label">
                                     <input type="checkbox" @bind="PropPreventPinning" />
@@ -986,16 +1051,34 @@
                         </div>
                         <div class="form-group">
                             <label class="mono">Shim Layer Name</label>
-                            <span class="form-hint">Application compatibility layer (e.g. ~ WIN7RTM for Windows 7 compat mode)</span>
+                            <span class="form-hint">Application compatibility layer — select a preset or type a custom value (prefix with ~ for single layer)</span>
+                            <select class="form-input" value="@ExtraShimLayerName" @onchange="OnShimLayerSelected" style="margin-bottom: 0.35rem;">
+                                <option value="">None</option>
+                                @foreach (var shim in ShimLayerOptions)
+                                {
+                                    <option value="@shim.Value">@shim.Label</option>
+                                }
+                            </select>
                             <input type="text" @bind="ExtraShimLayerName" placeholder="~ WIN7RTM" class="form-input" />
                         </div>
 
                         <div class="console-subgroup">
                             <span class="console-subgroup-label mono">Known Folder</span>
+                            <div class="form-group">
+                                <label class="mono">Preset</label>
+                                <span class="form-hint">Select a well-known folder or enter a custom GUID below</span>
+                                <select class="form-input" value="@KnownFolderGuid" @onchange="OnKnownFolderSelected">
+                                    <option value="">None</option>
+                                    @foreach (var kf in KnownFolderOptions)
+                                    {
+                                        <option value="@kf.Value">@kf.Label</option>
+                                    }
+                                </select>
+                            </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="mono">Folder GUID</label>
-                                    <span class="form-hint">KNOWNFOLDERID GUID for a shell known folder (e.g. Desktop, Documents)</span>
+                                    <span class="form-hint">KNOWNFOLDERID GUID for a shell known folder</span>
                                     <input type="text" @bind="KnownFolderGuid"
                                            placeholder="00000000-0000-0000-0000-000000000000" class="form-input" />
                                 </div>
@@ -1009,10 +1092,21 @@
 
                         <div class="console-subgroup">
                             <span class="console-subgroup-label mono">Special Folder</span>
+                            <div class="form-group">
+                                <label class="mono">Preset</label>
+                                <span class="form-hint">Select a CSIDL folder or enter a custom value below</span>
+                                <select class="form-input" value="@SpecialFolderCsidl" @onchange="OnCsidlSelected">
+                                    <option value="0">None</option>
+                                    @foreach (var csidl in CsidlOptions)
+                                    {
+                                        <option value="@csidl.Value">@csidl.Label (0x@(csidl.Value.ToString("X4")))</option>
+                                    }
+                                </select>
+                            </div>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label class="mono">CSIDL Value</label>
-                                    <span class="form-hint">CSIDL constant identifying a special folder (e.g. 0x25 = System, 0x26 = Program Files)</span>
+                                    <span class="form-hint">CSIDL constant identifying a special folder</span>
                                     <input type="number" @bind="SpecialFolderCsidl" class="form-input" />
                                 </div>
                                 <div class="form-group">
@@ -1182,6 +1276,29 @@
     private bool PropExcludeFromShowInNewInstall { get; set; }
     private bool PropIsDestListSeparator { get; set; }
     private string? PropToastActivatorCLSID { get; set; }
+    private string? PropTargetParsingPath { get; set; }
+    private uint? PropTargetSFGAOFlags { get; set; }
+    private string? PropItemTypeText { get; set; }
+    private string? PropMimeType { get; set; }
+
+    // Named Properties
+    private record NamedPropertyEntry(string Name, string Type, string Value);
+    private List<NamedPropertyEntry> NamedProperties { get; set; } = [];
+
+    private void AddNamedProperty() =>
+        NamedProperties.Add(new NamedPropertyEntry("", "String", ""));
+
+    private void RemoveNamedProperty(int index) =>
+        NamedProperties.RemoveAt(index);
+
+    private void UpdateNamedProperty(int index, string? name, string? type, string? value)
+    {
+        var p = NamedProperties[index];
+        NamedProperties[index] = new NamedPropertyEntry(
+            name ?? p.Name,
+            type ?? p.Type,
+            value ?? p.Value);
+    }
 
     // Extra Data
     private uint? ExtraConsoleCodePage { get; set; }
@@ -1521,6 +1638,37 @@
                 && Guid.TryParse(PropToastActivatorCLSID, out var clsid))
                 builder.ToastActivatorCLSID = clsid;
 
+            // System.Link properties
+            if (!string.IsNullOrWhiteSpace(PropTargetParsingPath))
+                builder.TargetParsingPath = PropTargetParsingPath;
+            if (PropTargetSFGAOFlags is { } sfgao and not 0)
+                builder.TargetSFGAOFlags = sfgao;
+
+            // System properties
+            if (!string.IsNullOrWhiteSpace(PropItemTypeText))
+                builder.ItemTypeText = PropItemTypeText;
+            if (!string.IsNullOrWhiteSpace(PropMimeType))
+                builder.MimeType = PropMimeType;
+
+            // Named properties
+            foreach (var np in NamedProperties)
+            {
+                if (string.IsNullOrWhiteSpace(np.Name)) continue;
+                switch (np.Type)
+                {
+                    case "String":
+                        builder.AddNamedStringProperty(np.Name, np.Value ?? "");
+                        break;
+                    case "UInt32" when uint.TryParse(np.Value, out var u):
+                        builder.AddNamedUInt32Property(np.Name, u);
+                        break;
+                    case "Bool":
+                        builder.AddNamedBoolProperty(np.Name,
+                            np.Value?.Equals("true", StringComparison.OrdinalIgnoreCase) == true);
+                        break;
+                }
+            }
+
             opts.PropertyStoreData = builder.Build();
         }
 
@@ -1772,6 +1920,7 @@
         {
             var opts = BuildOptions();
 
+            // Preserve original tracking data if not stripping
             if (!StripTrackingData)
             {
                 opts.Tracker = ParsedTracker;
@@ -1781,6 +1930,10 @@
                 opts.WriteTime = ParsedWriteTime;
                 if (!EnablePropertyStore)
                     opts.PropertyStoreData = ParsedPropertyStore;
+            }
+            else
+            {
+                ShortcutSanitizer.Sanitize(opts);
             }
 
             var lnkBytes = Shortcut.Create(opts);
@@ -1912,6 +2065,11 @@
         PropExcludeFromShowInNewInstall = false;
         PropIsDestListSeparator = false;
         PropToastActivatorCLSID = null;
+        PropTargetParsingPath = null;
+        PropTargetSFGAOFlags = null;
+        PropItemTypeText = null;
+        PropMimeType = null;
+        NamedProperties.Clear();
         ExtraConsoleCodePage = null;
         ExtraDarwinData = null;
         ExtraShimLayerName = null;
@@ -1949,6 +2107,141 @@
         var key = HotkeyKeyOptions.FirstOrDefault(k => k.Value == HotkeyKeyValue);
         parts.Add(key?.Label ?? $"0x{HotkeyKeyValue:X2}");
         return string.Join(" + ", parts);
+    }
+
+    // --- Shim Layer Options ---
+
+    private record ShimLayerOption(string Label, string Value);
+
+    private static readonly ShimLayerOption[] ShimLayerOptions =
+    [
+        new("Windows XP SP3", "~ " + ShimLayerNames.WinXPSP3),
+        new("Windows XP SP2", "~ " + ShimLayerNames.WinXPSP2),
+        new("Windows Vista SP2", "~ " + ShimLayerNames.WinVistaSP2),
+        new("Windows 7 RTM", "~ " + ShimLayerNames.Win7RTM),
+        new("Windows 8 RTM", "~ " + ShimLayerNames.Win8RTM),
+        new("256 Colors", "~ " + ShimLayerNames.Color256),
+        new("640×480 Resolution", "~ " + ShimLayerNames.Resolution640x480),
+        new("High DPI Aware", "~ " + ShimLayerNames.HighDpiAware),
+        new("Disable Themes", "~ " + ShimLayerNames.DisableThemes),
+        new("Run as Admin", "~ " + ShimLayerNames.RunAsAdmin),
+        new("Disable NX (Show UI)", "~ " + ShimLayerNames.DisableNXShowUI),
+        new("Force DirectDraw Emulation", "~ " + ShimLayerNames.ForceDirectDrawEmulation),
+    ];
+
+    private void OnShimLayerSelected(ChangeEventArgs e)
+    {
+        ExtraShimLayerName = e.Value?.ToString();
+    }
+
+    // --- CSIDL Options ---
+
+    private record CsidlOption(string Label, uint Value);
+
+    private static readonly CsidlOption[] CsidlOptions =
+    [
+        new("Desktop", CsidlFolderIds.Desktop),
+        new("Programs", CsidlFolderIds.Programs),
+        new("Personal (Documents)", CsidlFolderIds.Personal),
+        new("Favorites", CsidlFolderIds.Favorites),
+        new("Startup", CsidlFolderIds.Startup),
+        new("Recent", CsidlFolderIds.Recent),
+        new("SendTo", CsidlFolderIds.SendTo),
+        new("Start Menu", CsidlFolderIds.StartMenu),
+        new("My Music", CsidlFolderIds.MyMusic),
+        new("My Video", CsidlFolderIds.MyVideo),
+        new("Desktop Directory", CsidlFolderIds.DesktopDirectory),
+        new("My Computer", CsidlFolderIds.Drives),
+        new("Network", CsidlFolderIds.Network),
+        new("Fonts", CsidlFolderIds.Fonts),
+        new("Templates", CsidlFolderIds.Templates),
+        new("Common Start Menu", CsidlFolderIds.CommonStartMenu),
+        new("Common Programs", CsidlFolderIds.CommonPrograms),
+        new("Common Startup", CsidlFolderIds.CommonStartup),
+        new("AppData (Roaming)", CsidlFolderIds.AppData),
+        new("Local AppData", CsidlFolderIds.LocalAppData),
+        new("Common AppData", CsidlFolderIds.CommonAppData),
+        new("Windows", CsidlFolderIds.Windows),
+        new("System (System32)", CsidlFolderIds.System),
+        new("Program Files", CsidlFolderIds.ProgramFiles),
+        new("My Pictures", CsidlFolderIds.MyPictures),
+        new("Profile", CsidlFolderIds.Profile),
+        new("System x86", CsidlFolderIds.SystemX86),
+        new("Program Files x86", CsidlFolderIds.ProgramFilesX86),
+        new("Common Files", CsidlFolderIds.CommonFiles),
+        new("Common Files x86", CsidlFolderIds.CommonFilesX86),
+        new("Admin Tools", CsidlFolderIds.AdminTools),
+        new("Common Admin Tools", CsidlFolderIds.CommonAdminTools),
+    ];
+
+    private void OnCsidlSelected(ChangeEventArgs e)
+    {
+        if (uint.TryParse(e.Value?.ToString(), out var val))
+            SpecialFolderCsidl = val;
+    }
+
+    // --- Known Folder Options ---
+
+    private record KnownFolderOption(string Label, Guid Value);
+
+    private static readonly KnownFolderOption[] KnownFolderOptions =
+    [
+        new("Desktop", KnownFolderIds.Desktop),
+        new("Documents", KnownFolderIds.Documents),
+        new("Downloads", KnownFolderIds.Downloads),
+        new("Music", KnownFolderIds.Music),
+        new("Pictures", KnownFolderIds.Pictures),
+        new("Videos", KnownFolderIds.Videos),
+        new("Profile", KnownFolderIds.Profile),
+        new("Saved Games", KnownFolderIds.SavedGames),
+        new("Contacts", KnownFolderIds.Contacts),
+        new("Searches", KnownFolderIds.Searches),
+        new("Favorites", KnownFolderIds.Favorites),
+        new("Links", KnownFolderIds.Links),
+        new("Templates", KnownFolderIds.Templates),
+        new("Program Files", KnownFolderIds.ProgramFiles),
+        new("Program Files x86", KnownFolderIds.ProgramFilesX86),
+        new("Common Files", KnownFolderIds.ProgramFilesCommon),
+        new("Common Files x86", KnownFolderIds.ProgramFilesCommonX86),
+        new("System (System32)", KnownFolderIds.System),
+        new("System x86", KnownFolderIds.SystemX86),
+        new("Windows", KnownFolderIds.Windows),
+        new("Fonts", KnownFolderIds.Fonts),
+        new("AppData (Roaming)", KnownFolderIds.AppData),
+        new("Local AppData", KnownFolderIds.LocalAppData),
+        new("Local AppData Low", KnownFolderIds.LocalAppDataLow),
+        new("ProgramData", KnownFolderIds.ProgramData),
+        new("Start Menu", KnownFolderIds.StartMenu),
+        new("Programs", KnownFolderIds.Programs),
+        new("Startup", KnownFolderIds.Startup),
+        new("Admin Tools", KnownFolderIds.AdminTools),
+        new("Common Start Menu", KnownFolderIds.CommonStartMenu),
+        new("Common Programs", KnownFolderIds.CommonPrograms),
+        new("Common Startup", KnownFolderIds.CommonStartup),
+        new("Common Desktop", KnownFolderIds.CommonDesktopDir),
+        new("Common Templates", KnownFolderIds.CommonTemplates),
+        new("Common Admin Tools", KnownFolderIds.CommonAdminTools),
+        new("User Profiles", KnownFolderIds.UserProfiles),
+        new("Public", KnownFolderIds.Public),
+        new("Public Documents", KnownFolderIds.PublicDocuments),
+        new("Public Downloads", KnownFolderIds.PublicDownloads),
+        new("Public Music", KnownFolderIds.PublicMusic),
+        new("Public Pictures", KnownFolderIds.PublicPictures),
+        new("Public Videos", KnownFolderIds.PublicVideos),
+        new("Recycle Bin", KnownFolderIds.RecycleBin),
+        new("Quick Launch", KnownFolderIds.QuickLaunch),
+        new("SendTo", KnownFolderIds.SendTo),
+        new("Recent", KnownFolderIds.Recent),
+        new("User Program Files", KnownFolderIds.UserProgramFiles),
+    ];
+
+    private void OnKnownFolderSelected(ChangeEventArgs e)
+    {
+        var val = e.Value?.ToString();
+        if (!string.IsNullOrWhiteSpace(val) && Guid.TryParse(val, out _))
+            KnownFolderGuid = val;
+        else
+            KnownFolderGuid = null;
     }
 
     // --- Helpers ---
