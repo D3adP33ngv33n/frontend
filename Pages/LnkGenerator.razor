@@ -50,14 +50,14 @@
                 <label class="mono">Icon Templates</label>
                 <div class="icon-templates">
                     <button type="button" class="icon-template @(IsIconSelected(null, 0) ? "selected" : "")"
-                            title="Default"                            @onclick='() => SelectIcon(null, 0)'>
+                            title="Default" @onclick='() => SelectIcon(null, 0)'>
                         <span class="icon-template-symbol">---</span>
                         <span class="icon-template-label">None</span>
                     </button>
                     @foreach (var tpl in IconTemplates)
                     {
                         <button type="button" class="icon-template @(IsIconSelected(tpl.Path, tpl.Index) ? "selected" : "")"
-                                title="@tpl.Label — @tpl.Path, @tpl.Index"                                @onclick="() => SelectIcon(tpl.Path, tpl.Index)">
+                                title="@tpl.Label — @tpl.Path, @tpl.Index" @onclick="() => SelectIcon(tpl.Path, tpl.Index)">
                             <span class="icon-template-symbol">@tpl.Symbol</span>
                             <span class="icon-template-label">@tpl.Label</span>
                         </button>
@@ -159,47 +159,18 @@
             @"%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe", 0,
             ShortcutWindowStyle.Minimized, false, "ps-helloworld"),
 
-        new("Admin Command Prompt",
-            @"C:\Windows\System32\cmd.exe",
-            null, @"C:\", "Elevated Command Prompt",
+        new("Admin Command Prompt PowerShell Base64 Hello World",
+            @"C:\Windows\System32\conhost.exe",
+            $"--headless powershell.exe -e {Convert.ToBase64String(System.Text.Encoding.Unicode.GetBytes("(New-Object -ComObject WScript.Shell).Popup('Elevated Hello World')"))}",
+            @"C:\", "Elevated Command Prompt",
             @"%SystemRoot%\system32\cmd.exe", 0,
-            ShortcutWindowStyle.Normal, true, "admin-cmd"),
+            ShortcutWindowStyle.Minimized, true, "admin-cmd"),
 
         new("Admin PowerShell",
             @"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe",
             "-NoExit", @"C:\", "Elevated PowerShell",
             @"%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe", 0,
             ShortcutWindowStyle.Normal, true, "admin-powershell"),
-
-        new("Open Notepad",
-            @"C:\Windows\System32\notepad.exe",
-            null, null, "Open Notepad",
-            @"%SystemRoot%\system32\notepad.exe", 0,
-            ShortcutWindowStyle.Normal, false, "notepad"),
-
-        new("Minimized Startup Script",
-            @"C:\Windows\System32\cmd.exe",
-            @"/c ""C:\Scripts\startup.bat""", @"C:\Scripts", "Startup Script",
-            @"%SystemRoot%\system32\shell32.dll", 3,
-            ShortcutWindowStyle.Minimized, false, "startup-script"),
-
-        new("Windows Calculator",
-            @"C:\Windows\System32\calc.exe",
-            null, null, "Calculator",
-            @"%SystemRoot%\system32\calc.exe", 0,
-            ShortcutWindowStyle.Normal, false, "calculator"),
-
-        new("Remote Desktop",
-            @"C:\Windows\System32\mstsc.exe",
-            null, null, "Remote Desktop Connection",
-            @"%SystemRoot%\system32\mstsc.exe", 0,
-            ShortcutWindowStyle.Normal, false, "remote-desktop"),
-
-        new("Disk Cleanup (Admin)",
-            @"C:\Windows\System32\cleanmgr.exe",
-            "/d C:", @"C:\", "Disk Cleanup",
-            @"%SystemRoot%\system32\cleanmgr.exe", 0,
-            ShortcutWindowStyle.Normal, true, "disk-cleanup"),
     ];
 
     private void OnTemplateSelected(ChangeEventArgs e)
