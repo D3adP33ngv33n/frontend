@@ -37,123 +37,11 @@
                     </div>
                 </div>
             }
-
-            <div class="lnk-form-wrapper">
-                <div class="form-group template-selector">
-                    <label class="mono" for="template">Template</label>
-                    <select id="template" class="form-input" value="@SelectedTemplateName" @onchange="OnTemplateSelected">
-                        <option value="">Custom</option>
-                        @foreach (var tpl in LnkTemplates)
-                        {
-                            <option value="@tpl.Name">@tpl.Name</option>
-                        }
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="mono" for="gen-target">Target Path <span class="required">*</span></label>
-                    <input id="gen-target" type="text" @bind="Target" placeholder="C:\Windows\notepad.exe" class="form-input" />
-                </div>
-
-                <div class="form-group">
-                    <label class="mono" for="gen-arguments">Arguments</label>
-                    <input id="gen-arguments" type="text" @bind="Arguments" placeholder="--flag value" class="form-input" />
-                </div>
-
-                <div class="form-group">
-                    <label class="mono" for="gen-workingDir">Working Directory</label>
-                    <input id="gen-workingDir" type="text" @bind="WorkingDirectory" placeholder="C:\MyApp" class="form-input" />
-                </div>
-
-                <div class="form-group">
-                    <label class="mono" for="gen-description">Description</label>
-                    <input id="gen-description" type="text" @bind="Description" placeholder="My Shortcut" class="form-input" />
-                </div>
-
-                <div class="form-group">
-                    <label class="mono">Icon Templates</label>
-                    <div class="icon-templates">
-                        <button type="button" class="icon-template @(IsIconSelected(null, 0) ? "selected" : "")"
-                                title="Default" @onclick='() => SelectIcon(null, 0)'>
-                            <span class="icon-template-symbol">---</span>
-                            <span class="icon-template-label">None</span>
-                        </button>
-                        @foreach (var tpl in IconTemplates)
-                        {
-                            <button type="button" class="icon-template @(IsIconSelected(tpl.Path, tpl.Index) ? "selected" : "")"
-                                    title="@tpl.Label — @tpl.Path, @tpl.Index" @onclick="() => SelectIcon(tpl.Path, tpl.Index)">
-                                <span class="icon-template-symbol">@tpl.Symbol</span>
-                                <span class="icon-template-label">@tpl.Label</span>
-                            </button>
-                        }
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="mono" for="gen-iconLocation">Icon Location</label>
-                        <input id="gen-iconLocation" type="text" @bind="IconLocation"
-                               placeholder="%SystemRoot%\system32\shell32.dll" class="form-input" />
-                    </div>
-                    <div class="form-group">
-                        <label class="mono" for="gen-iconIndex">Icon Index</label>
-                        <input id="gen-iconIndex" type="number" @bind="IconIndex" class="form-input" />
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="mono" for="gen-windowStyle">Window Style</label>
-                        <select id="gen-windowStyle" @bind="WindowStyle" class="form-input">
-                            <option value="@ShortcutWindowStyle.Normal">Normal</option>
-                            <option value="@ShortcutWindowStyle.Maximized">Maximized</option>
-                            <option value="@ShortcutWindowStyle.Minimized">Minimized</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="mono" for="gen-fileName">File Name</label>
-                        <input id="gen-fileName" type="text" @bind="FileName" placeholder="shortcut" class="form-input" />
-                    </div>
-                </div>
-
-                <div class="form-checkboxes">
-                    <label class="checkbox-label">
-                        <input type="checkbox" @bind="RunAsAdmin" />
-                        <span class="checkmark"></span>
-                        <span class="mono">Run as Administrator</span>
-                    </label>
-                </div>
-
-                @if (!string.IsNullOrWhiteSpace(GenerateError))
-                {
-                    <div class="error-banner">
-                        <span>@GenerateError</span>
-                    </div>
-                }
-
-                @if (IsGenerated)
-                {
-                    <div class="success-banner">
-                        <span>Shortcut generated and downloaded as .zip successfully.</span>
-                    </div>
-                }
-
-                <button class="btn btn-primary generate-btn" @onclick="GenerateLnk" disabled="@IsGenerating">
-                    @if (IsGenerating)
-                    {
-                        <span>Generating...</span>
-                    }
-                    else
-                    {
-                        <span>Generate .lnk</span>
-                    }
-                </button>
-            </div>
         }
         else
         {
+            <!-- Overview -->
             <div class="lnk-results">
-                <!-- Overview -->
                 <div class="lnk-section">
                     <button class="lnk-section-header" @onclick="() => ToggleSection(0)">
                         <span class="mono">Overview</span>
@@ -322,134 +210,159 @@
                         }
                     </div>
                 }
-
-                <!-- Editor -->
-                <div class="lnk-section">
-                    <button class="lnk-section-header" @onclick="() => ToggleSection(2)">
-                        <span class="mono">Editor</span>
-                        <span class="section-arrow @(IsSectionOpen(2) ? "open" : "")">&#x25BE;</span>
-                    </button>
-                    @if (IsSectionOpen(2))
-                    {
-                        <div class="lnk-section-body">
-                            <div class="lnk-edit-form">
-                                <div class="form-group">
-                                    <label class="mono" for="edit-target">Target Path <span class="required">*</span></label>
-                                    <input id="edit-target" type="text" @bind="Target" placeholder="C:\Windows\notepad.exe" class="form-input" />
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="mono" for="edit-arguments">Arguments</label>
-                                    <input id="edit-arguments" type="text" @bind="Arguments" placeholder="--flag value" class="form-input" />
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="mono" for="edit-workingDir">Working Directory</label>
-                                    <input id="edit-workingDir" type="text" @bind="WorkingDirectory" placeholder="C:\MyApp" class="form-input" />
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="mono" for="edit-description">Description</label>
-                                    <input id="edit-description" type="text" @bind="Description" placeholder="My Shortcut" class="form-input" />
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="mono">Icon Templates</label>
-                                    <div class="icon-templates">
-                                        <button type="button" class="icon-template @(IsIconSelected(null, 0) ? "selected" : "")"
-                                                title="Default" @onclick='() => SelectIcon(null, 0)'>
-                                            <span class="icon-template-symbol">---</span>
-                                            <span class="icon-template-label">None</span>
-                                        </button>
-                                        @foreach (var tpl in IconTemplates)
-                                        {
-                                            <button type="button" class="icon-template @(IsIconSelected(tpl.Path, tpl.Index) ? "selected" : "")"
-                                                    title="@tpl.Label — @tpl.Path, @tpl.Index" @onclick="() => SelectIcon(tpl.Path, tpl.Index)">
-                                                <span class="icon-template-symbol">@tpl.Symbol</span>
-                                                <span class="icon-template-label">@tpl.Label</span>
-                                            </button>
-                                        }
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label class="mono" for="edit-iconLocation">Icon Location</label>
-                                        <input id="edit-iconLocation" type="text" @bind="IconLocation"
-                                               placeholder="%SystemRoot%\system32\shell32.dll" class="form-input" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="mono" for="edit-iconIndex">Icon Index</label>
-                                        <input id="edit-iconIndex" type="number" @bind="IconIndex" class="form-input" />
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label class="mono" for="edit-windowStyle">Window Style</label>
-                                        <select id="edit-windowStyle" @bind="WindowStyle" class="form-input">
-                                            <option value="@ShortcutWindowStyle.Normal">Normal</option>
-                                            <option value="@ShortcutWindowStyle.Maximized">Maximized</option>
-                                            <option value="@ShortcutWindowStyle.Minimized">Minimized</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="mono" for="edit-fileName">File Name</label>
-                                        <input id="edit-fileName" type="text" @bind="FileName" placeholder="shortcut" class="form-input" />
-                                    </div>
-                                </div>
-
-                                <div class="form-checkboxes">
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" @bind="RunAsAdmin" />
-                                        <span class="checkmark"></span>
-                                        <span class="mono">Run as Administrator</span>
-                                    </label>
-                                    @if (HasTrackingData)
-                                    {
-                                        <label class="checkbox-label">
-                                            <input type="checkbox" @bind="StripTrackingData" />
-                                            <span class="checkmark"></span>
-                                            <span class="mono">Strip Tracking Data</span>
-                                        </label>
-                                    }
-                                </div>
-
-                                @if (!string.IsNullOrWhiteSpace(DownloadError))
-                                {
-                                    <div class="error-banner">
-                                        <span>@DownloadError</span>
-                                    </div>
-                                }
-
-                                @if (IsDownloaded)
-                                {
-                                    <div class="success-banner">
-                                        <span>Shortcut downloaded as .zip successfully.</span>
-                                    </div>
-                                }
-
-                                <div class="lnk-actions">
-                                    <button class="btn btn-primary action-btn" @onclick="DownloadLnk" disabled="@IsDownloading">
-                                        @if (IsDownloading)
-                                        {
-                                            <span>Downloading...</span>
-                                        }
-                                        else
-                                        {
-                                            <span>Download .lnk</span>
-                                        }
-                                    </button>
-                                    <button class="btn btn-secondary action-btn" @onclick="ResetParse">
-                                        Back to Generator
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
             </div>
         }
+
+        <!-- Shared Form -->
+        <div class="lnk-form-wrapper">
+            @if (!IsParsed)
+            {
+                <div class="form-group template-selector">
+                    <label class="mono" for="template">Template</label>
+                    <select id="template" class="form-input" value="@SelectedTemplateName" @onchange="OnTemplateSelected">
+                        <option value="">Custom</option>
+                        @foreach (var tpl in LnkTemplates)
+                        {
+                            <option value="@tpl.Name">@tpl.Name</option>
+                        }
+                    </select>
+                </div>
+            }
+
+            <div class="form-group">
+                <label class="mono" for="target">Target Path <span class="required">*</span></label>
+                <input id="target" type="text" @bind="Target" placeholder="C:\Windows\notepad.exe" class="form-input" />
+            </div>
+
+            <div class="form-group">
+                <label class="mono" for="arguments">Arguments</label>
+                <input id="arguments" type="text" @bind="Arguments" placeholder="--flag value" class="form-input" />
+            </div>
+
+            <div class="form-group">
+                <label class="mono" for="workingDir">Working Directory</label>
+                <input id="workingDir" type="text" @bind="WorkingDirectory" placeholder="C:\MyApp" class="form-input" />
+            </div>
+
+            <div class="form-group">
+                <label class="mono" for="description">Description</label>
+                <input id="description" type="text" @bind="Description" placeholder="My Shortcut" class="form-input" />
+            </div>
+
+            <div class="form-group">
+                <label class="mono" for="iconTemplate">Icon Template</label>
+                <select id="iconTemplate" class="form-input" value="@SelectedIconTemplateName" @onchange="OnIconTemplateSelected">
+                    <option value="">None</option>
+                    @foreach (var tpl in IconTemplates)
+                    {
+                        <option value="@tpl.Label">@tpl.Symbol @tpl.Label</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="mono" for="iconLocation">Icon Location</label>
+                    <input id="iconLocation" type="text" @bind="IconLocation"
+                           placeholder="%SystemRoot%\system32\shell32.dll" class="form-input" />
+                </div>
+                <div class="form-group">
+                    <label class="mono" for="iconIndex">Icon Index</label>
+                    <input id="iconIndex" type="number" @bind="IconIndex" class="form-input" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="mono" for="windowStyle">Window Style</label>
+                    <select id="windowStyle" @bind="WindowStyle" class="form-input">
+                        <option value="@ShortcutWindowStyle.Normal">Normal</option>
+                        <option value="@ShortcutWindowStyle.Maximized">Maximized</option>
+                        <option value="@ShortcutWindowStyle.Minimized">Minimized</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="mono" for="fileName">File Name</label>
+                    <input id="fileName" type="text" @bind="FileName" placeholder="shortcut" class="form-input" />
+                </div>
+            </div>
+
+            <div class="form-checkboxes">
+                <label class="checkbox-label">
+                    <input type="checkbox" @bind="RunAsAdmin" />
+                    <span class="checkmark"></span>
+                    <span class="mono">Run as Administrator</span>
+                </label>
+                @if (IsParsed && HasTrackingData)
+                {
+                    <label class="checkbox-label">
+                        <input type="checkbox" @bind="StripTrackingData" />
+                        <span class="checkmark"></span>
+                        <span class="mono">Strip Tracking Data</span>
+                    </label>
+                }
+            </div>
+
+            @if (!IsParsed)
+            {
+                @if (!string.IsNullOrWhiteSpace(GenerateError))
+                {
+                    <div class="error-banner">
+                        <span>@GenerateError</span>
+                    </div>
+                }
+
+                @if (IsGenerated)
+                {
+                    <div class="success-banner">
+                        <span>Shortcut generated and downloaded as .zip successfully.</span>
+                    </div>
+                }
+
+                <button class="btn btn-primary generate-btn" @onclick="GenerateLnk" disabled="@IsGenerating">
+                    @if (IsGenerating)
+                    {
+                        <span>Generating...</span>
+                    }
+                    else
+                    {
+                        <span>Generate .lnk</span>
+                    }
+                </button>
+            }
+            else
+            {
+                @if (!string.IsNullOrWhiteSpace(DownloadError))
+                {
+                    <div class="error-banner">
+                        <span>@DownloadError</span>
+                    </div>
+                }
+
+                @if (IsDownloaded)
+                {
+                    <div class="success-banner">
+                        <span>Shortcut downloaded as .zip successfully.</span>
+                    </div>
+                }
+
+                <div class="lnk-actions">
+                    <button class="btn btn-primary action-btn" @onclick="DownloadLnk" disabled="@IsDownloading">
+                        @if (IsDownloading)
+                        {
+                            <span>Downloading...</span>
+                        }
+                        else
+                        {
+                            <span>Download .lnk</span>
+                        }
+                    </button>
+                    <button class="btn btn-secondary action-btn" @onclick="ResetParse">
+                        Back to Generator
+                    </button>
+                </div>
+            }
+        </div>
 
         <div class="powered-by">
             <div class="powered-by-header">
@@ -491,7 +404,7 @@
     private bool IsDownloading { get; set; }
     private bool IsDownloaded { get; set; }
     private string? DownloadError { get; set; }
-    private readonly HashSet<int> OpenSections = [0, 1, 2];
+    private readonly HashSet<int> OpenSections = [0, 1];
     private const long MaxFileSize = 10 * 1024 * 1024;
 
     // Tracking data from parsed file
@@ -596,15 +509,23 @@
         new("🎵", "MP3", @"%SystemRoot%\system32\imageres.dll", 85),
     ];
 
-    private void SelectIcon(string? path, int index)
-    {
-        IconLocation = path;
-        IconIndex = index;
-    }
+    private string SelectedIconTemplateName =>
+        IconTemplates.FirstOrDefault(t => t.Path == IconLocation && t.Index == IconIndex)?.Label ?? "";
 
-    private bool IsIconSelected(string? path, int index)
+    private void OnIconTemplateSelected(ChangeEventArgs e)
     {
-        return IconLocation == path && IconIndex == index;
+        var label = e.Value?.ToString() ?? "";
+        var template = IconTemplates.FirstOrDefault(t => t.Label == label);
+        if (template != null)
+        {
+            IconLocation = template.Path;
+            IconIndex = template.Index;
+        }
+        else
+        {
+            IconLocation = null;
+            IconIndex = 0;
+        }
     }
 
     // --- Generate ---
@@ -722,7 +643,6 @@
             OpenSections.Clear();
             OpenSections.Add(0);
             OpenSections.Add(1);
-            OpenSections.Add(2);
         }
         catch (ArgumentException ex)
         {

@@ -181,59 +181,6 @@ select.form-input option {
     border-bottom: 1px solid var(--border-color);
 }
 
-/* Icon templates */
-.icon-templates {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 0.5rem;
-}
-
-.icon-template {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
-    padding: 0.6rem 0.4rem;
-    background: var(--darker-bg);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: var(--transition-fast);
-    color: var(--text-secondary);
-    font-family: inherit;
-}
-
-.icon-template:hover {
-    border-color: var(--primary-color);
-    background: rgba(0, 255, 204, 0.04);
-}
-
-.icon-template.selected {
-    border-color: var(--primary-color);
-    background: rgba(0, 255, 204, 0.08);
-    box-shadow: 0 0 0 1px var(--primary-color), 0 0 12px rgba(0, 255, 204, 0.1);
-}
-
-.icon-template-symbol {
-    font-size: 1.4rem;
-    line-height: 1;
-}
-
-.icon-template-label {
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--text-muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-}
-
-.icon-template.selected .icon-template-label {
-    color: var(--primary-color);
-}
-
 /* Banners */
 .error-banner {
     background: rgba(255, 60, 60, 0.1);
@@ -451,10 +398,6 @@ select.form-input option {
     .form-row {
         flex-direction: column;
         gap: 0;
-    }
-
-    .icon-templates {
-        grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
     }
 
     .lnk-section-body {
