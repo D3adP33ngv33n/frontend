@@ -690,7 +690,7 @@
                 {
                     <span>@entry.Name</span>
                 }
-                else if (depth == 0 && entry.Id.HasValue && Enum.IsDefined(typeof(ResourceType), entry.Id.Value))
+                else if (depth == 0 && entry.Id.HasValue && Enum.IsDefined(typeof(ResourceType), entry.Id.Value)) 
                 {
                     <span>@((ResourceType)entry.Id.Value)</span>
                 }
