@@ -1,0 +1,39 @@
+/* Upload Strip */
+
+.upload-strip {
+    position: relative;
+    max-width: 640px;
+    margin: 0 auto 1.25rem;
+    padding: 0.7rem 1.25rem;
+    background: var(--card-bg);
+    border: 1px dashed var(--border-color);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.upload-strip:hover,
+.upload-strip.drag-over {
+    border-color: var(--primary-color);
+    background: rgba(0, 255, 204, 0.03);
+}
+
+.upload-strip-label {
+    font-size: 0.82rem;
+    color: var(--primary-color);
+    letter-spacing: var(--letter-spacing-wide);
+}
+
+.upload-strip-sep {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.upload-strip-hint {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}

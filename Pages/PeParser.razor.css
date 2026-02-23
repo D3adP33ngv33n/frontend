@@ -1,4 +1,4 @@
-/* Upload zone */
+/* PE form wrapper */
 .pe-form-wrapper {
     max-width: 640px;
     margin: 0 auto 2rem;
@@ -11,43 +11,6 @@
 .pe-form-wrapper .error-banner {
     margin-top: 1rem;
     margin-bottom: 0;
-}
-
-.upload-zone {
-    position: relative;
-    background: var(--card-bg);
-    border: 2px dashed var(--border-color);
-    border-radius: var(--border-radius);
-    padding: 3rem 2rem;
-    text-align: center;
-    transition: var(--transition-fast);
-    cursor: pointer;
-}
-
-.upload-zone:hover,
-.upload-zone.drag-over {
-    border-color: var(--primary-color);
-    background: rgba(0, 255, 204, 0.03);
-}
-
-.upload-icon {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 0.75rem;
-    letter-spacing: var(--letter-spacing-wide);
-}
-
-.upload-text {
-    color: var(--text-secondary);
-    font-size: 1rem;
-    margin-bottom: 0.4rem;
-}
-
-.upload-hint {
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    letter-spacing: var(--letter-spacing-wide);
 }
 
 /* Results container */
@@ -226,10 +189,6 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-    .upload-zone {
-        padding: 2rem 1.5rem;
-    }
-
     .pe-table {
         font-size: 0.78rem;
     }

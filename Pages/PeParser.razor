@@ -16,11 +16,11 @@
         </div>
 
         <div class="pe-form-wrapper">
-            <div class="upload-zone @(IsDragOver ? "drag-over" : "")"
+            <div class="upload-strip @(IsDragOver ? "drag-over" : "")"
                  @ondragenter="OnDragEnter" @ondragleave="OnDragLeave" @ondragover:preventDefault>
-                <div class="upload-icon mono">PE</div>
-                <p class="upload-text">Drop a PE file here or click to browse</p>
-                <p class="upload-hint mono">.exe .dll .sys .ocx — max 50 MB</p>
+                <span class="mono upload-strip-label">Drop PE file to parse</span>
+                <span class="upload-strip-sep mono">|</span>
+                <span class="upload-strip-hint">.exe .dll .sys .ocx — max 50 MB</span>
                 <InputFile OnChange="OnFileSelected" accept=".exe,.dll,.sys,.ocx,.efi,.scr,.cpl" class="upload-input" />
             </div>
 
