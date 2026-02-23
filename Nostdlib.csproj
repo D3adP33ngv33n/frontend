@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="PeSharp" Version="1.*" />
-    <PackageReference Include="ShortcutLib" Version="1.*" />
+    <PackageReference Include="ShortcutLib" Version="1.0.5-alpha.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.3" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Extensions.Localization" Version="10.0.3" />
