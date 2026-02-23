@@ -20,12 +20,6 @@
 
         <ul class="navbar-nav @(IsMobileMenuOpen ? "open" : "")">
             <li class="nav-item">
-                <a href="@Routes.Services" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.Services"]</a>
-            </li>
-            <li class="nav-item">
-                <a href="@Routes.About" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.About"]</a>
-            </li>
-            <li class="nav-item">
                 <a href="@Routes.OpenSource" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.OpenSource"]</a>
             </li>
             <li class="nav-item">

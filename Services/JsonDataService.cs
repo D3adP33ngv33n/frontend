@@ -68,9 +68,6 @@ public class JsonDataService : IDataService, IDisposable
         return result;
     }
 
-    public Task<List<ServiceItem>> GetServicesAsync()
-        => LoadDataAsync<ServiceItem>("services.json", nameof(ServiceItem));
-
     public Task<List<JobPosition>> GetJobPositionsAsync()
         => LoadDataAsync<JobPosition>("careers.json", nameof(JobPosition));
 

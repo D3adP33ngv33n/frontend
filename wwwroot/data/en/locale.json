@@ -1,6 +1,4 @@
 {
-  "Nav.About": "About",
-  "Nav.Services": "Services",
   "Nav.OpenSource": "Open Source",
   "Nav.Careers": "Careers",
   "Nav.Privacy": "Privacy",
@@ -11,23 +9,6 @@
   "Hero.Subtitle": "Elite cybersecurity consulting for organizations that demand discretion. Proven expertise. Measurable outcomes. Absolute confidentiality.",
   "Hero.CTA.Primary": "Start a Conversation",
   "Hero.CTA.Secondary": "Explore Our Work",
-
-  "About.Title": "About Us",
-  "About.Subtitle": "Precision security for high-stakes environments",
-  "About.Description1": "Our team brings decades of combined experience across offensive security, cryptographic research, and incident response. We operate where capability matters more than visibility.",
-  "About.Description2": "We architect and defend systems for organizations facing sophisticated threats—integrating advanced cryptographic protocols and security frameworks built for resilience under pressure.",
-  "About.Description3": "No case studies. No testimonials.",
-  "About.Description4": "Just outcomes.",
-  "About.PrinciplesTitle": "Principles",
-  "About.Principle1": "Layered defense as architectural foundation",
-  "About.Principle2": "Absolute client confidentiality",
-  "About.Principle3": "Intelligence-driven security operations",
-  "About.Principle4": "Continuous validation through adversarial testing",
-  "About.Principle5": "First-principles approach to complex problems",
-
-  "Services.Title": "Services",
-  "Services.Subtitle": "Specialized capabilities for complex security challenges",
-  "Services.Note": "Every engagement operates under strict NDA. We collaborate directly with stakeholders to design solutions calibrated to your specific threat model and operational requirements.",
 
   "Careers.Title": "Careers",
   "Careers.Subtitle": "Build your career at the edge of security research",
