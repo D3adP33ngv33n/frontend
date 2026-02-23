@@ -15,20 +15,30 @@
         </div>
 
         <div class="lnk-form-wrapper">
+            <div class="form-group template-selector">
+                <label class="mono" for="template">Template</label>
+                <select id="template" class="form-input" value="@SelectedTemplateName" @onchange="OnTemplateSelected">
+                    <option value="">Custom</option>
+                    @foreach (var tpl in LnkTemplates)
+                    {
+                        <option value="@tpl.Name">@tpl.Name</option>
+                    }
+                </select>
+            </div>
+
             <div class="form-group">
                 <label class="mono" for="target">Target Path <span class="required">*</span></label>
                 <input id="target" type="text" @bind="Target" placeholder="C:\Windows\notepad.exe" class="form-input" />
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="mono" for="arguments">Arguments</label>
-                    <input id="arguments" type="text" @bind="Arguments" placeholder="--flag value" class="form-input" />
-                </div>
-                <div class="form-group">
-                    <label class="mono" for="workingDir">Working Directory</label>
-                    <input id="workingDir" type="text" @bind="WorkingDirectory" placeholder="C:\MyApp" class="form-input" />
-                </div>
+            <div class="form-group">
+                <label class="mono" for="arguments">Arguments</label>
+                <input id="arguments" type="text" @bind="Arguments" placeholder="--flag value" class="form-input" />
+            </div>
+
+            <div class="form-group">
+                <label class="mono" for="workingDir">Working Directory</label>
+                <input id="workingDir" type="text" @bind="WorkingDirectory" placeholder="C:\MyApp" class="form-input" />
             </div>
 
             <div class="form-group">
@@ -40,16 +50,14 @@
                 <label class="mono">Icon Templates</label>
                 <div class="icon-templates">
                     <button type="button" class="icon-template @(IsIconSelected(null, 0) ? "selected" : "")"
-                            title="Default"
-                            @onclick='() => SelectIcon(null, 0)'>
+                            title="Default"                            @onclick='() => SelectIcon(null, 0)'>
                         <span class="icon-template-symbol">---</span>
                         <span class="icon-template-label">None</span>
                     </button>
                     @foreach (var tpl in IconTemplates)
                     {
                         <button type="button" class="icon-template @(IsIconSelected(tpl.Path, tpl.Index) ? "selected" : "")"
-                                title="@tpl.Label — @tpl.Path, @tpl.Index"
-                                @onclick="() => SelectIcon(tpl.Path, tpl.Index)">
+                                title="@tpl.Label — @tpl.Path, @tpl.Index"                                @onclick="() => SelectIcon(tpl.Path, tpl.Index)">
                             <span class="icon-template-symbol">@tpl.Symbol</span>
                             <span class="icon-template-label">@tpl.Label</span>
                         </button>
@@ -60,7 +68,8 @@
             <div class="form-row">
                 <div class="form-group">
                     <label class="mono" for="iconLocation">Icon Location</label>
-                    <input id="iconLocation" type="text" @bind="IconLocation" placeholder="%SystemRoot%\system32\shell32.dll" class="form-input" />
+                    <input id="iconLocation" type="text" @bind="IconLocation"
+                           placeholder="%SystemRoot%\system32\shell32.dll" class="form-input" />
                 </div>
                 <div class="form-group">
                     <label class="mono" for="iconIndex">Icon Index</label>
@@ -134,6 +143,96 @@
     private bool IsGenerating { get; set; }
     private bool IsGenerated { get; set; }
     private string? ErrorMessage { get; set; }
+    private string SelectedTemplateName { get; set; } = "";
+
+    private record LnkTemplate(
+        string Name, string Target, string? Arguments, string? WorkingDirectory,
+        string? ShortcutDescription, string? IconLocation, int IconIndex,
+        ShortcutWindowStyle WindowStyle, bool RunAsAdmin, string FileName);
+
+    private static readonly LnkTemplate[] LnkTemplates =
+    [
+        new("PowerShell Hello World",
+            @"C:\Windows\System32\conhost.exe",
+            "--headless powershell.exe \"(New-Object -ComObject WScript.Shell).Popup('Hello World')\"",
+            null, "Headless launching a PowerShell popup",
+            @"%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe", 0,
+            ShortcutWindowStyle.Minimized, false, "ps-helloworld"),
+
+        new("Admin Command Prompt",
+            @"C:\Windows\System32\cmd.exe",
+            null, @"C:\", "Elevated Command Prompt",
+            @"%SystemRoot%\system32\cmd.exe", 0,
+            ShortcutWindowStyle.Normal, true, "admin-cmd"),
+
+        new("Admin PowerShell",
+            @"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe",
+            "-NoExit", @"C:\", "Elevated PowerShell",
+            @"%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe", 0,
+            ShortcutWindowStyle.Normal, true, "admin-powershell"),
+
+        new("Open Notepad",
+            @"C:\Windows\System32\notepad.exe",
+            null, null, "Open Notepad",
+            @"%SystemRoot%\system32\notepad.exe", 0,
+            ShortcutWindowStyle.Normal, false, "notepad"),
+
+        new("Minimized Startup Script",
+            @"C:\Windows\System32\cmd.exe",
+            @"/c ""C:\Scripts\startup.bat""", @"C:\Scripts", "Startup Script",
+            @"%SystemRoot%\system32\shell32.dll", 3,
+            ShortcutWindowStyle.Minimized, false, "startup-script"),
+
+        new("Windows Calculator",
+            @"C:\Windows\System32\calc.exe",
+            null, null, "Calculator",
+            @"%SystemRoot%\system32\calc.exe", 0,
+            ShortcutWindowStyle.Normal, false, "calculator"),
+
+        new("Remote Desktop",
+            @"C:\Windows\System32\mstsc.exe",
+            null, null, "Remote Desktop Connection",
+            @"%SystemRoot%\system32\mstsc.exe", 0,
+            ShortcutWindowStyle.Normal, false, "remote-desktop"),
+
+        new("Disk Cleanup (Admin)",
+            @"C:\Windows\System32\cleanmgr.exe",
+            "/d C:", @"C:\", "Disk Cleanup",
+            @"%SystemRoot%\system32\cleanmgr.exe", 0,
+            ShortcutWindowStyle.Normal, true, "disk-cleanup"),
+    ];
+
+    private void OnTemplateSelected(ChangeEventArgs e)
+    {
+        SelectedTemplateName = e.Value?.ToString() ?? "";
+        var template = LnkTemplates.FirstOrDefault(t => t.Name == SelectedTemplateName);
+        if (template is null)
+        {
+            Target = "";
+            Arguments = null;
+            WorkingDirectory = null;
+            Description = null;
+            IconLocation = null;
+            IconIndex = 0;
+            WindowStyle = ShortcutWindowStyle.Normal;
+            RunAsAdmin = false;
+            FileName = "shortcut";
+        }
+        else
+        {
+            Target = template.Target;
+            Arguments = template.Arguments;
+            WorkingDirectory = template.WorkingDirectory;
+            Description = template.ShortcutDescription;
+            IconLocation = template.IconLocation;
+            IconIndex = template.IconIndex;
+            WindowStyle = template.WindowStyle;
+            RunAsAdmin = template.RunAsAdmin;
+            FileName = template.FileName;
+        }
+        ErrorMessage = null;
+        IsGenerated = false;
+    }
 
     private record IconTemplate(string Symbol, string Label, string Path, int Index);
 

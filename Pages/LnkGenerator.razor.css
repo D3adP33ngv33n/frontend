@@ -111,6 +111,13 @@ select.form-input option {
     cursor: pointer;
 }
 
+/* Template selector */
+.template-selector {
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
 /* Icon templates */
 .icon-templates {
     display: grid;
