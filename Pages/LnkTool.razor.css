@@ -65,9 +65,134 @@
     max-width: 700px;
 }
 
+/* Flag pills */
+.lnk-flags {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.lnk-flags-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: var(--letter-spacing-wide);
+    margin-right: 0.25rem;
+}
+
+.lnk-flag {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    background: rgba(0, 255, 204, 0.08);
+    border: 1px solid rgba(0, 255, 204, 0.2);
+    border-radius: 3px;
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+}
+
+/* Checkbox grid for File Attributes, Link Flags */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.5rem;
+}
+
+/* Form sections (advanced collapsible areas inside the form) */
+.form-section {
+    margin-top: 1.25rem;
+}
+
+.form-section + .form-section {
+    margin-top: 0.75rem;
+}
+
+/* Console sub-groups */
+.console-subgroup {
+    margin-bottom: 1.25rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.console-subgroup:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+.console-subgroup-label {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: var(--letter-spacing-wide);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+}
+
+/* Color table grid (editable) */
+.color-table-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+}
+
+.color-swatch {
+    aspect-ratio: 1.5;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    padding: 0;
+    cursor: pointer;
+    min-height: 28px;
+    background: var(--darker-bg);
+}
+
+.color-swatch::-webkit-color-swatch-wrapper {
+    padding: 2px;
+}
+
+.color-swatch::-webkit-color-swatch {
+    border: none;
+    border-radius: 2px;
+}
+
+/* Color preview (parser read-only) */
+.color-preview-row {
+    display: flex;
+    gap: 0.3rem;
+    margin-top: 0.75rem;
+}
+
+.color-preview-swatch {
+    flex: 1;
+    height: 24px;
+    border-radius: 3px;
+    border: 1px solid var(--border-color);
+}
+
+/* Info banner */
+.info-banner {
+    background: rgba(100, 150, 255, 0.1);
+    border: 1px solid rgba(100, 150, 255, 0.25);
+    border-radius: var(--border-radius);
+    padding: 0.6rem 0.85rem;
+    color: #7aa2ff;
+    font-size: 0.82rem;
+    margin-bottom: 1rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .lnk-actions {
         flex-direction: column;
+    }
+
+    .checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .color-table-grid {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
