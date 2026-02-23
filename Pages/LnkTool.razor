@@ -1,0 +1,851 @@
+@page "/lnk-tool"
+@inject IJSRuntime JS
+@using ShortcutLib
+@using System.IO.Compression
+
+<PageTitle>LNK Tool - NOSTDLIB</PageTitle>
+
+<Navbar />
+
+<section class="lnk-tool">
+    <div class="container">
+        <div class="lnk-header">
+            <h1 class="mono">LNK <span class="accent">Tool</span></h1>
+            <p class="lnk-subtitle">Generate and edit Windows shortcut (.lnk) files directly in your browser.</p>
+        </div>
+
+        @if (!IsParsed)
+        {
+            <div class="upload-strip @(IsDragOver ? "drag-over" : "")"
+                 @ondragenter="OnDragEnter" @ondragleave="OnDragLeave" @ondragover:preventDefault>
+                <span class="mono upload-strip-label">Drop .lnk to edit</span>
+                <span class="upload-strip-sep mono">|</span>
+                <span class="upload-strip-hint">or click to browse</span>
+                <InputFile OnChange="OnFileSelected" accept=".lnk" class="upload-input" />
+            </div>
+
+            @if (IsLoading)
+            {
+                <div class="loading-banner mono">Parsing...</div>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(ParseError))
+            {
+                <div class="parse-error-wrapper">
+                    <div class="error-banner">
+                        <span>@ParseError</span>
+                    </div>
+                </div>
+            }
+
+            <div class="lnk-form-wrapper">
+                <div class="form-group template-selector">
+                    <label class="mono" for="template">Template</label>
+                    <select id="template" class="form-input" value="@SelectedTemplateName" @onchange="OnTemplateSelected">
+                        <option value="">Custom</option>
+                        @foreach (var tpl in LnkTemplates)
+                        {
+                            <option value="@tpl.Name">@tpl.Name</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="mono" for="gen-target">Target Path <span class="required">*</span></label>
+                    <input id="gen-target" type="text" @bind="Target" placeholder="C:\Windows\notepad.exe" class="form-input" />
+                </div>
+
+                <div class="form-group">
+                    <label class="mono" for="gen-arguments">Arguments</label>
+                    <input id="gen-arguments" type="text" @bind="Arguments" placeholder="--flag value" class="form-input" />
+                </div>
+
+                <div class="form-group">
+                    <label class="mono" for="gen-workingDir">Working Directory</label>
+                    <input id="gen-workingDir" type="text" @bind="WorkingDirectory" placeholder="C:\MyApp" class="form-input" />
+                </div>
+
+                <div class="form-group">
+                    <label class="mono" for="gen-description">Description</label>
+                    <input id="gen-description" type="text" @bind="Description" placeholder="My Shortcut" class="form-input" />
+                </div>
+
+                <div class="form-group">
+                    <label class="mono">Icon Templates</label>
+                    <div class="icon-templates">
+                        <button type="button" class="icon-template @(IsIconSelected(null, 0) ? "selected" : "")"
+                                title="Default" @onclick='() => SelectIcon(null, 0)'>
+                            <span class="icon-template-symbol">---</span>
+                            <span class="icon-template-label">None</span>
+                        </button>
+                        @foreach (var tpl in IconTemplates)
+                        {
+                            <button type="button" class="icon-template @(IsIconSelected(tpl.Path, tpl.Index) ? "selected" : "")"
+                                    title="@tpl.Label — @tpl.Path, @tpl.Index" @onclick="() => SelectIcon(tpl.Path, tpl.Index)">
+                                <span class="icon-template-symbol">@tpl.Symbol</span>
+                                <span class="icon-template-label">@tpl.Label</span>
+                            </button>
+                        }
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="mono" for="gen-iconLocation">Icon Location</label>
+                        <input id="gen-iconLocation" type="text" @bind="IconLocation"
+                               placeholder="%SystemRoot%\system32\shell32.dll" class="form-input" />
+                    </div>
+                    <div class="form-group">
+                        <label class="mono" for="gen-iconIndex">Icon Index</label>
+                        <input id="gen-iconIndex" type="number" @bind="IconIndex" class="form-input" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="mono" for="gen-windowStyle">Window Style</label>
+                        <select id="gen-windowStyle" @bind="WindowStyle" class="form-input">
+                            <option value="@ShortcutWindowStyle.Normal">Normal</option>
+                            <option value="@ShortcutWindowStyle.Maximized">Maximized</option>
+                            <option value="@ShortcutWindowStyle.Minimized">Minimized</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="mono" for="gen-fileName">File Name</label>
+                        <input id="gen-fileName" type="text" @bind="FileName" placeholder="shortcut" class="form-input" />
+                    </div>
+                </div>
+
+                <div class="form-checkboxes">
+                    <label class="checkbox-label">
+                        <input type="checkbox" @bind="RunAsAdmin" />
+                        <span class="checkmark"></span>
+                        <span class="mono">Run as Administrator</span>
+                    </label>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(GenerateError))
+                {
+                    <div class="error-banner">
+                        <span>@GenerateError</span>
+                    </div>
+                }
+
+                @if (IsGenerated)
+                {
+                    <div class="success-banner">
+                        <span>Shortcut generated and downloaded as .zip successfully.</span>
+                    </div>
+                }
+
+                <button class="btn btn-primary generate-btn" @onclick="GenerateLnk" disabled="@IsGenerating">
+                    @if (IsGenerating)
+                    {
+                        <span>Generating...</span>
+                    }
+                    else
+                    {
+                        <span>Generate .lnk</span>
+                    }
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="lnk-results">
+                <!-- Overview -->
+                <div class="lnk-section">
+                    <button class="lnk-section-header" @onclick="() => ToggleSection(0)">
+                        <span class="mono">Overview</span>
+                        <span class="section-arrow @(IsSectionOpen(0) ? "open" : "")">&#x25BE;</span>
+                    </button>
+                    @if (IsSectionOpen(0))
+                    {
+                        <div class="lnk-section-body">
+                            <div class="lnk-info-grid">
+                                <div class="lnk-info-item">
+                                    <span class="lnk-info-label mono">File</span>
+                                    <span class="lnk-info-value">@OriginalFileName</span>
+                                </div>
+                                <div class="lnk-info-item">
+                                    <span class="lnk-info-label mono">Size</span>
+                                    <span class="lnk-info-value">@FormatSize((ulong)OriginalFileSize)</span>
+                                </div>
+                                <div class="lnk-info-item">
+                                    <span class="lnk-info-label mono">Target</span>
+                                    <span class="lnk-info-value mono">@(Target ?? "—")</span>
+                                </div>
+                                @if (!string.IsNullOrWhiteSpace(Arguments))
+                                {
+                                    <div class="lnk-info-item">
+                                        <span class="lnk-info-label mono">Arguments</span>
+                                        <span class="lnk-info-value mono">@Arguments</span>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(WorkingDirectory))
+                                {
+                                    <div class="lnk-info-item">
+                                        <span class="lnk-info-label mono">Working Dir</span>
+                                        <span class="lnk-info-value mono">@WorkingDirectory</span>
+                                    </div>
+                                }
+                                <div class="lnk-info-item">
+                                    <span class="lnk-info-label mono">Window Style</span>
+                                    <span class="lnk-info-value">@WindowStyle</span>
+                                </div>
+                                <div class="lnk-info-item">
+                                    <span class="lnk-info-label mono">Run as Admin</span>
+                                    <span class="lnk-info-value">@(RunAsAdmin ? "Yes" : "No")</span>
+                                </div>
+                                @if (!string.IsNullOrWhiteSpace(IconLocation))
+                                {
+                                    <div class="lnk-info-item">
+                                        <span class="lnk-info-label mono">Icon</span>
+                                        <span class="lnk-info-value mono">@IconLocation, @IconIndex</span>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(Description))
+                                {
+                                    <div class="lnk-info-item">
+                                        <span class="lnk-info-label mono">Description</span>
+                                        <span class="lnk-info-value">@Description</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- Tracking Info -->
+                @if (HasTrackingData)
+                {
+                    <div class="lnk-section tracking-section">
+                        <button class="lnk-section-header" @onclick="() => ToggleSection(1)">
+                            <span class="mono">Tracking Info</span>
+                            <span class="section-arrow @(IsSectionOpen(1) ? "open" : "")">&#x25BE;</span>
+                        </button>
+                        @if (IsSectionOpen(1))
+                        {
+                            <div class="lnk-section-body">
+                                <div class="warning-banner">
+                                    <span>This file contains embedded tracking data that can identify the machine it was created on.</span>
+                                </div>
+
+                                <div class="lnk-info-grid">
+                                    @if (ParsedTracker != null)
+                                    {
+                                        <div class="lnk-info-item tracking-item">
+                                            <span class="lnk-info-label mono">Machine ID</span>
+                                            <span class="lnk-info-value mono">@ParsedTracker.MachineId</span>
+                                        </div>
+                                        <div class="lnk-info-item tracking-item">
+                                            <span class="lnk-info-label mono">Volume ID</span>
+                                            <span class="lnk-info-value mono">@ParsedTracker.VolumeId</span>
+                                        </div>
+                                        <div class="lnk-info-item tracking-item">
+                                            <span class="lnk-info-label mono">Object ID</span>
+                                            <span class="lnk-info-value mono">@ParsedTracker.ObjectId</span>
+                                        </div>
+                                        @if (ParsedTracker.BirthVolumeId != null)
+                                        {
+                                            <div class="lnk-info-item tracking-item">
+                                                <span class="lnk-info-label mono">Birth Volume ID</span>
+                                                <span class="lnk-info-value mono">@ParsedTracker.BirthVolumeId</span>
+                                            </div>
+                                        }
+                                        @if (ParsedTracker.BirthObjectId != null)
+                                        {
+                                            <div class="lnk-info-item tracking-item">
+                                                <span class="lnk-info-label mono">Birth Object ID</span>
+                                                <span class="lnk-info-value mono">@ParsedTracker.BirthObjectId</span>
+                                            </div>
+                                        }
+                                    }
+
+                                    @if (ParsedLinkInfo?.Local != null)
+                                    {
+                                        <div class="lnk-info-item tracking-item">
+                                            <span class="lnk-info-label mono">Local Path</span>
+                                            <span class="lnk-info-value mono">@ParsedLinkInfo.Local.BasePath</span>
+                                        </div>
+                                        <div class="lnk-info-item tracking-item">
+                                            <span class="lnk-info-label mono">Drive Serial</span>
+                                            <span class="lnk-info-value mono">@($"0x{ParsedLinkInfo.Local.DriveSerialNumber:X8}")</span>
+                                        </div>
+                                        @if (!string.IsNullOrWhiteSpace(ParsedLinkInfo.Local.VolumeLabel))
+                                        {
+                                            <div class="lnk-info-item tracking-item">
+                                                <span class="lnk-info-label mono">Volume Label</span>
+                                                <span class="lnk-info-value mono">@ParsedLinkInfo.Local.VolumeLabel</span>
+                                            </div>
+                                        }
+                                    }
+                                    @if (ParsedLinkInfo?.Network != null)
+                                    {
+                                        <div class="lnk-info-item tracking-item">
+                                            <span class="lnk-info-label mono">Network Share</span>
+                                            <span class="lnk-info-value mono">@ParsedLinkInfo.Network.ShareName</span>
+                                        </div>
+                                    }
+
+                                    @if (ParsedCreationTime != null)
+                                    {
+                                        <div class="lnk-info-item tracking-item">
+                                            <span class="lnk-info-label mono">Created</span>
+                                            <span class="lnk-info-value mono">@ParsedCreationTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</span>
+                                        </div>
+                                    }
+                                    @if (ParsedAccessTime != null)
+                                    {
+                                        <div class="lnk-info-item tracking-item">
+                                            <span class="lnk-info-label mono">Accessed</span>
+                                            <span class="lnk-info-value mono">@ParsedAccessTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</span>
+                                        </div>
+                                    }
+                                    @if (ParsedWriteTime != null)
+                                    {
+                                        <div class="lnk-info-item tracking-item">
+                                            <span class="lnk-info-label mono">Modified</span>
+                                            <span class="lnk-info-value mono">@ParsedWriteTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</span>
+                                        </div>
+                                    }
+
+                                    @if (ParsedPropertyStore != null)
+                                    {
+                                        <div class="lnk-info-item tracking-item">
+                                            <span class="lnk-info-label mono">Property Store</span>
+                                            <span class="lnk-info-value mono">@FormatSize((ulong)ParsedPropertyStore.Length)</span>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+
+                <!-- Editor -->
+                <div class="lnk-section">
+                    <button class="lnk-section-header" @onclick="() => ToggleSection(2)">
+                        <span class="mono">Editor</span>
+                        <span class="section-arrow @(IsSectionOpen(2) ? "open" : "")">&#x25BE;</span>
+                    </button>
+                    @if (IsSectionOpen(2))
+                    {
+                        <div class="lnk-section-body">
+                            <div class="lnk-edit-form">
+                                <div class="form-group">
+                                    <label class="mono" for="edit-target">Target Path <span class="required">*</span></label>
+                                    <input id="edit-target" type="text" @bind="Target" placeholder="C:\Windows\notepad.exe" class="form-input" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="mono" for="edit-arguments">Arguments</label>
+                                    <input id="edit-arguments" type="text" @bind="Arguments" placeholder="--flag value" class="form-input" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="mono" for="edit-workingDir">Working Directory</label>
+                                    <input id="edit-workingDir" type="text" @bind="WorkingDirectory" placeholder="C:\MyApp" class="form-input" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="mono" for="edit-description">Description</label>
+                                    <input id="edit-description" type="text" @bind="Description" placeholder="My Shortcut" class="form-input" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="mono">Icon Templates</label>
+                                    <div class="icon-templates">
+                                        <button type="button" class="icon-template @(IsIconSelected(null, 0) ? "selected" : "")"
+                                                title="Default" @onclick='() => SelectIcon(null, 0)'>
+                                            <span class="icon-template-symbol">---</span>
+                                            <span class="icon-template-label">None</span>
+                                        </button>
+                                        @foreach (var tpl in IconTemplates)
+                                        {
+                                            <button type="button" class="icon-template @(IsIconSelected(tpl.Path, tpl.Index) ? "selected" : "")"
+                                                    title="@tpl.Label — @tpl.Path, @tpl.Index" @onclick="() => SelectIcon(tpl.Path, tpl.Index)">
+                                                <span class="icon-template-symbol">@tpl.Symbol</span>
+                                                <span class="icon-template-label">@tpl.Label</span>
+                                            </button>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="mono" for="edit-iconLocation">Icon Location</label>
+                                        <input id="edit-iconLocation" type="text" @bind="IconLocation"
+                                               placeholder="%SystemRoot%\system32\shell32.dll" class="form-input" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="mono" for="edit-iconIndex">Icon Index</label>
+                                        <input id="edit-iconIndex" type="number" @bind="IconIndex" class="form-input" />
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="mono" for="edit-windowStyle">Window Style</label>
+                                        <select id="edit-windowStyle" @bind="WindowStyle" class="form-input">
+                                            <option value="@ShortcutWindowStyle.Normal">Normal</option>
+                                            <option value="@ShortcutWindowStyle.Maximized">Maximized</option>
+                                            <option value="@ShortcutWindowStyle.Minimized">Minimized</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="mono" for="edit-fileName">File Name</label>
+                                        <input id="edit-fileName" type="text" @bind="FileName" placeholder="shortcut" class="form-input" />
+                                    </div>
+                                </div>
+
+                                <div class="form-checkboxes">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" @bind="RunAsAdmin" />
+                                        <span class="checkmark"></span>
+                                        <span class="mono">Run as Administrator</span>
+                                    </label>
+                                    @if (HasTrackingData)
+                                    {
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" @bind="StripTrackingData" />
+                                            <span class="checkmark"></span>
+                                            <span class="mono">Strip Tracking Data</span>
+                                        </label>
+                                    }
+                                </div>
+
+                                @if (!string.IsNullOrWhiteSpace(DownloadError))
+                                {
+                                    <div class="error-banner">
+                                        <span>@DownloadError</span>
+                                    </div>
+                                }
+
+                                @if (IsDownloaded)
+                                {
+                                    <div class="success-banner">
+                                        <span>Shortcut downloaded as .zip successfully.</span>
+                                    </div>
+                                }
+
+                                <div class="lnk-actions">
+                                    <button class="btn btn-primary action-btn" @onclick="DownloadLnk" disabled="@IsDownloading">
+                                        @if (IsDownloading)
+                                        {
+                                            <span>Downloading...</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Download .lnk</span>
+                                        }
+                                    </button>
+                                    <button class="btn btn-secondary action-btn" @onclick="ResetParse">
+                                        Back to Generator
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+        <div class="powered-by">
+            <div class="powered-by-header">
+                <span class="mono powered-by-label">Powered by</span>
+                <a href="https://github.com/mrzaxaryan/ShortcutLib" target="_blank" rel="noopener noreferrer"
+                   class="mono powered-by-link">ShortcutLib</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<Footer />
+
+@code {
+    // Shared form fields
+    private string Target { get; set; } = "";
+    private string? Arguments { get; set; }
+    private string? WorkingDirectory { get; set; }
+    private string? Description { get; set; }
+    private string? IconLocation { get; set; }
+    private int IconIndex { get; set; }
+    private ShortcutWindowStyle WindowStyle { get; set; } = ShortcutWindowStyle.Normal;
+    private bool RunAsAdmin { get; set; }
+    private string FileName { get; set; } = "shortcut";
+
+    // Generator state
+    private string SelectedTemplateName { get; set; } = "";
+    private bool IsGenerating { get; set; }
+    private bool IsGenerated { get; set; }
+    private string? GenerateError { get; set; }
+
+    // Parser state
+    private string? OriginalFileName { get; set; }
+    private long OriginalFileSize { get; set; }
+    private bool IsParsed { get; set; }
+    private bool IsLoading { get; set; }
+    private bool IsDragOver { get; set; }
+    private string? ParseError { get; set; }
+    private bool IsDownloading { get; set; }
+    private bool IsDownloaded { get; set; }
+    private string? DownloadError { get; set; }
+    private readonly HashSet<int> OpenSections = [0, 1, 2];
+    private const long MaxFileSize = 10 * 1024 * 1024;
+
+    // Tracking data from parsed file
+    private TrackerData? ParsedTracker { get; set; }
+    private LinkInfo? ParsedLinkInfo { get; set; }
+    private DateTime? ParsedCreationTime { get; set; }
+    private DateTime? ParsedAccessTime { get; set; }
+    private DateTime? ParsedWriteTime { get; set; }
+    private byte[]? ParsedPropertyStore { get; set; }
+    private bool StripTrackingData { get; set; } = true;
+
+    private bool HasTrackingData => ParsedTracker != null || ParsedLinkInfo != null ||
+        ParsedCreationTime != null || ParsedAccessTime != null || ParsedWriteTime != null ||
+        ParsedPropertyStore != null;
+
+    // --- Templates ---
+
+    private record LnkTemplate(
+        string Name, string Target, string? Arguments, string? WorkingDirectory,
+        string? ShortcutDescription, string? IconLocation, int IconIndex,
+        ShortcutWindowStyle WindowStyle, bool RunAsAdmin, string FileName);
+
+    private static readonly LnkTemplate[] LnkTemplates =
+    [
+        new("PowerShell Hello World",
+            @"C:\Windows\System32\conhost.exe",
+            "--headless powershell.exe \"(New-Object -ComObject WScript.Shell).Popup('Hello World')\"",
+            null, "Headless launching a PowerShell popup",
+            @"%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe", 0,
+            ShortcutWindowStyle.Minimized, false, "ps-helloworld"),
+
+        new("Admin Command Prompt PowerShell Base64 Hello World",
+            @"C:\Windows\System32\conhost.exe",
+            $"--headless powershell.exe -e {Convert.ToBase64String(System.Text.Encoding.Unicode.GetBytes("(New-Object -ComObject WScript.Shell).Popup('Elevated Hello World')"))}",
+            @"C:\", "Elevated Command Prompt",
+            @"%SystemRoot%\system32\cmd.exe", 0,
+            ShortcutWindowStyle.Minimized, true, "admin-cmd"),
+
+        new("Admin PowerShell",
+            @"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe",
+            "-NoExit", @"C:\", "Elevated PowerShell",
+            @"%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe", 0,
+            ShortcutWindowStyle.Normal, true, "admin-powershell"),
+    ];
+
+    private void OnTemplateSelected(ChangeEventArgs e)
+    {
+        SelectedTemplateName = e.Value?.ToString() ?? "";
+        var template = LnkTemplates.FirstOrDefault(t => t.Name == SelectedTemplateName);
+        if (template is null)
+        {
+            Target = "";
+            Arguments = null;
+            WorkingDirectory = null;
+            Description = null;
+            IconLocation = null;
+            IconIndex = 0;
+            WindowStyle = ShortcutWindowStyle.Normal;
+            RunAsAdmin = false;
+            FileName = "shortcut";
+        }
+        else
+        {
+            Target = template.Target;
+            Arguments = template.Arguments;
+            WorkingDirectory = template.WorkingDirectory;
+            Description = template.ShortcutDescription;
+            IconLocation = template.IconLocation;
+            IconIndex = template.IconIndex;
+            WindowStyle = template.WindowStyle;
+            RunAsAdmin = template.RunAsAdmin;
+            FileName = template.FileName;
+        }
+        GenerateError = null;
+        IsGenerated = false;
+    }
+
+    // --- Icon Templates ---
+
+    private record IconTemplate(string Symbol, string Label, string Path, int Index);
+
+    private static readonly IconTemplate[] IconTemplates =
+    [
+        new("📁", "Folder", @"%SystemRoot%\system32\shell32.dll", 3),
+        new("📄", "Document", @"%SystemRoot%\system32\shell32.dll", 1),
+        new("🌐", "Network", @"%SystemRoot%\system32\shell32.dll", 17),
+        new("💻", "Computer", @"%SystemRoot%\system32\shell32.dll", 15),
+        new("🔍", "Search", @"%SystemRoot%\system32\shell32.dll", 22),
+        new("⚙️", "Settings", @"%SystemRoot%\system32\shell32.dll", 316),
+        new("🛡️", "Shield", @"%SystemRoot%\system32\shell32.dll", 77),
+        new("🔒", "Lock", @"%SystemRoot%\system32\shell32.dll", 47),
+        new("⌨️", "CMD", @"%SystemRoot%\system32\cmd.exe", 0),
+        new("🟦", "PowerShell", @"%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe", 0),
+        new("📝", "Notepad", @"%SystemRoot%\system32\notepad.exe", 0),
+        new("🧮", "Calc", @"%SystemRoot%\system32\calc.exe", 0),
+        new("🗑️", "Recycle", @"%SystemRoot%\system32\shell32.dll", 31),
+        new("💾", "Disk", @"%SystemRoot%\system32\shell32.dll", 8),
+        new("🖨️", "Printer", @"%SystemRoot%\system32\shell32.dll", 16),
+        new("🔑", "Key", @"%SystemRoot%\system32\shell32.dll", 44),
+        new("📕", "PDF", @"%SystemRoot%\system32\imageres.dll", 187),
+        new("🖼️", "JPEG", @"%SystemRoot%\system32\imageres.dll", 67),
+        new("🎵", "MP3", @"%SystemRoot%\system32\imageres.dll", 85),
+    ];
+
+    private void SelectIcon(string? path, int index)
+    {
+        IconLocation = path;
+        IconIndex = index;
+    }
+
+    private bool IsIconSelected(string? path, int index)
+    {
+        return IconLocation == path && IconIndex == index;
+    }
+
+    // --- Generate ---
+
+    private async Task GenerateLnk()
+    {
+        GenerateError = null;
+        IsGenerated = false;
+
+        if (string.IsNullOrWhiteSpace(Target))
+        {
+            GenerateError = "Target path is required.";
+            return;
+        }
+
+        IsGenerating = true;
+        StateHasChanged();
+
+        try
+        {
+            var lnkBytes = Shortcut.Create(
+                new ShortcutOptions
+                {
+                    Target = Target,
+                    Arguments = Arguments,
+                    WorkingDirectory = WorkingDirectory,
+                    Description = Description,
+                    IconLocation = IconLocation,
+                    IconIndex = IconIndex,
+                    WindowStyle = WindowStyle,
+                    RunAsAdmin = RunAsAdmin
+                }
+            );
+
+            var safeName = string.IsNullOrWhiteSpace(FileName) ? "shortcut" : FileName.Trim();
+            if (!safeName.EndsWith(".lnk", StringComparison.OrdinalIgnoreCase))
+                safeName += ".lnk";
+
+            using var zipStream = new MemoryStream();
+            using (var archive = new ZipArchive(zipStream, ZipArchiveMode.Create, leaveOpen: true))
+            {
+                var entry = archive.CreateEntry(safeName, CompressionLevel.SmallestSize);
+                using var entryStream = entry.Open();
+                entryStream.Write(lnkBytes, 0, lnkBytes.Length);
+            }
+
+            var zipName = Path.ChangeExtension(safeName, ".zip");
+            await JS.InvokeVoidAsync("downloadFile", zipName, Convert.ToBase64String(zipStream.ToArray()));
+            IsGenerated = true;
+        }
+        catch (Exception ex)
+        {
+            GenerateError = $"Failed to generate shortcut: {ex.Message}";
+        }
+        finally
+        {
+            IsGenerating = false;
+        }
+    }
+
+    // --- Parse ---
+
+    private void OnDragEnter() => IsDragOver = true;
+    private void OnDragLeave() => IsDragOver = false;
+
+    private async Task OnFileSelected(InputFileChangeEventArgs e)
+    {
+        IsDragOver = false;
+        ParseError = null;
+        IsParsed = false;
+
+        var file = e.File;
+        OriginalFileName = file.Name;
+        OriginalFileSize = file.Size;
+
+        if (file.Size > MaxFileSize)
+        {
+            ParseError = $"File too large ({FormatSize((ulong)file.Size)}). Maximum is 10 MB.";
+            return;
+        }
+
+        IsLoading = true;
+        StateHasChanged();
+
+        try
+        {
+            using var stream = file.OpenReadStream(MaxFileSize);
+            using var ms = new MemoryStream();
+            await stream.CopyToAsync(ms);
+            var bytes = ms.ToArray();
+
+            var options = Shortcut.Open(bytes);
+
+            Target = options.Target ?? "";
+            Arguments = options.Arguments;
+            WorkingDirectory = options.WorkingDirectory;
+            Description = options.Description;
+            IconLocation = options.IconLocation;
+            IconIndex = options.IconIndex;
+            WindowStyle = options.WindowStyle;
+            RunAsAdmin = options.RunAsAdmin;
+            FileName = Path.GetFileNameWithoutExtension(file.Name);
+
+            ParsedTracker = options.Tracker;
+            ParsedLinkInfo = options.LinkInfo;
+            ParsedCreationTime = options.CreationTime;
+            ParsedAccessTime = options.AccessTime;
+            ParsedWriteTime = options.WriteTime;
+            ParsedPropertyStore = options.PropertyStoreData;
+            StripTrackingData = true;
+
+            IsParsed = true;
+            IsDownloaded = false;
+            DownloadError = null;
+            OpenSections.Clear();
+            OpenSections.Add(0);
+            OpenSections.Add(1);
+            OpenSections.Add(2);
+        }
+        catch (ArgumentException ex)
+        {
+            ParseError = $"Invalid LNK file: {ex.Message}";
+        }
+        catch (FormatException ex)
+        {
+            ParseError = $"Invalid LNK file: {ex.Message}";
+        }
+        catch (Exception ex)
+        {
+            ParseError = $"Failed to parse file: {ex.Message}";
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    private async Task DownloadLnk()
+    {
+        DownloadError = null;
+        IsDownloaded = false;
+
+        if (string.IsNullOrWhiteSpace(Target))
+        {
+            DownloadError = "Target path is required.";
+            return;
+        }
+
+        IsDownloading = true;
+        StateHasChanged();
+
+        try
+        {
+            var opts = new ShortcutOptions
+            {
+                Target = Target,
+                Arguments = Arguments,
+                WorkingDirectory = WorkingDirectory,
+                Description = Description,
+                IconLocation = IconLocation,
+                IconIndex = IconIndex,
+                WindowStyle = WindowStyle,
+                RunAsAdmin = RunAsAdmin
+            };
+
+            if (!StripTrackingData)
+            {
+                opts.Tracker = ParsedTracker;
+                opts.LinkInfo = ParsedLinkInfo;
+                opts.CreationTime = ParsedCreationTime;
+                opts.AccessTime = ParsedAccessTime;
+                opts.WriteTime = ParsedWriteTime;
+                opts.PropertyStoreData = ParsedPropertyStore;
+            }
+
+            var lnkBytes = Shortcut.Create(opts);
+
+            var safeName = string.IsNullOrWhiteSpace(FileName) ? "shortcut" : FileName.Trim();
+            if (!safeName.EndsWith(".lnk", StringComparison.OrdinalIgnoreCase))
+                safeName += ".lnk";
+
+            using var zipStream = new MemoryStream();
+            using (var archive = new ZipArchive(zipStream, ZipArchiveMode.Create, leaveOpen: true))
+            {
+                var entry = archive.CreateEntry(safeName, CompressionLevel.SmallestSize);
+                using var entryStream = entry.Open();
+                entryStream.Write(lnkBytes, 0, lnkBytes.Length);
+            }
+
+            var zipName = Path.ChangeExtension(safeName, ".zip");
+            await JS.InvokeVoidAsync("downloadFile", zipName, Convert.ToBase64String(zipStream.ToArray()));
+            IsDownloaded = true;
+        }
+        catch (Exception ex)
+        {
+            DownloadError = $"Failed to generate shortcut: {ex.Message}";
+        }
+        finally
+        {
+            IsDownloading = false;
+        }
+    }
+
+    private void ResetParse()
+    {
+        IsParsed = false;
+        ParseError = null;
+        DownloadError = null;
+        IsDownloaded = false;
+        Target = "";
+        Arguments = null;
+        WorkingDirectory = null;
+        Description = null;
+        IconLocation = null;
+        IconIndex = 0;
+        WindowStyle = ShortcutWindowStyle.Normal;
+        RunAsAdmin = false;
+        FileName = "shortcut";
+        OriginalFileName = null;
+        OriginalFileSize = 0;
+        ParsedTracker = null;
+        ParsedLinkInfo = null;
+        ParsedCreationTime = null;
+        ParsedAccessTime = null;
+        ParsedWriteTime = null;
+        ParsedPropertyStore = null;
+        StripTrackingData = true;
+    }
+
+    private void ToggleSection(int index)
+    {
+        if (!OpenSections.Remove(index))
+            OpenSections.Add(index);
+    }
+
+    private bool IsSectionOpen(int index) => OpenSections.Contains(index);
+
+    private static string FormatSize(ulong bytes)
+    {
+        if (bytes < 1024) return $"{bytes} B";
+        if (bytes < 1024 * 1024) return $"{bytes / 1024.0:F1} KB";
+        return $"{bytes / (1024.0 * 1024.0):F1} MB";
+    }
+}

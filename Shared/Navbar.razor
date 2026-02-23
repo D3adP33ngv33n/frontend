@@ -35,16 +35,13 @@
                 </button>
                 <ul class="dropdown-menu @(IsToolsDropdownOpen ? "open" : "")">
                     <li>
-                        <a href="@Routes.LnkGenerator" class="dropdown-link" @onclick="CloseMobileMenu">LNK Generator</a>
+                        <a href="@Routes.LnkTool" class="dropdown-link" @onclick="CloseMobileMenu">LNK Tool</a>
                     </li>
                     <li>
                         <a href="@Routes.Base64Converter" class="dropdown-link" @onclick="CloseMobileMenu">Base64 Converter</a>
                     </li>
                     <li>
                         <a href="@Routes.PeParser" class="dropdown-link" @onclick="CloseMobileMenu">PE Parser</a>
-                    </li>
-                    <li>
-                        <a href="@Routes.LnkParser" class="dropdown-link" @onclick="CloseMobileMenu">LNK Parser</a>
                     </li>
                 </ul>
             </li>
