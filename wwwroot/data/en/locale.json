@@ -1,7 +1,6 @@
 {
   "Nav.OpenSource": "Open Source",
   "Nav.Careers": "Careers",
-  "Nav.Privacy": "Privacy",
   "Nav.Contact": "Contact",
   "Nav.Tools": "Tools",
 
@@ -23,17 +22,6 @@
   "OpenSource.Audience": "Audience:",
   "OpenSource.License": "License:",
   "OpenSource.GitHub": "GitHub",
-
-  "Privacy.Title": "Privacy Policy",
-  "Privacy.Subtitle": "Discretion as a core operating principle",
-  "Privacy.Description1": "We maintain absolute confidentiality across all engagements and client relationships. Discretion is not a policy—it's embedded in our operational DNA.",
-  "Privacy.Description2": "Our clients entrust us with sensitive systems and critical infrastructure. That responsibility shapes everything we do. Your engagement exists only between us.",
-  "Privacy.CommitmentsTitle": "Our Commitments",
-  "Privacy.Commitment1": "Zero client disclosure without explicit consent",
-  "Privacy.Commitment2": "No third-party analytics or tracking",
-  "Privacy.Commitment3": "Encrypted communications as standard",
-  "Privacy.Commitment4": "Data retention limited to operational necessity",
-  "Privacy.Commitment5": "Right to deletion honored without exception",
 
   "Contact.Title": "Initiate Contact",
   "Contact.Subtitle": "Ready to discuss your security posture? Reach out through a secure channel below.",
