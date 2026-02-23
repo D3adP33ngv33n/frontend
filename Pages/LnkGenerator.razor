@@ -1,0 +1,229 @@
+@page "/lnk-generator"
+@inject IJSRuntime JS
+@using ShortcutLib
+@using System.IO.Compression
+
+<PageTitle>LNK Generator - NOSTDLIB</PageTitle>
+
+<Navbar />
+
+<section class="lnk-generator">
+    <div class="container">
+        <div class="lnk-header">
+            <h1 class="mono">LNK <span class="accent">Generator</span></h1>
+            <p class="lnk-subtitle">Generate Windows shortcut (.lnk) files directly in your browser.</p>
+        </div>
+
+        <div class="lnk-form-wrapper">
+            <div class="form-group">
+                <label class="mono" for="target">Target Path <span class="required">*</span></label>
+                <input id="target" type="text" @bind="Target" placeholder="C:\Windows\notepad.exe" class="form-input" />
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="mono" for="arguments">Arguments</label>
+                    <input id="arguments" type="text" @bind="Arguments" placeholder="--flag value" class="form-input" />
+                </div>
+                <div class="form-group">
+                    <label class="mono" for="workingDir">Working Directory</label>
+                    <input id="workingDir" type="text" @bind="WorkingDirectory" placeholder="C:\MyApp" class="form-input" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="mono" for="description">Description</label>
+                <input id="description" type="text" @bind="Description" placeholder="My Shortcut" class="form-input" />
+            </div>
+
+            <div class="form-group">
+                <label class="mono">Icon Templates</label>
+                <div class="icon-templates">
+                    <button type="button" class="icon-template @(IsIconSelected(null, 0) ? "selected" : "")"
+                            title="Default"
+                            @onclick='() => SelectIcon(null, 0)'>
+                        <span class="icon-template-symbol">---</span>
+                        <span class="icon-template-label">None</span>
+                    </button>
+                    @foreach (var tpl in IconTemplates)
+                    {
+                        <button type="button" class="icon-template @(IsIconSelected(tpl.Path, tpl.Index) ? "selected" : "")"
+                                title="@tpl.Label — @tpl.Path, @tpl.Index"
+                                @onclick="() => SelectIcon(tpl.Path, tpl.Index)">
+                            <span class="icon-template-symbol">@tpl.Symbol</span>
+                            <span class="icon-template-label">@tpl.Label</span>
+                        </button>
+                    }
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="mono" for="iconLocation">Icon Location</label>
+                    <input id="iconLocation" type="text" @bind="IconLocation" placeholder="%SystemRoot%\system32\shell32.dll" class="form-input" />
+                </div>
+                <div class="form-group">
+                    <label class="mono" for="iconIndex">Icon Index</label>
+                    <input id="iconIndex" type="number" @bind="IconIndex" class="form-input" />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="mono" for="windowStyle">Window Style</label>
+                    <select id="windowStyle" @bind="WindowStyle" class="form-input">
+                        <option value="@ShortcutWindowStyle.Normal">Normal</option>
+                        <option value="@ShortcutWindowStyle.Maximized">Maximized</option>
+                        <option value="@ShortcutWindowStyle.Minimized">Minimized</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="mono" for="fileName">File Name</label>
+                    <input id="fileName" type="text" @bind="FileName" placeholder="shortcut" class="form-input" />
+                </div>
+            </div>
+
+            <div class="form-checkboxes">
+                <label class="checkbox-label">
+                    <input type="checkbox" @bind="RunAsAdmin" />
+                    <span class="checkmark"></span>
+                    <span class="mono">Run as Administrator</span>
+                </label>
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(ErrorMessage))
+            {
+                <div class="error-banner">
+                    <span>@ErrorMessage</span>
+                </div>
+            }
+
+            @if (IsGenerated)
+            {
+                <div class="success-banner">
+                    <span>Shortcut generated and downloaded as .zip successfully.</span>
+                </div>
+            }
+
+            <button class="btn btn-primary generate-btn" @onclick="GenerateLnk" disabled="@IsGenerating">
+                @if (IsGenerating)
+                {
+                    <span>Generating...</span>
+                }
+                else
+                {
+                    <span>Generate .lnk</span>
+                }
+            </button>
+        </div>
+    </div>
+</section>
+
+<Footer />
+
+@code {
+    private string Target { get; set; } = "";
+    private string? Arguments { get; set; }
+    private string? WorkingDirectory { get; set; }
+    private string? Description { get; set; }
+    private string? IconLocation { get; set; }
+    private int IconIndex { get; set; }
+    private ShortcutWindowStyle WindowStyle { get; set; } = ShortcutWindowStyle.Normal;
+    private bool RunAsAdmin { get; set; }
+    private string FileName { get; set; } = "shortcut";
+    private bool IsGenerating { get; set; }
+    private bool IsGenerated { get; set; }
+    private string? ErrorMessage { get; set; }
+
+    private record IconTemplate(string Symbol, string Label, string Path, int Index);
+
+    private static readonly IconTemplate[] IconTemplates =
+    [
+        new("📁", "Folder", @"%SystemRoot%\system32\shell32.dll", 3),
+        new("📄", "Document", @"%SystemRoot%\system32\shell32.dll", 1),
+        new("🌐", "Network", @"%SystemRoot%\system32\shell32.dll", 17),
+        new("💻", "Computer", @"%SystemRoot%\system32\shell32.dll", 15),
+        new("🔍", "Search", @"%SystemRoot%\system32\shell32.dll", 22),
+        new("⚙️", "Settings", @"%SystemRoot%\system32\shell32.dll", 316),
+        new("🛡️", "Shield", @"%SystemRoot%\system32\shell32.dll", 77),
+        new("🔒", "Lock", @"%SystemRoot%\system32\shell32.dll", 47),
+        new("⌨️", "CMD", @"%SystemRoot%\system32\cmd.exe", 0),
+        new("🟦", "PowerShell", @"%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe", 0),
+        new("📝", "Notepad", @"%SystemRoot%\system32\notepad.exe", 0),
+        new("🧮", "Calc", @"%SystemRoot%\system32\calc.exe", 0),
+        new("🗑️", "Recycle", @"%SystemRoot%\system32\shell32.dll", 31),
+        new("💾", "Disk", @"%SystemRoot%\system32\shell32.dll", 8),
+        new("🖨️", "Printer", @"%SystemRoot%\system32\shell32.dll", 16),
+        new("🔑", "Key", @"%SystemRoot%\system32\shell32.dll", 44),
+        new("📕", "PDF", @"%SystemRoot%\system32\imageres.dll", 187),
+        new("🖼️", "JPEG", @"%SystemRoot%\system32\imageres.dll", 67),
+        new("🎵", "MP3", @"%SystemRoot%\system32\imageres.dll", 85),
+    ];
+
+    private void SelectIcon(string? path, int index)
+    {
+        IconLocation = path;
+        IconIndex = index;
+    }
+
+    private bool IsIconSelected(string? path, int index)
+    {
+        return IconLocation == path && IconIndex == index;
+    }
+
+    private async Task GenerateLnk()
+    {
+        ErrorMessage = null;
+        IsGenerated = false;
+
+        if (string.IsNullOrWhiteSpace(Target))
+        {
+            ErrorMessage = "Target path is required.";
+            return;
+        }
+
+        IsGenerating = true;
+        StateHasChanged();
+
+        try
+        {
+            var lnkBytes = Shortcut.Create(
+                new ShortcutOptions
+                {
+                    Target = Target,
+                    Arguments = Arguments,
+                    WorkingDirectory = WorkingDirectory,
+                    Description = Description,
+                    IconLocation = IconLocation,
+                    IconIndex = IconIndex,
+                    WindowStyle = WindowStyle,
+                    RunAsAdmin = RunAsAdmin
+                }
+            );
+
+            var safeName = string.IsNullOrWhiteSpace(FileName) ? "shortcut" : FileName.Trim();
+            if (!safeName.EndsWith(".lnk", StringComparison.OrdinalIgnoreCase))
+                safeName += ".lnk";
+
+            using var zipStream = new MemoryStream();
+            using (var archive = new ZipArchive(zipStream, ZipArchiveMode.Create, leaveOpen: true))
+            {
+                var entry = archive.CreateEntry(safeName, CompressionLevel.SmallestSize);
+                using var entryStream = entry.Open();
+                entryStream.Write(lnkBytes, 0, lnkBytes.Length);
+            }
+
+            var zipName = Path.ChangeExtension(safeName, ".zip");
+            await JS.InvokeVoidAsync("downloadFile", zipName, Convert.ToBase64String(zipStream.ToArray()));
+            IsGenerated = true;
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = $"Failed to generate shortcut: {ex.Message}";
+        }
+        finally
+        {
+            IsGenerating = false;
+        }
+    }
+}

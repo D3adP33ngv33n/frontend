@@ -125,6 +125,73 @@
   opacity: 1;
 }
 
+/* Dropdown menu */
+.has-dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: inherit;
+}
+
+.dropdown-arrow {
+  font-size: 0.7rem;
+  transition: var(--transition-fast);
+}
+
+.has-dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 180px;
+  background: rgba(5, 5, 16, 0.95);
+  backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(0, 255, 204, 0.15);
+  border-radius: var(--border-radius);
+  padding: 0.5rem 0;
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition-fast);
+  margin-top: 0.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.has-dropdown:hover .dropdown-menu,
+.dropdown-menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown-link {
+  display: block;
+  padding: 0.6rem 1.2rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  transition: var(--transition-fast);
+  white-space: nowrap;
+}
+
+.dropdown-link:hover {
+  color: var(--primary-color);
+  background: rgba(0, 255, 204, 0.05);
+  text-shadow: 0 0 20px var(--primary-glow);
+}
+
 /* Mobile menu toggle button */
 .mobile-menu-toggle {
   display: none;
@@ -238,6 +305,33 @@
     margin-top: 1rem;
     padding-top: 1rem;
     border-top: 1px solid rgba(0, 255, 204, 0.2);
+  }
+
+  .has-dropdown .dropdown-menu {
+    position: static;
+    transform: none;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    transition: max-height 0.3s ease;
+  }
+
+  .has-dropdown:hover .dropdown-menu,
+  .has-dropdown .dropdown-menu.open {
+    max-height: 200px;
+  }
+
+  .dropdown-link {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   }
 }
 
