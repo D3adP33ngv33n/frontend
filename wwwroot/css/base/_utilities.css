@@ -9,10 +9,6 @@
   transform: translateX(-50%);
 }
 
-.mono {
-  font-family: 'JetBrains Mono', monospace;
-}
-
 .glow {
   text-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
 }

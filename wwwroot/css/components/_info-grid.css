@@ -1,0 +1,42 @@
+/* Info Grid Styles */
+
+.tool-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.6rem;
+}
+
+.tool-info-grid--single-col {
+    grid-template-columns: 1fr;
+}
+
+.tool-info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.4rem 0.6rem;
+    background: var(--darker-bg);
+    border-radius: 4px;
+    gap: 0.75rem;
+}
+
+.tool-info-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: var(--letter-spacing-wide);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.tool-info-value {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    text-align: right;
+    word-break: break-all;
+}
+
+@media (max-width: 768px) {
+    .tool-info-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,53 @@
+/* Collapsible Section Styles */
+
+.tool-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+}
+
+.tool-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem 1.25rem;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    text-align: left;
+    font-family: inherit;
+}
+
+.tool-section-header:hover {
+    background: rgba(0, 255, 204, 0.03);
+}
+
+.section-arrow {
+    color: var(--text-muted);
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.section-arrow.open {
+    transform: rotate(180deg);
+}
+
+.tool-section-body {
+    padding: 0 1.25rem 1.25rem;
+}
+
+@media (max-width: 768px) {
+    .tool-section-header {
+        padding: 0.75rem 1rem;
+    }
+
+    .tool-section-body {
+        padding: 0 0.75rem 0.75rem;
+    }
+}

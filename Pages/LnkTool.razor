@@ -7,11 +7,11 @@
 
 <Navbar />
 
-<section class="lnk-tool">
+<section class="tool-page">
     <div class="container">
-        <div class="lnk-header">
+        <div class="tool-header">
             <h1 class="mono">LNK <span class="accent">Tool</span></h1>
-            <p class="lnk-subtitle">Generate and edit Windows shortcut (.lnk) files directly in your browser.</p>
+            <p class="tool-subtitle">Generate and edit Windows shortcut (.lnk) files directly in your browser.</p>
         </div>
 
         @if (!IsParsed)
@@ -42,61 +42,61 @@
         {
             <!-- Overview -->
             <div class="lnk-results">
-                <div class="lnk-section">
-                    <button class="lnk-section-header" @onclick="() => ToggleSection(0)">
+                <div class="tool-section">
+                    <button class="tool-section-header" @onclick="() => ToggleSection(0)">
                         <span class="mono">Overview</span>
                         <span class="section-arrow @(IsSectionOpen(0) ? "open" : "")">&#x25BE;</span>
                     </button>
                     @if (IsSectionOpen(0))
                     {
-                        <div class="lnk-section-body">
-                            <div class="lnk-info-grid">
-                                <div class="lnk-info-item">
-                                    <span class="lnk-info-label mono">File</span>
-                                    <span class="lnk-info-value">@OriginalFileName</span>
+                        <div class="tool-section-body">
+                            <div class="tool-info-grid tool-info-grid--single-col">
+                                <div class="tool-info-item">
+                                    <span class="tool-info-label mono">File</span>
+                                    <span class="tool-info-value">@OriginalFileName</span>
                                 </div>
-                                <div class="lnk-info-item">
-                                    <span class="lnk-info-label mono">Size</span>
-                                    <span class="lnk-info-value">@FormatSize((ulong)OriginalFileSize)</span>
+                                <div class="tool-info-item">
+                                    <span class="tool-info-label mono">Size</span>
+                                    <span class="tool-info-value">@FormatSize((ulong)OriginalFileSize)</span>
                                 </div>
-                                <div class="lnk-info-item">
-                                    <span class="lnk-info-label mono">Target</span>
-                                    <span class="lnk-info-value mono">@(Target ?? "—")</span>
+                                <div class="tool-info-item">
+                                    <span class="tool-info-label mono">Target</span>
+                                    <span class="tool-info-value mono">@(Target ?? "—")</span>
                                 </div>
                                 @if (!string.IsNullOrWhiteSpace(Arguments))
                                 {
-                                    <div class="lnk-info-item">
-                                        <span class="lnk-info-label mono">Arguments</span>
-                                        <span class="lnk-info-value mono">@Arguments</span>
+                                    <div class="tool-info-item">
+                                        <span class="tool-info-label mono">Arguments</span>
+                                        <span class="tool-info-value mono">@Arguments</span>
                                     </div>
                                 }
                                 @if (!string.IsNullOrWhiteSpace(WorkingDirectory))
                                 {
-                                    <div class="lnk-info-item">
-                                        <span class="lnk-info-label mono">Working Dir</span>
-                                        <span class="lnk-info-value mono">@WorkingDirectory</span>
+                                    <div class="tool-info-item">
+                                        <span class="tool-info-label mono">Working Dir</span>
+                                        <span class="tool-info-value mono">@WorkingDirectory</span>
                                     </div>
                                 }
-                                <div class="lnk-info-item">
-                                    <span class="lnk-info-label mono">Window Style</span>
-                                    <span class="lnk-info-value">@WindowStyle</span>
+                                <div class="tool-info-item">
+                                    <span class="tool-info-label mono">Window Style</span>
+                                    <span class="tool-info-value">@WindowStyle</span>
                                 </div>
-                                <div class="lnk-info-item">
-                                    <span class="lnk-info-label mono">Run as Admin</span>
-                                    <span class="lnk-info-value">@(RunAsAdmin ? "Yes" : "No")</span>
+                                <div class="tool-info-item">
+                                    <span class="tool-info-label mono">Run as Admin</span>
+                                    <span class="tool-info-value">@(RunAsAdmin ? "Yes" : "No")</span>
                                 </div>
                                 @if (!string.IsNullOrWhiteSpace(IconLocation))
                                 {
-                                    <div class="lnk-info-item">
-                                        <span class="lnk-info-label mono">Icon</span>
-                                        <span class="lnk-info-value mono">@IconLocation, @IconIndex</span>
+                                    <div class="tool-info-item">
+                                        <span class="tool-info-label mono">Icon</span>
+                                        <span class="tool-info-value mono">@IconLocation, @IconIndex</span>
                                     </div>
                                 }
                                 @if (!string.IsNullOrWhiteSpace(Description))
                                 {
-                                    <div class="lnk-info-item">
-                                        <span class="lnk-info-label mono">Description</span>
-                                        <span class="lnk-info-value">@Description</span>
+                                    <div class="tool-info-item">
+                                        <span class="tool-info-label mono">Description</span>
+                                        <span class="tool-info-value">@Description</span>
                                     </div>
                                 }
                             </div>
@@ -107,102 +107,102 @@
                 <!-- Tracking Info -->
                 @if (HasTrackingData)
                 {
-                    <div class="lnk-section tracking-section">
-                        <button class="lnk-section-header" @onclick="() => ToggleSection(1)">
+                    <div class="tool-section tracking-section">
+                        <button class="tool-section-header" @onclick="() => ToggleSection(1)">
                             <span class="mono">Tracking Info</span>
                             <span class="section-arrow @(IsSectionOpen(1) ? "open" : "")">&#x25BE;</span>
                         </button>
                         @if (IsSectionOpen(1))
                         {
-                            <div class="lnk-section-body">
+                            <div class="tool-section-body">
                                 <div class="warning-banner">
                                     <span>This file contains embedded tracking data that can identify the machine it was created on.</span>
                                 </div>
 
-                                <div class="lnk-info-grid">
+                                <div class="tool-info-grid tool-info-grid--single-col">
                                     @if (ParsedTracker != null)
                                     {
-                                        <div class="lnk-info-item tracking-item">
-                                            <span class="lnk-info-label mono">Machine ID</span>
-                                            <span class="lnk-info-value mono">@ParsedTracker.MachineId</span>
+                                        <div class="tool-info-item tracking-item">
+                                            <span class="tool-info-label mono">Machine ID</span>
+                                            <span class="tool-info-value mono">@ParsedTracker.MachineId</span>
                                         </div>
-                                        <div class="lnk-info-item tracking-item">
-                                            <span class="lnk-info-label mono">Volume ID</span>
-                                            <span class="lnk-info-value mono">@ParsedTracker.VolumeId</span>
+                                        <div class="tool-info-item tracking-item">
+                                            <span class="tool-info-label mono">Volume ID</span>
+                                            <span class="tool-info-value mono">@ParsedTracker.VolumeId</span>
                                         </div>
-                                        <div class="lnk-info-item tracking-item">
-                                            <span class="lnk-info-label mono">Object ID</span>
-                                            <span class="lnk-info-value mono">@ParsedTracker.ObjectId</span>
+                                        <div class="tool-info-item tracking-item">
+                                            <span class="tool-info-label mono">Object ID</span>
+                                            <span class="tool-info-value mono">@ParsedTracker.ObjectId</span>
                                         </div>
                                         @if (ParsedTracker.BirthVolumeId != null)
                                         {
-                                            <div class="lnk-info-item tracking-item">
-                                                <span class="lnk-info-label mono">Birth Volume ID</span>
-                                                <span class="lnk-info-value mono">@ParsedTracker.BirthVolumeId</span>
+                                            <div class="tool-info-item tracking-item">
+                                                <span class="tool-info-label mono">Birth Volume ID</span>
+                                                <span class="tool-info-value mono">@ParsedTracker.BirthVolumeId</span>
                                             </div>
                                         }
                                         @if (ParsedTracker.BirthObjectId != null)
                                         {
-                                            <div class="lnk-info-item tracking-item">
-                                                <span class="lnk-info-label mono">Birth Object ID</span>
-                                                <span class="lnk-info-value mono">@ParsedTracker.BirthObjectId</span>
+                                            <div class="tool-info-item tracking-item">
+                                                <span class="tool-info-label mono">Birth Object ID</span>
+                                                <span class="tool-info-value mono">@ParsedTracker.BirthObjectId</span>
                                             </div>
                                         }
                                     }
 
                                     @if (ParsedLinkInfo?.Local != null)
                                     {
-                                        <div class="lnk-info-item tracking-item">
-                                            <span class="lnk-info-label mono">Local Path</span>
-                                            <span class="lnk-info-value mono">@ParsedLinkInfo.Local.BasePath</span>
+                                        <div class="tool-info-item tracking-item">
+                                            <span class="tool-info-label mono">Local Path</span>
+                                            <span class="tool-info-value mono">@ParsedLinkInfo.Local.BasePath</span>
                                         </div>
-                                        <div class="lnk-info-item tracking-item">
-                                            <span class="lnk-info-label mono">Drive Serial</span>
-                                            <span class="lnk-info-value mono">@($"0x{ParsedLinkInfo.Local.DriveSerialNumber:X8}")</span>
+                                        <div class="tool-info-item tracking-item">
+                                            <span class="tool-info-label mono">Drive Serial</span>
+                                            <span class="tool-info-value mono">@($"0x{ParsedLinkInfo.Local.DriveSerialNumber:X8}")</span>
                                         </div>
                                         @if (!string.IsNullOrWhiteSpace(ParsedLinkInfo.Local.VolumeLabel))
                                         {
-                                            <div class="lnk-info-item tracking-item">
-                                                <span class="lnk-info-label mono">Volume Label</span>
-                                                <span class="lnk-info-value mono">@ParsedLinkInfo.Local.VolumeLabel</span>
+                                            <div class="tool-info-item tracking-item">
+                                                <span class="tool-info-label mono">Volume Label</span>
+                                                <span class="tool-info-value mono">@ParsedLinkInfo.Local.VolumeLabel</span>
                                             </div>
                                         }
                                     }
                                     @if (ParsedLinkInfo?.Network != null)
                                     {
-                                        <div class="lnk-info-item tracking-item">
-                                            <span class="lnk-info-label mono">Network Share</span>
-                                            <span class="lnk-info-value mono">@ParsedLinkInfo.Network.ShareName</span>
+                                        <div class="tool-info-item tracking-item">
+                                            <span class="tool-info-label mono">Network Share</span>
+                                            <span class="tool-info-value mono">@ParsedLinkInfo.Network.ShareName</span>
                                         </div>
                                     }
 
                                     @if (ParsedCreationTime != null)
                                     {
-                                        <div class="lnk-info-item tracking-item">
-                                            <span class="lnk-info-label mono">Created</span>
-                                            <span class="lnk-info-value mono">@ParsedCreationTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</span>
+                                        <div class="tool-info-item tracking-item">
+                                            <span class="tool-info-label mono">Created</span>
+                                            <span class="tool-info-value mono">@ParsedCreationTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</span>
                                         </div>
                                     }
                                     @if (ParsedAccessTime != null)
                                     {
-                                        <div class="lnk-info-item tracking-item">
-                                            <span class="lnk-info-label mono">Accessed</span>
-                                            <span class="lnk-info-value mono">@ParsedAccessTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</span>
+                                        <div class="tool-info-item tracking-item">
+                                            <span class="tool-info-label mono">Accessed</span>
+                                            <span class="tool-info-value mono">@ParsedAccessTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</span>
                                         </div>
                                     }
                                     @if (ParsedWriteTime != null)
                                     {
-                                        <div class="lnk-info-item tracking-item">
-                                            <span class="lnk-info-label mono">Modified</span>
-                                            <span class="lnk-info-value mono">@ParsedWriteTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</span>
+                                        <div class="tool-info-item tracking-item">
+                                            <span class="tool-info-label mono">Modified</span>
+                                            <span class="tool-info-value mono">@ParsedWriteTime.Value.ToString("yyyy-MM-dd HH:mm:ss")</span>
                                         </div>
                                     }
 
                                     @if (ParsedPropertyStore != null)
                                     {
-                                        <div class="lnk-info-item tracking-item">
-                                            <span class="lnk-info-label mono">Property Store</span>
-                                            <span class="lnk-info-value mono">@FormatSize((ulong)ParsedPropertyStore.Length)</span>
+                                        <div class="tool-info-item tracking-item">
+                                            <span class="tool-info-label mono">Property Store</span>
+                                            <span class="tool-info-value mono">@FormatSize((ulong)ParsedPropertyStore.Length)</span>
                                         </div>
                                     }
                                 </div>
@@ -214,7 +214,7 @@
         }
 
         <!-- Shared Form -->
-        <div class="lnk-form-wrapper">
+        <div class="tool-form-wrapper">
             @if (!IsParsed)
             {
                 <div class="form-group template-selector">

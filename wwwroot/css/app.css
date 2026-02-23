@@ -7,5 +7,11 @@
 
 /* Component styles */
 @import 'components/_buttons.css';
+@import 'components/_forms.css';
+@import 'components/_banners.css';
+@import 'components/_sections.css';
+@import 'components/_info-grid.css';
+@import 'components/_powered-by.css';
+@import 'components/_tool-page.css';
 @import 'components/_loading.css';
 @import 'components/_update-notification.css';
