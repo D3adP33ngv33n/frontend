@@ -25,23 +25,6 @@
             <li class="nav-item">
                 <a href="@Routes.Contact" class="nav-link" @onclick="CloseMobileMenu">@L["Nav.Contact"]</a>
             </li>
-            <li class="nav-item has-dropdown">
-                <button class="nav-link dropdown-toggle" @onclick="ToggleToolsDropdown" @onclick:stopPropagation="true">
-                    @L["Nav.Tools"]
-                    <span class="dropdown-arrow">▾</span>
-                </button>
-                <ul class="dropdown-menu @(IsToolsDropdownOpen ? "open" : "")">
-                    <li>
-                        <a href="@Routes.LnkTool" class="dropdown-link" @onclick="CloseMobileMenu">LNK Tool</a>
-                    </li>
-                    <li>
-                        <a href="@Routes.Base64Converter" class="dropdown-link" @onclick="CloseMobileMenu">Base64 Converter</a>
-                    </li>
-                    <li>
-                        <a href="@Routes.PeParser" class="dropdown-link" @onclick="CloseMobileMenu">PE Parser</a>
-                    </li>
-                </ul>
-            </li>
             <li class="nav-item">
                 <LanguageSelector />
             </li>
@@ -52,7 +35,6 @@
 @code {
     private bool IsScrolled { get; set; } = false;
     private bool IsMobileMenuOpen { get; set; } = false;
-    private bool IsToolsDropdownOpen { get; set; } = false;
 
     protected override void OnInitialized()
     {
@@ -65,15 +47,9 @@
         await SetBodyScrollLock(IsMobileMenuOpen);
     }
 
-    private void ToggleToolsDropdown()
-    {
-        IsToolsDropdownOpen = !IsToolsDropdownOpen;
-    }
-
     private async Task CloseMobileMenu()
     {
         IsMobileMenuOpen = false;
-        IsToolsDropdownOpen = false;
         await SetBodyScrollLock(false);
     }
 
