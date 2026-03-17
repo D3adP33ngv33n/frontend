@@ -1,5 +1,4 @@
 {
-  "Nav.OpenSource": "Open Source",
   "Nav.Careers": "Карьера",
   "Nav.Contact": "Контакты",
   "Nav.Tools": "Инструменты",
@@ -17,14 +16,6 @@
   "Careers.Requirements": "Требования",
   "Careers.Apply": "Откликнуться через LinkedIn",
   "Careers.Note": "Наш процесс отбора строг по замыслу. Квалифицированные кандидаты получают прямые приглашения для первоначальных бесед.",
-
-  "OpenSource.Title": "Open Source",
-  "OpenSource.Subtitle": "Технические исследования, инструменты и документация",
-  "OpenSource.KeyFeatures": "Ключевые особенности",
-  "OpenSource.UseCases": "Сценарии использования",
-  "OpenSource.Audience": "Аудитория:",
-  "OpenSource.License": "Лицензия:",
-  "OpenSource.GitHub": "GitHub",
 
   "Contact.Title": "Связаться с нами",
   "Contact.Subtitle": "Готовы обсудить вашу безопасность? Свяжитесь с нами через защищённый канал ниже.",

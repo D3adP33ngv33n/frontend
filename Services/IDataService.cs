@@ -6,7 +6,6 @@ public interface IDataService
 {
     Task<List<JobPosition>> GetJobPositionsAsync();
     Task<JobPosition?> GetJobPositionByIdAsync(int id);
-    Task<List<OpenSourceProject>> GetOpenSourceProjectsAsync();
-    Task<List<SocialLink>> GetSocialLinksAsync();
+Task<List<SocialLink>> GetSocialLinksAsync();
     void ClearCache();
 }

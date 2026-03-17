@@ -1,5 +1,4 @@
 {
-  "Nav.OpenSource": "Բաց կոդ",
   "Nav.Careers": "Կարիերա",
   "Nav.Contact": "Կապ",
   "Nav.Tools": "Գործիքներ",
@@ -15,11 +14,6 @@
   "Careers.Requirements": "Պահանջներ",
   "Careers.Apply": "Դիմել LinkedIn-ի միջոցով",
   "Careers.Note": "Մեր ընտրության գործընթացը խիստ է նախագծմամբ։ Որակավորված թեկնածուները ստանում են ուղիղ հրավերներ նախնական զրույցների համար։",
-  "OpenSource.Title": "ԲԱՑ ԿՈԴ",
-  "OpenSource.Subtitle": "Բաց կոդի գործիքներ և տեխնիկական հետազոտություններ մեր թիմից",
-  "OpenSource.KeyFeatures": "Հիմնական հատկություններ",
-  "OpenSource.Audience": "Թիրախավինրը՝",
-  "OpenSource.GitHub": "GitHub",
   "Contact.Title": "Կապվել մեզ հետ",
   "Contact.Subtitle": "Պատրաստ՞ քննարկել ձեր անվտանգության վիճակը՞ Կապվեք մեզ հետ ստորև նշված ապահով ալիքով։",
   "Contact.Note": "Բոլոր նախնական հաղորդակցությունները դիտարկվում են որպես գաղտնի",
@@ -31,7 +25,5 @@
   "Error.Message": "Անսպասելի սխալ տեղի ունեցավ։",
   "Error.ReturnHome": "Վերադառնալ գլխավոր էջ",
   "NotFound.Title": "Չի գտնվել",
-  "NotFound.Message": "Ներեցեք, այս հասցեում ոչինչ չկա։",
-  "OpenSource.UseCases": "Օգտագործման դեպքեր",
-  "OpenSource.License": "Լիցենզիա՝"
+  "NotFound.Message": "Ներեցեք, այս հասցեում ոչինչ չկա։"
 }

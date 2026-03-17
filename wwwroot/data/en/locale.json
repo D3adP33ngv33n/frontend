@@ -1,5 +1,4 @@
 {
-  "Nav.OpenSource": "Open Source",
   "Nav.Careers": "Careers",
   "Nav.Contact": "Contact",
   "Nav.Tools": "Tools",
@@ -17,14 +16,6 @@
   "Careers.Requirements": "Requirements",
   "Careers.Apply": "Apply via LinkedIn",
   "Careers.Note": "Our selection process is rigorous by design. Qualified candidates receive direct outreach for initial conversations.",
-
-  "OpenSource.Title": "Open Source",
-  "OpenSource.Subtitle": "Technical research, tools, and documentation",
-  "OpenSource.KeyFeatures": "Key Features",
-  "OpenSource.UseCases": "Use Cases",
-  "OpenSource.Audience": "Audience:",
-  "OpenSource.License": "License:",
-  "OpenSource.GitHub": "GitHub",
 
   "Contact.Title": "Initiate Contact",
   "Contact.Subtitle": "Ready to discuss your security posture? Reach out through a secure channel below.",
